@@ -11,12 +11,16 @@
         "laravel/framework": "^9.19",
         "laravel/passport": "^11.0",
         "laravel/tinker": "^2.7",
+        "pestphp/pest": "^1.16",
+        "pestphp/pest-plugin-laravel": "^1.1",
         "spatie/data-transfer-object": "^3.7",
+        "spatie/laravel-permission": "^5.9",
         "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {
         "alisuliman/code_generator": "^2.1.0",
         "fakerphp/faker": "^1.9.1",
+        "laravel/breeze": "^1.18",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
