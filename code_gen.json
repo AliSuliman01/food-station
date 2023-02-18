@@ -1,28 +1,18 @@
 {
-  "tables": [
-    {
-      "table_name": "tests",
-      "entity_name": "Test",
-      "instance_name": "test",
-      "sub_namespace": "Layer1\\Layer2\\Layer3",
-      "operation": "crud",
-      "columns": [
+    "tables": [
         {
-          "type": "integer",
-          "name": "id",
-          "validation_rules": "integer|required"
-        },
-        {
-          "type": "",
-          "name": "",
-          "validation_rules": ""
-        },
-        {
-          "type": "",
-          "name": "",
-          "validation_rules": ""
+            "table_name": "categorizable",
+            "entity_name": "Categorizable",
+            "instance_name": "categorizable",
+            "sub_namespace": "Categorizable",
+            "operation": "crud",
+            "columns": [
+                {
+                    "type": "integer",
+                    "name": "id",
+                    "validation_rules": "integer|required"
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }

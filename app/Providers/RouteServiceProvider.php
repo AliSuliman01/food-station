@@ -70,7 +70,7 @@ class RouteServiceProvider extends ServiceProvider
                     $routeFiles = json_decode(file_get_contents(__DIR__ . '/routes.json'), true);
 
                     foreach ($routeFiles as $routeFile)
-                        Route::middleware('api')
+                        Route::middleware('web')
                             ->namespace($this->namespace)
                             ->group(base_path($routeFile));
                 }
