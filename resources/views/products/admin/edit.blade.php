@@ -23,7 +23,7 @@
                                   method="post">
                                 @csrf
                                 @method('delete')
-                                <input type="submit" class="btn-danger"  value="Delete"/>
+                                <input type="submit" class="btn-danger" value="Delete"/>
                             </form>
                         </div>
                     </div>
@@ -76,19 +76,27 @@
                 <div class="rounded border border-dashed border-2 border-gray-200 w-full h-64 px-2">
 
                     <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">Ingredients</h3>
-                    <ul class="grid w-full gap-6 md:grid-cols-12">
-                        @foreach($ingredients as $ingredient)
-                        <li>
-                            <input type="radio" id="hosting-{{$ingredient->id}}" name="hosting" value="hosting-small" class="hidden peer" required>
-                            <label for="hosting-{{$ingredient->id}}" class="shadow-lg inline-flex items-center justify-between w-full rounded-lg text-gray-500 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:shadow-blue-300 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                <div class="block">
-                                    <img class="rounded-lg" src="{{$ingredient->images[0]->path}}" alt="">
-                                    <h6 class="w-full text-center">{{$ingredient->translation?->name}}</h6>
-                                </div>
-                            </label>
-                        </li>
-                        @endforeach
-                    </ul>
+
+                    @foreach($categories as $category)
+                        <ul class="grid w-full gap-6 md:grid-cols-12 flex items-center">
+                            <li>
+                                <h5 class="font-bold">{{$category->translation?->name}}</h5>
+                            </li>
+                            @foreach($category->ingredients as $ingredient)
+                                <li>
+                                    <input type="radio" id="hosting-{{$ingredient->id}}" name="radio-group-{{$category->id}}"
+                                           value="hosting-small" class="hidden peer" required>
+                                    <label for="hosting-{{$ingredient->id}}"
+                                           class="shadow-lg inline-flex items-center justify-between w-full rounded-lg text-gray-500 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:shadow-blue-300 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                        <div class="block">
+                                            <img class="rounded-lg" src="{{$ingredient->images[0]?->path}}" alt="" title="{{$ingredient->translation?->name}}">
+                                        </div>
+                                    </label>
+                                </li>
+                            @endforeach
+                        </ul>
+                        <br>
+                    @endforeach
 
                 </div>
                 <div class="flex justify-end">

@@ -12,6 +12,10 @@ class Restaurant extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $cascadeDeletes = [
+        'products',
+    ];
+
     protected $guarded = [
         'id',
         'created_at',

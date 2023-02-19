@@ -3,10 +3,9 @@
 
 namespace App\Modules\Products\Controllers;
 
-
-use App\Helpers\Response;
 use App\Helpers\Storage;
 use App\Http\Controllers\Controller;
+use App\Modules\Categories\ViewModels\GetLeafCategoriesVM;
 use App\Modules\Ingredients\ViewModels\GetAllIngredientsVM;
 use App\Modules\Products\Model\Product;
 use App\Modules\Products\Actions\StoreProductAction;
@@ -29,7 +28,6 @@ class AdminProductController extends Controller
 
     public function index()
     {
-
         return view('products.admin.index', [
             'products' => (new GetAllProductsVM())->toArray()
         ]);
@@ -37,7 +35,6 @@ class AdminProductController extends Controller
 
     public function show(Product $product)
     {
-
         return view('products.admin.show', [
             'product' => (new GetProductVM($product))->toArray()
         ]);
@@ -45,10 +42,9 @@ class AdminProductController extends Controller
 
     public function edit(Product $product)
     {
-
         return view('products.admin.edit', [
             'product' => (new GetProductVM($product))->toArray(),
-            'ingredients' => (new GetAllIngredientsVM())->toArray()
+            'categories' => (new GetLeafCategoriesVM(with:['ingredients']))->toArray()
         ]);
     }
 
@@ -61,7 +57,6 @@ class AdminProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-
         DB::transaction(function () use ($request) {
 
             $data = $request->validated();
@@ -89,7 +84,6 @@ class AdminProductController extends Controller
 
     public function update(Product $product, UpdateProductRequest $request)
     {
-
         DB::transaction(function () use ($product, $request) {
 
             $data = $request->validated();
@@ -113,7 +107,6 @@ class AdminProductController extends Controller
 
     public function destroy(Product $product)
     {
-
         DestroyProductAction::execute($product);
         return redirect()->route('admin.products.index');
     }

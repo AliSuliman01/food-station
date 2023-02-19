@@ -17,6 +17,12 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes, HasTranslations, HasImages;
 
+    protected $cascadeDeletes = [
+        'translations',
+        'images',
+        'ingredients',
+    ];
+
     protected $guarded = [
         'id',
         'created_at',
