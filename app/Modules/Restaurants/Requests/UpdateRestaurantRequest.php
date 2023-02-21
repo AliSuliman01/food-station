@@ -11,12 +11,12 @@ class UpdateRestaurantRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'name'				=> 'nullable' ,
+			'name'				=> 'required' ,
 			'latitude'				=> 'nullable' ,
 			'longitude'				=> 'nullable' ,
 			'full_address'				=> 'nullable' ,
 			'cover_image'				=> 'nullable' ,
-			'user_id'				=> 'nullable' ,
+			'user_id'				=> 'required' ,
 
         ];
     }

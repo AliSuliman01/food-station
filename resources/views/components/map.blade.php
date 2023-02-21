@@ -1,4 +1,4 @@
-<div id="map" class="h-96 relative w-full">
+<div id="map" class="h-full relative w-full">
     <button class="map-expand">
        <span
            class="absolute z-10 bottom-1 right-2 border border-2 border-gray-300 p-2 bg-white rounded">  <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

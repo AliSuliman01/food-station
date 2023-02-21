@@ -78,7 +78,7 @@
                                                 </button>
                                             </div>
                                             <!-- Modal body -->
-                                            <div class="p-6 space-y-6">
+                                            <div class="p-6 space-y-6 h-96 ">
                                                <x-map />
                                             </div>
                                             <!-- Modal footer -->

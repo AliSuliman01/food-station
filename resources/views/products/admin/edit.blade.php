@@ -1,6 +1,12 @@
 <x-admin-layout>
     <div class="p-8 text-gray-900">
         <div class="border border-gray-200 border-3 rounded p-2">
+            <form action="{{route('admin.products.destroy', ['product' => $product->id])}}"
+                  name="deleteForm"
+                  method="post">
+                @csrf
+                @method('delete')
+            </form>
             <form class="w-full"
                   action="{{route('admin.products.update', ['product' => $product->id])}}"
                   method="POST"
@@ -8,7 +14,9 @@
                   enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class=" md:grid md:grid-cols-4 gap-8">
+                <div class="m-4">
+
+                <div class="md:grid md:grid-cols-4 gap-8">
                     <div class="m-4 flex flex-col items-center justify-start col-span-1">
                         <div class="flex flex-col justify-center items-center">
                             <img src="{{$product->images[0]->path}}" id="productImage"
@@ -19,12 +27,7 @@
                             <button id="OpenImgUpload" class="bg-none border-b border-1 p-1">upload</button>
                         </div>
                         <div>
-                            <form action="{{route('admin.products.destroy', ['product' => $product->id])}}"
-                                  method="post">
-                                @csrf
-                                @method('delete')
-                                <input type="submit" class="btn-danger" value="Delete"/>
-                            </form>
+                            <button class="btn-danger" onclick="document.deleteForm.submit()">Delete</button>
                         </div>
                     </div>
                     <div class="col-span-3">
@@ -35,7 +38,7 @@
                                     Name
                                 </label>
                             </div>
-                            <div class="md:w-2/3">
+                            <div class="md:w-5/6">
                                 <input
                                     class="bg-gray-200 border-2 appearance-none border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                                     id="inline-full-name" type="text" name="name"
@@ -49,7 +52,7 @@
                                     Description
                                 </label>
                             </div>
-                            <div class="md:w-2/3">
+                            <div class="md:w-5/6">
                                 <textarea
                                     class="h-48 bg-gray-200 appearance-none  border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                                     id="description"
@@ -64,7 +67,7 @@
                                     Price
                                 </label>
                             </div>
-                            <div class="md:w-2/3">
+                            <div class="md:w-5/6">
                                 <input
                                     class="bg-gray-200 border-2 appearance-none border-gray-200 rounded w-full text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                                     id="inline-full-price" type="text" name="price" value="{{$product->price}}">
@@ -73,7 +76,7 @@
 
                     </div>
                 </div>
-                <div class="rounded border border-dashed border-2 border-gray-200 w-full h-64 px-2">
+                <div class="rounded border border-dashed border-2 border-gray-200 h-64 px-2">
 
                     <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">Ingredients</h3>
 
@@ -101,6 +104,7 @@
                 </div>
                 <div class="flex justify-end">
                     <button type="submit" class="btn-primary" onclick="document.updateForm.submit()">update</button>
+                </div>
                 </div>
             </form>
         </div>

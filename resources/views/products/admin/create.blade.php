@@ -9,7 +9,7 @@
                     <div class="m-4 flex items-start justify-center col-span-1">
                         <div class="flex flex-col justify-center items-center">
                             <img src="/storage/ingredients/default.svg" id="restaurantImage" class="w-36 h-36 object-contain rounded-full" alt="">
-                            <input type="file" name="cover_image" id="imgupload" onchange="$('#restaurantImage').attr('src', window.URL.createObjectURL(this.files[0]))" hidden/>
+                            <input type="file" name="image" id="imgupload" onchange="$('#restaurantImage').attr('src', window.URL.createObjectURL(this.files[0]))" hidden/>
                             <button id="OpenImgUpload" class="bg-none border-b border-1 p-1">upload</button>
                         </div>
                     </div>

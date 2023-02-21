@@ -12,9 +12,9 @@ class StoreRestaurantRequest extends FormRequest
     {
         return [
 			'name'				=> 'required' ,
-			'latitude'				=> 'required' ,
-			'longitude'				=> 'required' ,
-			'full_address'				=> 'required' ,
+			'latitude'				=> 'nullable' ,
+			'longitude'				=> 'nullable' ,
+			'full_address'				=> 'nullable' ,
 			'cover_image'				=> 'required' ,
 			'user_id'				=> 'required' ,
 

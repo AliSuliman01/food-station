@@ -12,9 +12,9 @@ class StoreProductRequest extends FormRequest
     {
         return [
 			'price'				=> 'nullable' ,
-			'name'				=> 'required' ,
+			'name'				=> 'nullable' ,
 			'description'				=> 'nullable' ,
-            'image' => 'required',
+            'image' => 'nullable',
         ];
     }
 }

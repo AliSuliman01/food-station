@@ -9,7 +9,7 @@
     <div
         class="text-center trounded w-full text-xl tracking-tight text-gray-900 dark:text-white flex justify-between items-center">
         <h6 class="font-bold text-sm text-gray-400">132 likes</h6>
-        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown-{{$product->id}}"
                 class="rounded text-center text-xs h-5 w-20 inline-flex justify-center border border-gray-300 bg-white text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
                 type="button">
             Options
@@ -19,7 +19,7 @@
             </svg>
         </button>
         <!-- Dropdown menu -->
-        <div id="dropdown"
+        <div id="dropdown-{{$product->id}}"
              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-20 dark:bg-gray-700">
             <ul class="text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                 <li>
