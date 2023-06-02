@@ -21,6 +21,12 @@
         </style>
     </head>
     <body class="antialiased">
+{{--    <form action="/oauth/authorize" method="get">--}}
+{{--        <input type="hidden" name="client_id" value="1">--}}
+{{--        <input type="hidden" name="redirect_uri" value="http://localhost:8000/auth/callback">--}}
+{{--        <input type="hidden" name="response_type" value="code">--}}
+{{--        <input type="submit" class="btn btn-primary" value="sign in">--}}
+{{--    </form>--}}
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">

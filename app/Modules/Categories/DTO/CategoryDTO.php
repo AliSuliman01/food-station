@@ -13,6 +13,8 @@ class CategoryDTO extends DataTransferObject
 	public $id;
 	/* @var integer|null */
 	public $parent_category_id;
+	/* @var string|null */
+	public $slug;
 
 
     public static function fromRequest($request)
@@ -20,6 +22,7 @@ class CategoryDTO extends DataTransferObject
         return new self([
 			'id'				=> $request['id'] ?? null ,
 			'parent_category_id'				=> $request['parent_category_id'] ?? null ,
+			'slug'				=> $request['slug'] ?? null ,
 
         ]);
     }

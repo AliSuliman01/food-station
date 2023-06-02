@@ -29,6 +29,11 @@ class Category extends Model
         'deleted_by_user_id',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function ingredients()
     {
         return $this->morphedByMany(Ingredient::class, 'categorizable');

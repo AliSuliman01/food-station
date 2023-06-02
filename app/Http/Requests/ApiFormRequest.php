@@ -1,6 +1,6 @@
 <?php
 
-namespace  App\Http;
+namespace  App\Http\Requests;
 
 use App\Exceptions\GeneralException;
 use Illuminate\Contracts\Validation\Validator;
@@ -21,8 +21,9 @@ abstract class ApiFormRequest extends FormRequest
     }
     public function validationData(): array
     {
-        return $this->all() ; // $this->route()->parameters
+        return $this->all() + $this->route()->parameters + $this->json()->all();
     }
+
     public abstract function rules();
 
 

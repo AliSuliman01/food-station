@@ -17,6 +17,8 @@ class UserDTO extends DataTransferObject
 	/* @var string|null */
 	public $email;
 	/* @var string|null */
+	public $mobile_phone;
+	/* @var string|null */
 	public $email_verified_at;
 	/* @var string|null */
 	public $photo_path;
@@ -32,6 +34,7 @@ class UserDTO extends DataTransferObject
 			'id'				=> $request['id'] ?? null ,
 			'name'				=> $request['name'] ?? null ,
 			'email'				=> $request['email'] ?? null ,
+			'mobile_phone'				=> $request['mobile_phone'] ?? null ,
 			'email_verified_at'				=> $request['email_verified_at'] ?? null ,
 			'photo_path'				=> $request['photo_path'] ?? null ,
 			'password'				=> isset($request['password'])? Hash::make($request['password']) : null ,

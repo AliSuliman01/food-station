@@ -10,7 +10,6 @@ class StoreUserAction
     public static function execute(
     UserDTO $userDTO
     ){
-
         return User::create(array_null_filter($userDTO->toArray()));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Products\Model;
 
+use App\Http\Traits\HasCategories;
 use App\Http\Traits\HasImages;
 use App\Http\Traits\HasTranslations;
 use App\Modules\Images\Model\Image;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\App;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes, HasTranslations, HasImages;
+    use HasFactory, SoftDeletes, HasTranslations, HasImages, HasCategories;
 
     protected $cascadeDeletes = [
         'translations',
