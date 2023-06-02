@@ -27,7 +27,7 @@ trait HasApiTokens
         $client = DB::table('oauth_clients')->where('password_client', 1)->first();
 
         if (!$client)
-            throw new GeneralException(__('password.invalid'), '', 422);
+            throw new \Exception(__('password.invalid'), '', 422);
 
         Passport::personalAccessTokensExpireIn(Carbon::now()->addMonth());
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(60));
@@ -50,7 +50,7 @@ trait HasApiTokens
             ]);
 
             if ($response->json('error'))
-                throw new GeneralException($response->json('message'));
+                throw new \Exception($response->json('message'));
 
             return [
                 'access_token' => $response->json('access_token'),
@@ -79,7 +79,7 @@ trait HasApiTokens
         ]);
 
         if ($response->json('error'))
-            throw new GeneralException($response->json('message'));
+            throw new \Exception($response->json('message'));
 
         return $response->json();
     }

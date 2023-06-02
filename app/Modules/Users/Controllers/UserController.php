@@ -4,6 +4,7 @@
 namespace App\Modules\Users\Controllers;
 
 
+use App\Exceptions\GeneralException;
 use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Modules\Users\Actions\RegisterUserAction;
@@ -61,11 +62,6 @@ class UserController extends Controller
 
         $userDTO = UserDTO::fromRequest($data);
 
-        if (isset($data['photo'])) {
-            $image_path = Storage::disk('public')->putFile('users', $data['photo']);
-
-            $userDTO->photo_path = "/storage/$image_path";
-        }
         $user = UpdateUserAction::execute($user, $userDTO);
 
         return back();
@@ -82,7 +78,13 @@ class UserController extends Controller
 
         $userRegisterDto = UserRegisterDTO::fromRequest($data);
 
-        $result = RegisterUserAction::execute($userRegisterDto);
+        try {
+
+            $result = RegisterUserAction::execute($userRegisterDto);
+
+        }catch (\Throwable $e){
+            new GeneralException($e->getMessage());
+        }
 
         return response()->json(Response::success($result));
     }
@@ -93,7 +95,13 @@ class UserController extends Controller
 
         $userLoginDto = UserLoginDTO::fromRequest($data);
 
-        $result = UserLoginAction::execute($userLoginDto);
+        try {
+
+            $result = UserLoginAction::execute($userLoginDto);
+
+        }catch (\Throwable $e){
+            new GeneralException($e->getMessage());
+        }
 
         return response()->json(Response::success($result));
     }

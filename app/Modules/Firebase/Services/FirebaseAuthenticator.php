@@ -4,7 +4,9 @@
 namespace App\Modules\Firebase\Services;
 
 
+use App\Exceptions\GeneralException;
 use Kreait\Firebase\Exception\Auth\FailedToVerifyToken;
+use Kreait\Laravel\Firebase\Facades\Firebase;
 
 class FirebaseAuthenticator
 {
@@ -12,16 +14,12 @@ class FirebaseAuthenticator
 
     public function __construct()
     {
-        $this->auth = app('firebase.auth');
+        $this->auth = Firebase::auth();
     }
 
     public function getMobilePhone($id_token)
     {
-        try {
-            $verifiedIdToken = $this->auth->verifyIdToken($id_token);
-        } catch (FailedToVerifyToken $e) {
-            throw new \Exception();
-        }
+        $verifiedIdToken = $this->auth->verifyIdToken($id_token);
 
         return $verifiedIdToken->claims()->get('sub');
     }

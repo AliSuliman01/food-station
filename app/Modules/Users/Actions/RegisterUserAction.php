@@ -13,7 +13,7 @@ class RegisterUserAction
     ){
         $mobile_phone = (new GetMobilePhoneFromIdTokenVM($userRegisterDTO->id_token))->toArray();
 
-        if (!$mobile_phone) throw new \Exception();
+        if (!$mobile_phone) throw new \Exception(__('validation.exists', ['attribute' => 'id_token']));
 
         $userDto = UserDTO::fromRequest($userRegisterDTO->toArray() + ['mobile_phone' => $mobile_phone]);
 

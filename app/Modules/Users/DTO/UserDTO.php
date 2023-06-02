@@ -3,11 +3,12 @@
 
 namespace App\Modules\Users\DTO;
 
+use App\Classes\OptimizedDataTransferObject;
 use Illuminate\Support\Facades\Hash;
 use Spatie\DataTransferObject\DataTransferObject;
 
 
-class UserDTO extends DataTransferObject
+class UserDTO extends OptimizedDataTransferObject
 {
 
 	/* @var integer|null */

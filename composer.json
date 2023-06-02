@@ -9,7 +9,7 @@
         "dyrynda/laravel-cascade-soft-deletes": "^4.1",
         "guzzlehttp/guzzle": "^7.2",
         "jenssegers/agent": "3.0.x-dev",
-        "kreait/firebase-php": "^7.2",
+        "kreait/laravel-firebase": "^5.2",
         "laravel/framework": "^9.19",
         "laravel/passport": "^11.0",
         "laravel/tinker": "^2.7",
