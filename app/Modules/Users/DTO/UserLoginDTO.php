@@ -17,7 +17,7 @@ class UserLoginDTO extends OptimizedDataTransferObject
     {
         return new self([
 			'email'				=> $request['email'] ?? null ,
-			'password'				=> isset($request['password'])? Hash::make($request['password']) : null ,
+			'password'				=> $request['password'] ?? null,
         ]);
     }
 }
