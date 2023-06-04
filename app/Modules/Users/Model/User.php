@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $guarded = [
-        'password',
+        'id',
     ];
 
     /**
@@ -35,8 +35,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
+        'verification_code',
         'password',
         'remember_token',
+        'created_by_user_id',
+        'updated_by_user_id',
+        'deleted_by_user_id',
+        'deleted_at',
     ];
 
     /**

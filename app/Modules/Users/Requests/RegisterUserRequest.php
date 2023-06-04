@@ -12,7 +12,7 @@ class RegisterUserRequest extends ApiFormRequest
     {
         return [
 			'name'				=> 'required' ,
-			'id_token'				=> 'required' ,
+			'email'				=> ['required', 'unique:users,email,NULL,id,deleted_at,NULL'] ,
             'photo_path'				=> 'nullable' ,
             'password'				=> 'required' ,
         ];

@@ -27,7 +27,7 @@ trait HasApiTokens
         $client = DB::table('oauth_clients')->where('password_client', 1)->first();
 
         if (!$client)
-            throw new \Exception(__('password.invalid'), '', 422);
+            throw new \Exception(__('password.invalid'), 422);
 
         Passport::personalAccessTokensExpireIn(Carbon::now()->addMonth());
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(60));
@@ -44,7 +44,7 @@ trait HasApiTokens
                 'grant_type' => 'password',
                 'client_id' => $client->id,
                 'client_secret' => $client->secret,
-                'username' => $this->mobile_phone,
+                'username' => $this->email,
                 'password' => $this->password,
                 'scope' => implode(' ', ['*']),
             ]);

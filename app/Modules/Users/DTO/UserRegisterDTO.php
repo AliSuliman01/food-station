@@ -12,7 +12,7 @@ class UserRegisterDTO extends OptimizedDataTransferObject
 	/* @var string|null */
 	public $name;
 	/* @var string|null */
-	public $id_token;
+	public $email;
 	/* @var string|null */
 	public $photo_path;
 	/* @var string|null */
@@ -22,9 +22,9 @@ class UserRegisterDTO extends OptimizedDataTransferObject
     {
         return new self([
 			'name'				=> $request['name'] ?? null ,
-			'id_token'				=> $request['id_token'] ?? null ,
+			'email'				=> $request['email'] ?? null ,
 			'photo_path'				=> $request['photo_path'] ?? null ,
-			'password'				=> isset($request['password'])? Hash::make($request['password']) : null ,
+			'password'				=> $request['password'] ?? null ,
         ]);
     }
 }
