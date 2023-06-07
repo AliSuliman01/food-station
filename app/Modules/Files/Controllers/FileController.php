@@ -12,9 +12,7 @@ class FileController
 {
     public function upload(UploadFileRequest $request)
     {
-        return response()->json(Response::success(request()->file('file')->clientExtension()));
         $data = $request->validated();
-
 
         $file_path = UploadFileAction::execute($data['file_path'], $data['file']);
 
