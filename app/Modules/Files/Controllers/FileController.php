@@ -12,8 +12,9 @@ class FileController
 {
     public function upload(UploadFileRequest $request)
     {
-        return response()->json($request->all());
         $data = $request->validated();
+
+        dd($data['file']);
 
         $file_path = UploadFileAction::execute($data['file_path'], $data['file']);
 
