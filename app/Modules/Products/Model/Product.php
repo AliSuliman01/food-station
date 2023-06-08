@@ -7,6 +7,7 @@ use App\Http\Traits\HasImages;
 use App\Http\Traits\HasTranslations;
 use App\Modules\Images\Model\Image;
 use App\Modules\Ingredients\Model\Ingredient;
+use App\Modules\Restaurants\Model\Restaurant;
 use App\Modules\Translations\Model\Translation;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -48,5 +49,10 @@ class Product extends Model
     public function ingredients()
     {
         return $this->belongsToMany(Ingredient::class);
+    }
+
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class);
     }
 }

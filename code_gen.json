@@ -1,15 +1,35 @@
 {
     "tables": [
         {
-            "table_name": "categorizable",
-            "entity_name": "Categorizable",
-            "instance_name": "categorizable",
-            "sub_namespace": "Categorizable",
+            "table_name": "settings",
+            "entity_name": "Setting",
+            "instance_name": "setting",
+            "sub_namespace": "Settings",
             "operation": "crud",
             "columns": [
                 {
                     "type": "integer",
                     "name": "id",
+                    "validation_rules": "integer|required"
+                },
+                {
+                    "type": "string",
+                    "name": "group",
+                    "validation_rules": "string|required"
+                },
+                {
+                    "type": "string",
+                    "name": "name",
+                    "validation_rules": "string|required"
+                },
+                {
+                    "type": "boolean",
+                    "name": "locked",
+                    "validation_rules": "integer|required"
+                },
+                {
+                    "type": "string",
+                    "name": "payload",
                     "validation_rules": "integer|required"
                 }
             ]

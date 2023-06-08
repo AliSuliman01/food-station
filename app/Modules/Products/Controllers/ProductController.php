@@ -6,6 +6,7 @@ namespace App\Modules\Products\Controllers;
 
 use App\Helpers\Response;
 use App\Http\Controllers\Controller;
+use App\Modules\Categories\Model\Category;
 use App\Modules\Products\Model\Product;
 use App\Modules\Products\Actions\StoreProductAction;
 use App\Modules\Products\Actions\DestroyProductAction;
@@ -13,6 +14,7 @@ use App\Modules\Products\Actions\UpdateProductAction;
 use App\Modules\Products\DTO\ProductDTO;
 use App\Modules\Products\Requests\StoreProductRequest;
 use App\Modules\Products\Requests\UpdateProductRequest;
+use App\Modules\Products\ViewModels\GetProductsByCategoryVM;
 use App\Modules\Products\ViewModels\GetProductVM;
 use App\Modules\Products\ViewModels\GetAllProductsVM;
 use Illuminate\Support\Facades\Auth;
@@ -24,11 +26,17 @@ class ProductController extends Controller
     public function __construct(){
         $this->middleware(['auth', 'verified']);
     }
-    public function index(){
 
-        return view('products.index', [
-            'products' => (new GetAllProductsVM())->toArray()
-        ]);
+    public function index(){
+        return \response()->json(Response::success((new GetAllProductsVM())->toArray()));
+    }
+
+    public function available(){
+        return \response()->json(Response::success((new GetProductsByCategoryVM(Category::AVAILABLE))->toArray()));
+    }
+
+    public function most_bought(){
+        return \response()->json(Response::success((new GetProductsByCategoryVM(Category::MOST_BOUGHT))->toArray()));
     }
 
     public function show(Product $product){

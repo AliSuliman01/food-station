@@ -9,7 +9,7 @@
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.4.13",
         "axios": "^1.1.2",
-        "flowbite": "^1.6.3",
+        "flowbite": "^1.6.5",
         "laravel-vite-plugin": "^0.7.2",
         "lodash": "^4.17.19",
         "postcss": "^8.4.21",
@@ -33,5 +33,10 @@
     "bugs": {
         "url": "https://github.com/AliSuliman01/food-station/issues"
     },
-    "homepage": "https://github.com/AliSuliman01/food-station#readme"
+    "homepage": "https://github.com/AliSuliman01/food-station#readme",
+    "dependencies": {
+        "jquery": "^3.7.0",
+        "tailwind": "^4.0.0",
+        "tailwindcss-animated": "^1.0.1"
+    }
 }

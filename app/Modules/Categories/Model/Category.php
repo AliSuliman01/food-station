@@ -13,6 +13,9 @@ class Category extends Model
 {
     use HasFactory, SoftDeletes, HasTranslations, HasImages;
 
+    public const AVAILABLE = 'available';
+    public const MOST_BOUGHT = 'most_bought';
+
     protected $guarded = [
         'id',
         'created_at',

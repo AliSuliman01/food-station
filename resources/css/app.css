@@ -13,3 +13,32 @@
 .sidebar-icon{
     @apply w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white
 }
+
+.mainGradientBg{
+    background: rgb(112,112,112);
+    background: linear-gradient(140deg, rgba(112,112,112,1) 0%, rgba(17,17,17,1) 23%, rgba(17,17,17,1) 80%, rgba(64,1,0,1) 100%);
+    background-repeat: no-repeat;
+}
+
+.fadeAnimation1S{
+    @apply animate-fade animate-once animate-ease-in-out animate-normal animate-fill-backwards  animate-delay-[1000ms] animate-duration-500;
+}
+.fadeAnimation6S{
+    @apply animate-fade animate-once animate-ease-in-out animate-normal animate-fill-backwards  animate-delay-[5200ms] animate-duration-500;
+}
+
+.fadeRightAnimation1S{
+    @apply animate-fade-right animate-once animate-ease-in-out animate-normal animate-fill-backwards  animate-delay-[1000ms] animate-duration-500;
+}
+.fadeRightAnimation2S{
+    @apply animate-fade-right animate-once animate-ease-in-out animate-normal animate-fill-backwards  animate-delay-[2000ms] animate-duration-500;
+}
+.fadeRightAnimation3S{
+    @apply animate-fade-right animate-once animate-ease-in-out animate-normal animate-fill-backwards  animate-delay-[2800ms] animate-duration-500;
+}
+.fadeRightAnimation4S{
+    @apply animate-fade-right animate-once animate-ease-in-out animate-normal animate-fill-backwards  animate-delay-[3600ms] animate-duration-500;
+}
+.fadeRightAnimation5S{
+    @apply animate-fade-right animate-once animate-ease-in-out animate-normal animate-fill-backwards  animate-delay-[4400ms] animate-duration-500;
+}

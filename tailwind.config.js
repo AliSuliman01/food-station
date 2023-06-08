@@ -6,9 +6,17 @@ module.exports = {
         "./node_modules/flowbite/**/*.js"
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors:{
+                'orange-pinky' :'#E3293F',
+                'orange-pinky-500' :'#fc4157',
+                'orange-yellow':'#cfb054',
+                'orange-yellow-500':'#e2be3f'
+            }
+        },
     },
     plugins: [
-        require('flowbite/plugin')
+        require('flowbite/plugin'),
+        require('tailwindcss-animated')
     ],
 }
