@@ -7,13 +7,10 @@ namespace App\Modules\Users\Controllers;
 use App\Exceptions\GeneralException;
 use App\Helpers\Response;
 use App\Http\Controllers\Controller;
-use App\Mail\EmailVerificationMail;
 use App\Modules\Users\Actions\RegisterUserAction;
-use App\Modules\Users\Actions\SetNewAuthTokensAction;
 use App\Modules\Users\Actions\UserLoginAction;
 use App\Modules\Users\Actions\SendVerificationEmailAction;
 use App\Modules\Users\Actions\VerifyEmailAction;
-use App\Modules\Users\Actions\VerifyUserEmailAction;
 use App\Modules\Users\DTO\UserLoginDTO;
 use App\Modules\Users\DTO\UserRegisterDTO;
 use App\Modules\Users\Model\User;
@@ -30,8 +27,6 @@ use App\Modules\Users\ViewModels\GetUserVM;
 use App\Modules\Users\ViewModels\GetAllUsersVM;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -94,15 +89,19 @@ class UserController extends Controller
         $userRegisterDto = UserRegisterDTO::fromRequest($data);
 
         try {
-            $user = DB::transaction(function ()use($userRegisterDto) {
+            $response = DB::transaction(function () use ($userRegisterDto) {
 
                 $user = RegisterUserAction::execute($userRegisterDto);
 
                 SendVerificationEmailAction::execute($user);
 
-                SetNewAuthTokensAction::execute($user);
+                $tokens = $user->createToken('access_token');
 
-                return $user;
+                return [
+                    'user' => $user,
+                    'access_token' => $tokens['access_token'],
+                    'refresh_token' => $tokens['refresh_token']
+                ];
 
             });
 
@@ -110,7 +109,7 @@ class UserController extends Controller
             throw new GeneralException($e->getMessage());
         }
 
-        return response()->json(Response::success($user));
+        return response()->json(Response::success($response));
     }
 
     public function login(LoginUserRequest $request)
@@ -120,17 +119,26 @@ class UserController extends Controller
         $userLoginDto = UserLoginDTO::fromRequest($data);
 
         try {
+            $response = DB::transaction(function () use ($userLoginDto) {
 
-            $user = UserLoginAction::execute($userLoginDto);
+                $user = UserLoginAction::execute($userLoginDto);
 
-            SetNewAuthTokensAction::execute($user);
+                $tokens = $user->createToken('access_token');
+
+                return [
+                    'user' => $user,
+                    'access_token' => $tokens['access_token'],
+                    'refresh_token' => $tokens['refresh_token']
+                ];
+            });
 
         } catch (\Throwable $e) {
             throw new GeneralException($e->getMessage());
         }
 
-        return response()->json(Response::success($user));
+        return response()->json(Response::success($response));
     }
+
     public function verify_email(VerifyEmailRequest $request)
     {
         $data = $request->validated();
