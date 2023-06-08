@@ -10,11 +10,15 @@ class GetAllUsersVM implements Arrayable
 {
     public function toArray()
     {
-        return User::query()
+        $users = User::query()
             ->when(request()->filter, function($query){
                 $query->where('name','like','%' . request()->filter . '%');
             })
             ->latest()
             ->get();
+
+        return [
+            'users' => $users
+        ];
     }
 }

@@ -18,6 +18,6 @@ class GetUserVM implements Arrayable
 
     public function toArray()
     {
-        return  $this->user;
+        return ['user' => $this->user];
     }
 }
