@@ -19,7 +19,7 @@ use App\Modules\Ingredients\ViewModels\GetAllIngredientsVM;
 class IngredientController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth:api')->only(['store','update','destroy']);
+        $this->middleware('auth:api');
     }
     public function index(){
 

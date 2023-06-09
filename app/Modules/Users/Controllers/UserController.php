@@ -32,24 +32,7 @@ class UserController extends Controller
 {
     public function index()
     {
-
-        return view('users.admin.index', [
-            'users' => (new GetAllUsersVM())->toArray()
-        ]);
-    }
-
-    public function edit(User $user)
-    {
-
-        return view('users.admin.edit', [
-            'user' => (new GetUserVM($user))->toArray()
-        ]);
-    }
-
-    public function create()
-    {
-
-        return view('users.admin.create');
+        return response()->json(Response::success((new GetAllUsersVM())->toArray()));
     }
 
     public function store(StoreUserRequest $request)
@@ -61,7 +44,7 @@ class UserController extends Controller
 
         $user = StoreUserAction::execute($userDTO);
 
-        return redirect()->route('admin.users.index');
+        return response()->json( (new GetUserVM($user))->toArray());
     }
 
     public function update(User $user, UpdateUserRequest $request)
@@ -73,13 +56,14 @@ class UserController extends Controller
 
         $user = UpdateUserAction::execute($user, $userDTO);
 
-        return back();
+        return response()->json( (new GetUserVM($user))->toArray());
+
     }
 
     public function destroy(User $user)
     {
         DestroyUserAction::execute($user);
-        return redirect()->route('admin.users.index');
+        return response()->json( (new GetUserVM($user))->toArray());
     }
 
     public function register(RegisterUserRequest $request)

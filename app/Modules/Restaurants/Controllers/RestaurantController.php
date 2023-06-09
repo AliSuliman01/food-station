@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Modules\Restaurants\Controllers;
-
 
 use App\Helpers\Response;
 use App\Http\Controllers\Controller;
@@ -22,9 +20,7 @@ class RestaurantController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        return view('restaurants.index', [
-           'restaurants' => (new GetAllRestaurantsVM())->toArray()
-        ]);
+        return response()->json(Response::success((new GetAllRestaurantsVM())->toArray()))
     }
 
     public function show(Restaurant $restaurant){

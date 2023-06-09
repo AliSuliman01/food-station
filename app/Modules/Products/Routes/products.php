@@ -11,7 +11,7 @@ Route::middleware(['auth:api'])->prefix('products')->group(function(){
 });
 
 Route::resource('products',ProductController::class);
-
-Route::prefix('admin')->as('admin.')->group(function(){
-   Route::resource('products', AdminProductController::class);
-});
+//
+//Route::prefix('admin')->as('admin.')->group(function(){
+//   Route::resource('products', AdminProductController::class);
+//});
