@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Modules\Products\Model\Product;
-use App\Modules\Restaurants\ViewModels\GetAllRestaurantsVM;
 use App\Modules\Settings\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,11 +41,10 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('products/{product}', function (Product $product) {
-    return view('product.show',[
-        'product' => $product
+    return view('product.show', [
+        'product' => $product,
     ]);
 })->name('product.show');
-
 
 Route::get('/cart', function () {
     return view('cart');
@@ -56,15 +54,13 @@ Route::get('/settings', function () {
     return view('settings');
 })->middleware(['auth', 'verified'])->name('settings.edit');
 
-
 Route::post('/settings', [SettingController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('settings');
 
-
-Route::get('products/order/{product}',function(Product $product){
-    return view('product.order',[
-        'product' => $product
+Route::get('products/order/{product}', function (Product $product) {
+    return view('product.order', [
+        'product' => $product,
     ]);
 })->middleware(['auth', 'verified'])->name('products.order');
 

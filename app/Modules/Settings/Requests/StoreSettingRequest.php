@@ -1,21 +1,19 @@
 <?php
 
-
 namespace App\Modules\Settings\Requests;
 
+use App\Http\Requests\ApiFormRequest;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class StoreSettingRequest extends FormRequest
+class StoreSettingRequest extends ApiFormRequest
 {
     public function rules(): array
     {
         return [
-			'id'				=> 'integer|required' ,
-			'group'				=> 'string|required' ,
-			'name'				=> 'string|required' ,
-			'locked'				=> 'integer|required' ,
-			'payload'				=> 'integer|required' ,
+            'id' => 'integer|required',
+            'group' => 'string|required',
+            'name' => 'string|required',
+            'locked' => 'integer|required',
+            'payload' => 'integer|required',
 
         ];
     }

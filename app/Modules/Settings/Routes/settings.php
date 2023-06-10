@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Modules\Settings\Controllers\SettingController;
+use Illuminate\Support\Facades\Route;
 
-Route::apiResource('settings',SettingController::class);
+Route::apiResource('settings', SettingController::class);

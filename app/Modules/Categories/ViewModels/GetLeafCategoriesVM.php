@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Modules\Categories\ViewModels;
 
 use App\Modules\Categories\Model\Category;

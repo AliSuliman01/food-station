@@ -8,8 +8,9 @@ class DestroySettingAction
 {
     public static function execute(
         Setting $setting
-    ){
+    ) {
         $setting->delete();
+
         return $setting;
     }
 }

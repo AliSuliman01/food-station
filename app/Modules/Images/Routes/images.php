@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Modules\Images\Controllers\ImageController;
+use Illuminate\Support\Facades\Route;
 
-Route::apiResource('images',ImageController::class);
+Route::apiResource('images', ImageController::class);

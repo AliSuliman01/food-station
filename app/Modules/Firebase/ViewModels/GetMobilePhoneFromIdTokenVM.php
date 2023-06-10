@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Modules\Firebase\ViewModels;
-
 
 use App\Modules\Firebase\Services\FirebaseAuthenticator;
 use Illuminate\Contracts\Support\Arrayable;
@@ -10,6 +8,7 @@ use Illuminate\Contracts\Support\Arrayable;
 class GetMobilePhoneFromIdTokenVM implements Arrayable
 {
     private $id_token;
+
     private $firebaseAuthenticator;
 
     public function __construct($id_token)

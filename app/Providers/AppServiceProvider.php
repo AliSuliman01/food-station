@@ -28,8 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(file_exists(__DIR__ . '/migrations.json'))
-            $this->loadMigrationsFrom(json_decode(file_get_contents(__DIR__ . '/migrations.json'),true));
+        if (file_exists(__DIR__.'/migrations.json')) {
+            $this->loadMigrationsFrom(json_decode(file_get_contents(__DIR__.'/migrations.json'), true));
+        }
 
         Relation::enforceMorphMap([
             'product' => Product::class,

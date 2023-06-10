@@ -3,9 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Modules\Images\Model\Image;
-use App\Modules\Products\Model\Product;
-use App\Modules\Translations\Model\Translation;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

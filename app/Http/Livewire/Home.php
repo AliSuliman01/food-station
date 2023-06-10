@@ -13,15 +13,16 @@ class Home extends Component
 
     public function productDetails($product_id)
     {
-        return redirect()->route('product.show',['product' => $product_id]);
+        return redirect()->route('product.show', ['product' => $product_id]);
     }
+
     public function render()
     {
-        return view('livewire.home',[
+        return view('livewire.home', [
             'products' => Product::with(['translation', 'restaurant'])
-                ->whereRelation('translation','name','like',"%{$this->search}%")
+                ->whereRelation('translation', 'name', 'like', "%{$this->search}%")
                 ->orWhereRelation('restaurant', 'name', 'like', "%{$this->search}%")
-                ->get()
-            ]);
+                ->get(),
+        ]);
     }
 }

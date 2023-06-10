@@ -8,8 +8,9 @@ class DestroyIngredientAction
 {
     public static function execute(
         Ingredient $ingredient
-    ){
+    ) {
         $ingredient->delete();
+
         return $ingredient;
     }
 }

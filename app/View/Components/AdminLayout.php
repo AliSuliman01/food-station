@@ -7,7 +7,6 @@ use Illuminate\View\View;
 
 class AdminLayout extends Component
 {
-
     /**
      * Get the view / contents that represents the component.
      */

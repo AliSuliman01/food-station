@@ -18,12 +18,14 @@ class Navbar extends Component
     public function setActiveNavPage($activeNavPage)
     {
         $this->activeNavPage = $activeNavPage;
+
         return redirect()->to(route($this->activeNavPage));
     }
+
     public function render()
     {
-        return view('livewire.navbar',[
-            'activeNavPage' => $this->activeNavPage
+        return view('livewire.navbar', [
+            'activeNavPage' => $this->activeNavPage,
         ]);
     }
 }

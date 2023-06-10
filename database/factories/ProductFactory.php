@@ -20,7 +20,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'price' => fake()->randomFloat(3,100,1000)
+            'price' => fake()->randomFloat(3, 100, 1000),
         ];
     }
 }

@@ -1,22 +1,20 @@
 <?php
 
-
 namespace App\Modules\Translations\Requests;
 
+use App\Http\Requests\ApiFormRequest;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateTranslationRequest extends FormRequest
+class UpdateTranslationRequest extends ApiFormRequest
 {
     public function rules(): array
     {
         return [
-			'id'				=> 'integer|required' ,
-			'translatable_id'				=> 'required' ,
-			'translatable_type'				=> 'nullable' ,
-			'name'				=> 'nullable' ,
-			'description'				=> 'nullable' ,
-			'notes'				=> 'nullable' ,
+            'id' => 'integer|required',
+            'translatable_id' => 'required',
+            'translatable_type' => 'nullable',
+            'name' => 'nullable',
+            'description' => 'nullable',
+            'notes' => 'nullable',
 
         ];
     }

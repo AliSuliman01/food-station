@@ -5,17 +5,14 @@ namespace App\Modules\Products\Model;
 use App\Http\Traits\HasCategories;
 use App\Http\Traits\HasImages;
 use App\Http\Traits\HasTranslations;
-use App\Modules\Images\Model\Image;
+use App\Models\OptimizedModel;
 use App\Modules\Ingredients\Model\Ingredient;
 use App\Modules\Restaurants\Model\Restaurant;
-use App\Modules\Translations\Model\Translation;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\App;
 
-class Product extends Model
+class Product extends OptimizedModel
 {
     use HasFactory, SoftDeletes, HasTranslations, HasImages, HasCategories;
 

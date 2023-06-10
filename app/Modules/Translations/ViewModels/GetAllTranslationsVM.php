@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Modules\Translations\ViewModels;
 
 use App\Modules\Translations\Model\Translation;

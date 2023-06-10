@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Modules\Translations\ViewModels;
 
-use App\Modules\Translations\Model\Translation;
 use Illuminate\Contracts\Support\Arrayable;
 
 class GetTranslationVM implements Arrayable
 {
-
     private $translation;
 
     public function __construct($translation)
@@ -18,6 +15,6 @@ class GetTranslationVM implements Arrayable
 
     public function toArray()
     {
-        return  $this->translation;
+        return $this->translation;
     }
 }

@@ -8,8 +8,9 @@ class DestroyTranslationAction
 {
     public static function execute(
         Translation $translation
-    ){
+    ) {
         $translation->delete();
+
         return $translation;
     }
 }

@@ -8,8 +8,9 @@ class DestroyUserAction
 {
     public static function execute(
         User $user
-    ){
+    ) {
         $user->delete();
+
         return $user;
     }
 }

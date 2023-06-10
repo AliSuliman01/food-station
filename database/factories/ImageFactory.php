@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ImageFactory extends Factory
 {
     protected $model = Image::class;
+
     /**
      * Define the model's default state.
      *
@@ -19,7 +20,7 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-            'path' => fake()->imageUrl(category: 'food')
+            'path' => fake()->imageUrl(category: 'food'),
         ];
     }
 }

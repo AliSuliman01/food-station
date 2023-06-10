@@ -1,6 +1,6 @@
 <?php
 
-namespace  App\Http\Requests;
+namespace App\Http\Requests;
 
 use App\Exceptions\GeneralException;
 use Illuminate\Contracts\Validation\Validator;
@@ -13,18 +13,18 @@ abstract class ApiFormRequest extends FormRequest
     {
         return true;
     }
+
     protected function failedValidation(Validator $validator)
     {
         $e = (new ValidationException($validator));
 
-        throw new GeneralException(collect($e->errors())->values()[0][0],$e->getTrace(),400);
+        throw new GeneralException(collect($e->errors())->values()[0][0], $e->getTrace(), 400);
     }
+
     public function validationData(): array
     {
         return $this->all() + $this->route()->parameters + $this->json()->all();
     }
 
-    public abstract function rules();
-
-
+    abstract public function rules();
 }

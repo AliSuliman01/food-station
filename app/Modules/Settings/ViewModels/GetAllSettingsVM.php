@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Modules\Settings\ViewModels;
 
 use App\Modules\Settings\Model\Setting;

@@ -4,16 +4,17 @@ namespace App\Modules\Categories\Model;
 
 use App\Http\Traits\HasImages;
 use App\Http\Traits\HasTranslations;
+use App\Models\OptimizedModel;
 use App\Modules\Ingredients\Model\Ingredient;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Category extends OptimizedModel
 {
     use HasFactory, SoftDeletes, HasTranslations, HasImages;
 
     public const AVAILABLE = 'available';
+
     public const MOST_BOUGHT = 'most_bought';
 
     protected $guarded = [
@@ -46,6 +47,7 @@ class Category extends Model
     {
         return $this->belongsTo(Category::class, 'parent_category_id');
     }
+
     public function sub_categories()
     {
         return $this->hasMany(Category::class, 'parent_category_id');

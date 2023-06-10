@@ -1,20 +1,22 @@
 <?php
 
-
 namespace App\Modules\Categories\Requests;
 
+use App\Http\Requests\ApiFormRequest;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class StoreCategoryRequest extends FormRequest
+class StoreCategoryRequest extends ApiFormRequest
 {
     public function rules(): array
     {
         return [
-			'parent_category_id'				=> 'integer|nullable' ,
-            'name'				=> 'string|required' ,
-            'description'				=> 'string|nullable' ,
-            'image' => 'nullable',
+            'parent_category_id' => ['integer', 'nullable', 'exists:categories,id,deleted_at,NULL'],
+            'name' => 'string|required',
+            'translations.*.language_code' => ['required'],
+            'translations.*.name' => ['required', 'string'],
+            'translations.*.description' => ['nullable', 'string'],
+            'translations.*.notes' => ['nullable', 'string'],
+            'images' => ['required'],
+            'images.*.path' => ['required'],
         ];
     }
 }

@@ -10,12 +10,13 @@ class UserLoginAction
 {
     public static function execute(
         UserLoginDTO $userLoginDTO
-    ){
+    ) {
         /** @var User $user */
-        $user = User::query()->where('email', '=', $userLoginDTO->email)->firstOrFail();
+        $user = User::query()->where('email', '=', $userLoginDTO->email)->first();
 
-        if (!Hash::check($userLoginDTO->password, $user->password))
+        if (! Hash::check($userLoginDTO->password, $user->password)) {
             throw new \Exception(__('auth.failed'));
+        }
 
         return $user;
 

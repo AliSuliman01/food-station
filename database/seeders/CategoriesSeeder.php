@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Database\Seeders;
-
 
 use App\Modules\Categories\Model\Category;
 use Illuminate\Database\Seeder;
@@ -13,8 +11,8 @@ class CategoriesSeeder extends Seeder
     {
         $data = [
             [
-                'slug' => 'filter'
-            ]
+                'slug' => 'filter',
+            ],
         ];
         Category::query()->insertOrIgnore($data);
     }

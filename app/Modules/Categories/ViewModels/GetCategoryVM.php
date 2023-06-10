@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Modules\Categories\ViewModels;
 
-use App\Modules\Categories\Model\Category;
 use Illuminate\Contracts\Support\Arrayable;
 
 class GetCategoryVM implements Arrayable
 {
-
     private $category;
 
     public function __construct($category)
@@ -18,6 +15,6 @@ class GetCategoryVM implements Arrayable
 
     public function toArray()
     {
-        return  $this->category;
+        return $this->category;
     }
 }

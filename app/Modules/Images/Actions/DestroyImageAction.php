@@ -8,8 +8,9 @@ class DestroyImageAction
 {
     public static function execute(
         Image $image
-    ){
+    ) {
         $image->delete();
+
         return $image;
     }
 }

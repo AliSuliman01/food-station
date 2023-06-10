@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class Map extends Component
 {
     public $initLat;
+
     public $initLong;
 
     /**

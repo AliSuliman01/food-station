@@ -1,9 +1,7 @@
 <?php
 
-
 namespace App\Http\Traits\Auth;
 
-use App\Exceptions\GeneralException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
@@ -26,21 +24,22 @@ trait HasApiTokens
 
         $client = DB::table('oauth_clients')->where('password_client', 1)->first();
 
-        if (!$client)
+        if (! $client) {
             throw new \Exception(__('password.invalid'), 422);
+        }
 
         Passport::personalAccessTokensExpireIn(Carbon::now()->addMonth());
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(60));
 
-
         if (App::isLocal()) {
             $objToken = $this->parentCreateToken($name, ['*']);
+
             return [
                 'access_token' => $objToken->accessToken,
-                'refresh_token' => null
+                'refresh_token' => null,
             ];
         } else {
-            $response = Http::asForm()->post( '/oauth/token', [
+            $response = Http::asForm()->post('/oauth/token', [
                 'grant_type' => 'password',
                 'client_id' => $client->id,
                 'client_secret' => $client->secret,
@@ -49,12 +48,13 @@ trait HasApiTokens
                 'scope' => implode(' ', ['*']),
             ]);
 
-            if ($response->json('error'))
+            if ($response->json('error')) {
                 throw new \Exception($response->json('message'));
+            }
 
             return [
                 'access_token' => $response->json('access_token'),
-                'refresh_token' => $response->json('refresh_token')
+                'refresh_token' => $response->json('refresh_token'),
             ];
         }
     }
@@ -70,7 +70,7 @@ trait HasApiTokens
         Passport::personalAccessTokensExpireIn(Carbon::now()->addMonth());
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(60));
 
-        $response = Http::asForm()->post(config('micro_contact.identity.url') . '/oauth/token', [
+        $response = Http::asForm()->post(config('micro_contact.identity.url').'/oauth/token', [
             'grant_type' => 'refresh_token',
             'refresh_token' => $refresh_token,
             'client_id' => $client->id,
@@ -78,8 +78,9 @@ trait HasApiTokens
             'scope' => $scopes,
         ]);
 
-        if ($response->json('error'))
+        if ($response->json('error')) {
             throw new \Exception($response->json('message'));
+        }
 
         return $response->json();
     }

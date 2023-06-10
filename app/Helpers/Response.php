@@ -2,9 +2,7 @@
 
 namespace App\Helpers;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 
 class Response
 {
@@ -19,7 +17,9 @@ class Response
 
     public static function error($message, $code, $detailed_error = null)
     {
-        if (!App::isLocal()) $detailed_error = null;
+        if (! App::isLocal()) {
+            $detailed_error = null;
+        }
 
         return [
             'success' => false,

@@ -1,22 +1,20 @@
 <?php
 
-
 namespace App\Modules\Ingredients\Controllers;
-
 
 use App\Helpers\Response;
 use App\Helpers\Storage;
 use App\Http\Controllers\Controller;
 use App\Modules\Categories\ViewModels\GetLeafCategoriesVM;
-use App\Modules\Ingredients\Model\Ingredient;
-use App\Modules\Ingredients\Actions\StoreIngredientAction;
 use App\Modules\Ingredients\Actions\DestroyIngredientAction;
+use App\Modules\Ingredients\Actions\StoreIngredientAction;
 use App\Modules\Ingredients\Actions\UpdateIngredientAction;
 use App\Modules\Ingredients\DTO\IngredientDTO;
+use App\Modules\Ingredients\Model\Ingredient;
 use App\Modules\Ingredients\Requests\StoreIngredientRequest;
 use App\Modules\Ingredients\Requests\UpdateIngredientRequest;
-use App\Modules\Ingredients\ViewModels\GetIngredientVM;
 use App\Modules\Ingredients\ViewModels\GetAllIngredientsVM;
+use App\Modules\Ingredients\ViewModels\GetIngredientVM;
 
 class AdminIngredientController extends Controller
 {
@@ -29,10 +27,12 @@ class AdminIngredientController extends Controller
     {
 
         return view('ingredients.admin.index', [
-            'ingredients' => (new GetAllIngredientsVM())->toArray()
+            'ingredients' => (new GetAllIngredientsVM())->toArray(),
         ]);
     }
-    public function show(Ingredient $ingredient){
+
+    public function show(Ingredient $ingredient)
+    {
 
         return response()->json(Response::success((new GetIngredientVM($ingredient))->toArray()));
     }
@@ -47,14 +47,15 @@ class AdminIngredientController extends Controller
 
     public function create()
     {
-        return view('ingredients.admin.create',[
+        return view('ingredients.admin.create', [
             'categories' => (new GetLeafCategoriesVM())->toArray(),
         ]);
     }
 
-    public function store(StoreIngredientRequest $request){
+    public function store(StoreIngredientRequest $request)
+    {
 
-        $data = $request->validated() ;
+        $data = $request->validated();
 
         $ingredientDTO = IngredientDTO::fromRequest($data);
 
@@ -69,15 +70,16 @@ class AdminIngredientController extends Controller
         ]);
 
         $ingredient->images()->create([
-            'path' => Storage::putFile('ingredients', $data['image'])
+            'path' => Storage::putFile('ingredients', $data['image']),
         ]);
 
         return redirect()->route('admin.ingredients.index');
     }
 
-    public function update(Ingredient $ingredient, UpdateIngredientRequest $request){
+    public function update(Ingredient $ingredient, UpdateIngredientRequest $request)
+    {
 
-        $data = $request->validated() ;
+        $data = $request->validated();
 
         $ingredientDTO = IngredientDTO::fromRequest($data);
 
@@ -90,17 +92,19 @@ class AdminIngredientController extends Controller
             'description' => $data['description'],
         ]);
 
-        if (isset($data['image']))
+        if (isset($data['image'])) {
             $ingredient->images()->first()->update(['path' => Storage::putFile('ingredients', $data['image'])]);
+        }
 
         return back();
     }
 
-    public function destroy(Ingredient $ingredient){
+    public function destroy(Ingredient $ingredient)
+    {
 
         DestroyIngredientAction::execute($ingredient);
+
         return redirect()->route('admin.ingredients.index');
 
     }
-
 }

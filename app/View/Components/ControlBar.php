@@ -10,7 +10,9 @@ class ControlBar extends Component
      * @var string
      */
     public $addingButtonTarget;
+
     public $searching;
+
     /**
      * Create a new component instance.
      *

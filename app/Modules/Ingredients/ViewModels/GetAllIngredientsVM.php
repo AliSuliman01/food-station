@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Modules\Ingredients\ViewModels;
 
 use App\Modules\Ingredients\Model\Ingredient;
@@ -10,6 +9,10 @@ class GetAllIngredientsVM implements Arrayable
 {
     public function toArray()
     {
-        return Ingredient::query()->get();
+        return Ingredient::with([
+            'translation',
+            'images',
+            'categories',
+        ])->get();
     }
 }

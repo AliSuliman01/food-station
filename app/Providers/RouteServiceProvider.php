@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-
     /**
      * The path to the "home" route for your application.
      *
@@ -62,17 +61,18 @@ class RouteServiceProvider extends ServiceProvider
         Route::group(['prefix' => 'api'], function () {
             Route::group(['prefix' => 'v1'], function () {
 
-                    Route::middleware('api')
-                        ->namespace($this->namespace)
-                        ->group(base_path('routes/api.php'));
+                Route::middleware('api')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/api.php'));
 
-                if (file_exists(__DIR__ . '/routes.json')) {
-                    $routeFiles = json_decode(file_get_contents(__DIR__ . '/routes.json'), true);
+                if (file_exists(__DIR__.'/routes.json')) {
+                    $routeFiles = json_decode(file_get_contents(__DIR__.'/routes.json'), true);
 
-                    foreach ($routeFiles as $routeFile)
+                    foreach ($routeFiles as $routeFile) {
                         Route::middleware('api')
                             ->namespace($this->namespace)
                             ->group(base_path($routeFile));
+                    }
                 }
             });
         });

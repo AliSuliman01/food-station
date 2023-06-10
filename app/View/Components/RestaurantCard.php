@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class RestaurantCard extends Component
 {
     public $restaurant;
+
     /**
      * Create a new component instance.
      *

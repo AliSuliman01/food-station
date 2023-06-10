@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Modules\Restaurants\ViewModels;
 
-use App\Modules\Restaurants\Model\Restaurant;
 use Illuminate\Contracts\Support\Arrayable;
 
 class GetRestaurantVM implements Arrayable
 {
-
     private $restaurant;
 
     public function __construct($restaurant)
@@ -18,6 +15,6 @@ class GetRestaurantVM implements Arrayable
 
     public function toArray()
     {
-        return  $this->restaurant;
+        return $this->restaurant;
     }
 }

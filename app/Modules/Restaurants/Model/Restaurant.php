@@ -2,15 +2,16 @@
 
 namespace App\Modules\Restaurants\Model;
 
+use App\Http\Traits\HasImages;
+use App\Models\OptimizedModel;
 use App\Modules\Products\Model\Product;
 use App\Modules\Users\Model\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Restaurant extends Model
+class Restaurant extends OptimizedModel
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasImages;
 
     protected $cascadeDeletes = [
         'products',

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Modules\Images\ViewModels;
 
 use App\Modules\Images\Model\Image;

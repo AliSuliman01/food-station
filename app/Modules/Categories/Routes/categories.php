@@ -1,7 +1,6 @@
 <?php
 
-use App\Modules\Categories\Controllers\AdminCategoryController;
-use Illuminate\Support\Facades\Route;
 use App\Modules\Categories\Controllers\CategoryController;
+use Illuminate\Support\Facades\Route;
 
-Route::resource('categories',CategoryController::class);
+Route::resource('categories', CategoryController::class);

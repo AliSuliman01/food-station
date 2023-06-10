@@ -8,8 +8,9 @@ class DestroyRestaurantAction
 {
     public static function execute(
         Restaurant $restaurant
-    ){
+    ) {
         $restaurant->delete();
+
         return $restaurant;
     }
 }

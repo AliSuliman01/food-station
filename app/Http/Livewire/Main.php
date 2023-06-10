@@ -14,6 +14,7 @@ class Main extends Component
     {
         $this->viewName = $viewName;
     }
+
     public function render()
     {
         return view($this->viewName);

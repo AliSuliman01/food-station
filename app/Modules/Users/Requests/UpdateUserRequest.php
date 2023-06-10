@@ -1,20 +1,18 @@
 <?php
 
-
 namespace App\Modules\Users\Requests;
 
+use App\Http\Requests\ApiFormRequest;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateUserRequest extends FormRequest
+class UpdateUserRequest extends ApiFormRequest
 {
     public function rules(): array
     {
         return [
-			'name'				=> 'nullable' ,
-			'email'				=> 'nullable' ,
-			'photo'				=> 'nullable' ,
-            'password'			=> 'nullable' ,
+            'name' => 'nullable',
+            'email' => ['required', 'unique:users,email,'.$this->user.',id,deleted_at,NULL'],
+            'photo' => 'nullable',
+            'password' => 'nullable',
         ];
     }
 }

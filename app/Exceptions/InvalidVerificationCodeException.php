@@ -2,10 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Helpers\Response;
-use Illuminate\Http\Request;
 use Exception;
-use Throwable;
 
 class InvalidVerificationCodeException extends Exception
 {

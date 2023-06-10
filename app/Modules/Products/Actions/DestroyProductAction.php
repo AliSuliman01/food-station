@@ -8,8 +8,9 @@ class DestroyProductAction
 {
     public static function execute(
         Product $product
-    ){
+    ) {
         $product->delete();
+
         return $product;
     }
 }

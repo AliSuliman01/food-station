@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class TranslationFactory extends Factory
 {
     protected $model = Translation::class;
+
     /**
      * Define the model's default state.
      *
@@ -22,7 +23,7 @@ class TranslationFactory extends Factory
             'language_code' => fake()->randomElement(['en', 'ar']),
             'name' => $this->faker->realText(20),
             'description' => $this->faker->paragraph,
-            'notes' => $this->faker->realText(100)
+            'notes' => $this->faker->realText(100),
         ];
     }
 }

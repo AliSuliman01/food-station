@@ -20,7 +20,7 @@ class RestaurantController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        return response()->json(Response::success((new GetAllRestaurantsVM())->toArray()))
+        return response()->json(Response::success((new GetAllRestaurantsVM())->toArray()));
     }
 
     public function show(Restaurant $restaurant){
@@ -36,6 +36,8 @@ class RestaurantController extends Controller
 
         $restaurant = StoreRestaurantAction::execute($restaurantDTO);
 
+        $restaurant->updateRelation('images', $data['images'] ?? []);
+
         return response()->json(Response::success((new GetRestaurantVM($restaurant))->toArray()));
     }
 
@@ -46,6 +48,8 @@ class RestaurantController extends Controller
         $restaurantDTO = RestaurantDTO::fromRequest($data);
 
         $restaurant = UpdateRestaurantAction::execute($restaurant, $restaurantDTO);
+
+        $restaurant->updateRelation('images', $data['images'] ?? []);
 
         return response()->json(Response::success((new GetRestaurantVM($restaurant))->toArray()));
     }

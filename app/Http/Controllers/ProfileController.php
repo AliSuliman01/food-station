@@ -33,8 +33,9 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        if ($request->hasFile('image'))
+        if ($request->hasFile('image')) {
             $request->user()->photo_path = Storage::putFile('users', $request->file('image'));
+        }
 
         $request->user()->save();
 

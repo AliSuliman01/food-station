@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Modules\Restaurants\ViewModels;
 
 use App\Modules\Restaurants\Model\Restaurant;
@@ -11,8 +10,8 @@ class GetAllRestaurantsVM implements Arrayable
     public function toArray()
     {
         return Restaurant::with(['user', 'products'])
-            ->when(request()->filter, function($query){
-                $query->where('name','like','%' . request()->filter . '%');
+            ->when(request()->filter, function ($query) {
+                $query->where('name', 'like', '%'.request()->filter.'%');
             })
             ->latest()
             ->get();

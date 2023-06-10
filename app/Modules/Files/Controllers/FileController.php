@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Modules\Files\Controllers;
-
 
 use App\Helpers\Response;
 use App\Modules\Files\Actions\UploadFileAction;

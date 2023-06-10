@@ -1,21 +1,20 @@
 <?php
 
-
 namespace App\Modules\Products\Controllers;
 
 use App\Helpers\Storage;
 use App\Http\Controllers\Controller;
 use App\Modules\Categories\ViewModels\GetLeafCategoriesVM;
 use App\Modules\Ingredients\ViewModels\GetAllIngredientsVM;
-use App\Modules\Products\Model\Product;
-use App\Modules\Products\Actions\StoreProductAction;
 use App\Modules\Products\Actions\DestroyProductAction;
+use App\Modules\Products\Actions\StoreProductAction;
 use App\Modules\Products\Actions\UpdateProductAction;
 use App\Modules\Products\DTO\ProductDTO;
+use App\Modules\Products\Model\Product;
 use App\Modules\Products\Requests\StoreProductRequest;
 use App\Modules\Products\Requests\UpdateProductRequest;
-use App\Modules\Products\ViewModels\GetProductVM;
 use App\Modules\Products\ViewModels\GetAllProductsVM;
+use App\Modules\Products\ViewModels\GetProductVM;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -29,14 +28,14 @@ class AdminProductController extends Controller
     public function index()
     {
         return view('products.admin.index', [
-            'products' => (new GetAllProductsVM())->toArray()
+            'products' => (new GetAllProductsVM())->toArray(),
         ]);
     }
 
     public function show(Product $product)
     {
         return view('products.admin.show', [
-            'product' => (new GetProductVM($product))->toArray()
+            'product' => (new GetProductVM($product))->toArray(),
         ]);
     }
 
@@ -44,14 +43,14 @@ class AdminProductController extends Controller
     {
         return view('products.admin.edit', [
             'product' => (new GetProductVM($product))->toArray(),
-            'categories' => (new GetLeafCategoriesVM(with:['ingredients']))->toArray()
+            'categories' => (new GetLeafCategoriesVM(with: ['ingredients']))->toArray(),
         ]);
     }
 
     public function create()
     {
-        return view('products.admin.create',[
-            'ingredients' => (new GetAllIngredientsVM())->toArray()
+        return view('products.admin.create', [
+            'ingredients' => (new GetAllIngredientsVM())->toArray(),
         ]);
     }
 
@@ -68,7 +67,7 @@ class AdminProductController extends Controller
             $product = StoreProductAction::execute($productDTO);
 
             $product->images()->create([
-                'path' => Storage::putFile('products', $data['image'])
+                'path' => Storage::putFile('products', $data['image']),
             ]);
 
             $product->translation()->create([
@@ -79,6 +78,7 @@ class AdminProductController extends Controller
 
             return $product;
         });
+
         return redirect()->route('admin.products.index');
     }
 
@@ -97,8 +97,9 @@ class AdminProductController extends Controller
                 'description' => $data['description'],
             ]);
 
-            if (isset($data['image']))
+            if (isset($data['image'])) {
                 $product->images()->first()->update(['path' => Storage::putFile('products', $data['image'])]);
+            }
 
         });
 
@@ -108,7 +109,7 @@ class AdminProductController extends Controller
     public function destroy(Product $product)
     {
         DestroyProductAction::execute($product);
+
         return redirect()->route('admin.products.index');
     }
-
 }

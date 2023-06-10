@@ -5,11 +5,11 @@ namespace App\Modules\Ingredients\Model;
 use App\Http\Traits\HasCategories;
 use App\Http\Traits\HasImages;
 use App\Http\Traits\HasTranslations;
+use App\Models\OptimizedModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Ingredient extends Model
+class Ingredient extends OptimizedModel
 {
     use HasFactory, SoftDeletes, HasTranslations, HasImages, HasCategories;
 

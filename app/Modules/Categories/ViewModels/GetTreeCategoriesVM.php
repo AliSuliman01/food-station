@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Modules\Categories\ViewModels;
 
 use App\Modules\Categories\Model\Category;
@@ -18,9 +17,9 @@ class GetTreeCategoriesVM implements Arrayable
     public function toArray()
     {
         return Category::with(['translation', 'image', 'ingredients'])
-            ->when(isset(request()->filter), function($query){
-                $query->whereRelation('translation', 'name', 'like', '%' . request()->filter . '%');
-            }, function ($query){
+            ->when(isset(request()->filter), function ($query) {
+                $query->whereRelation('translation', 'name', 'like', '%'.request()->filter.'%');
+            }, function ($query) {
                 $query->where('parent_category_id', $this->root);
             })
             ->get();

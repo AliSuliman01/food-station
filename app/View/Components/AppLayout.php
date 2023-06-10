@@ -8,6 +8,7 @@ use Illuminate\View\View;
 class AppLayout extends Component
 {
     public $background;
+
     public $blurBg;
 
     public function __construct($background = 'mainGradientBg', $blurBg = false)

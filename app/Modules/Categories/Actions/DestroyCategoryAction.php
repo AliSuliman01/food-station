@@ -8,8 +8,9 @@ class DestroyCategoryAction
 {
     public static function execute(
         Category $category
-    ){
+    ) {
         $category->delete();
+
         return $category;
     }
 }
