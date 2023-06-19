@@ -15,6 +15,6 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        throw new GeneralException('authorized', code: 401);
+        throw new GeneralException('unauthorized', code: 401);
     }
 }

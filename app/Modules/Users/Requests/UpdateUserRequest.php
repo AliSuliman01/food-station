@@ -3,16 +3,17 @@
 namespace App\Modules\Users\Requests;
 
 use App\Http\Requests\ApiFormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends ApiFormRequest
 {
     public function rules(): array
     {
         return [
-            'name' => 'nullable',
-            'email' => ['required', 'unique:users,email,'.$this->user.',id,deleted_at,NULL'],
-            'photo' => 'nullable',
-            'password' => 'nullable',
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($this->user()->id, 'id')],
+            'photo_path' => ['required', 'string'],
+            'password' => ['nullable', 'min:8'],
         ];
     }
 }

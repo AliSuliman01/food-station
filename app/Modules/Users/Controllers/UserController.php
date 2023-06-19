@@ -35,7 +35,6 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-
         $data = $request->validated();
 
         $userDTO = UserDTO::fromRequest($data);

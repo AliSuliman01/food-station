@@ -9,10 +9,10 @@ class StoreUserRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'email' => ['required', 'unique:users,email,NULL,id,deleted_at,NULL'],
-            'photo' => 'nullable',
-            'password' => 'required',
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email', 'unique:users,email,NULL,id,deleted_at,NULL'],
+            'photo_path' => ['nullable', 'string'],
+            'password' => ['required', 'min:8'],
         ];
     }
 }

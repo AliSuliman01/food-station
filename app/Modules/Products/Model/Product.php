@@ -43,7 +43,7 @@ class Product extends OptimizedModel
         return ProductFactory::new();
     }
 
-    public function ingredients()
+        public function ingredients()
     {
         return $this->belongsToMany(Ingredient::class);
     }
