@@ -42,44 +42,97 @@ type Query {
     ):[Ingredient]! @all
 
 }
-#input CreateRestaurantInput{
-#    id:ID!
-#    name:String
-#    latitude:Float
-#    longitude:Float
-#    full_address:String
-#    cover_image_path:String
-#    image:MorphOneImage
-#    images:MorphManyImages
-#    user:BelongsToUser
-#    products:HasManyProducts
-#}
 
 type LoginResponse{
     user:User
     access_token:String
     refresh_token:String
 }
-
 type RegisterResponse{
     user:User
     access_token:String
     refresh_token:String
 }
 
+input CreateRestaurantInput{
+    id:ID!
+    name:String
+    latitude:Float
+    longitude:Float
+    full_address:String
+    cover_image_path:String
+    images:ImagesMorphMany
+}
+input ImagesMorphMany{
+    create:CreateImageInput
+}
+input CreateImageInput{
+    path: String!
+    is_main: Boolean
+}
+
+
+input RestaurantBelongsTo{
+    connect:ID
+}
+
+input IngredientsBelongsToMany{
+    create:[CreateIngredientInput]
+    connect:[ID!]
+    sync:[ID!]
+}
+input CreateIngredientInput{
+    translations:[CreateTranslationInput!]!
+    images:[CreateImageInput]
+}
+input CategoriesMorphToMany{
+    connect:[ID!]
+    disconnect:[ID!]
+    sync:[ID!]
+}
+input TranslationsMorphMany{
+    create:[CreateTranslationInput!]!
+}
+input CreateTranslationInput{
+    language_code:String!
+    name:String!
+    description:String
+    notes:String
+}
+input CreateProductInput{
+    price:String!
+    restaurant:RestaurantBelongsTo
+    ingredients:IngredientsBelongsToMany
+    images:ImagesMorphMany
+    translations:TranslationsMorphMany
+    categories: CategoriesMorphToMany
+}
+
+input CategoryBelongsTo{
+    connect:ID
+}
+input CategoriesHasMany{
+    create:[CreateCategoryInput!]!
+}
+input CreateCategoryInput{
+    parent_category:CategoryBelongsTo
+    name:String
+    translations:TranslationsMorphMany
+    images:ImagesMorphMany
+    sub_categories:CategoriesHasMany
+}
 type Mutation{
     login(email:String!, password:String!): LoginResponse
     register(name:String, email:String!, password:String!, photo_path:String): RegisterResponse
 
-#    createRestaurant(input: CreateRestaurantInput! @spread):Restaurant @create
-#    updateRestaurant(id: ID, email: String, password: String): User
-#    deleteRestaurant(id:ID):Restaurant
-#    createProduct():Product
-#    updateProduct(id: ID, email: String, password: String): User
-#    deleteProduct(id:ID):Product
-#    createIngredient():Ingredient
-#    updateIngredient(id: ID, email: String, password: String): User
-#    deleteIngredient(id:ID):Ingredient
+    createRestaurant(input: CreateRestaurantInput! @spread):Restaurant @create
+    deleteRestaurant(id:ID):Restaurant @delete
+
+    createProduct(input: CreateProductInput! @spread):Product @create
+    deleteProduct(id:ID):Product @delete
+
+    createCategory(input: CreateCategoryInput! @spread):Category @create
+    deleteCategory(id:ID!):Category @delete
 }
 
 type User {
@@ -157,6 +210,7 @@ type Ingredient{
 type Image{
     id:ID!
     path:String!
+    is_main:Boolean
 }
 
 type Translation{

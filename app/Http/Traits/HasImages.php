@@ -13,6 +13,6 @@ trait HasImages
 
     public function image()
     {
-        return $this->morphOne(Image::class, 'imagable');
+        return $this->morphOne(Image::class, 'imagable')->where('is_main', '=', true);
     }
 }

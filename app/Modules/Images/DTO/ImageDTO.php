@@ -18,6 +18,9 @@ class ImageDTO extends DataTransferObject
     /* @var string|null */
     public $path;
 
+    /* @var boolean|null */
+    public $is_main;
+
     public static function fromRequest($request)
     {
         return new self([
@@ -25,6 +28,7 @@ class ImageDTO extends DataTransferObject
             'imagable_id' => $request['imagable_id'] ?? null,
             'imagable_type' => $request['imagable_type'] ?? null,
             'path' => $request['path'] ?? null,
+            'is_main' => $request['is_main'] ?? null,
 
         ]);
     }
