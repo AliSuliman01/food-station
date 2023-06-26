@@ -129,13 +129,13 @@ type Mutation {
     @can(ability: "create")
     @inject(context: "user.id", name: "user_id")
 
-    deleteRestaurant(id:ID):Restaurant @delete
+    deleteRestaurant(id:ID! @whereKey):Restaurant @delete
 
     createProduct(input: CreateProductInput! @spread):Product @create
-    deleteProduct(id:ID):Product @delete
+    deleteProduct(id:ID! @whereKey):Product @delete
 
     createCategory(input: CreateCategoryInput! @spread):Category @create
-    deleteCategory(id:ID!):Category @delete
+    deleteCategory(id:ID! @whereKey):Category @delete
 }
 
 type User {
