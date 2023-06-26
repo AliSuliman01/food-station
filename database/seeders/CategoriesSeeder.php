@@ -12,17 +12,20 @@ class CategoriesSeeder extends Seeder
         $data = [
             [
                 'id' => 1,
-                'slug' => 'home-page-filter',
+                'name' =>'home page filter' ,
+                'slug' => 'home-page-filter-1',
             ],
             [
                 'id' => 2,
-                'slug' => 'available-products',
+                'name' =>'today products' ,
+                'slug' => 'today-products-2',
             ],
             [
                 'id' => 3,
-                'slug' => 'most-bought-products',
+                'name' =>'most bought products' ,
+                'slug' => 'most-bought-products-3',
             ],
         ];
-        Category::query()->upsert($data, ['id']);
+        Category::query()->upsert($data, ['id'], ['name', 'slug']);
     }
 }
