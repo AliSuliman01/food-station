@@ -60,7 +60,7 @@ input CreateRestaurantInput{
     longitude:Float
     full_address:String
     cover_image_path:String
-    images:ImagesMorphMany
+#    images:ImagesMorphMany
 }
 input ImagesMorphMany{
     create:[CreateImageInput]
