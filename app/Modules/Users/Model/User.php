@@ -2,8 +2,8 @@
 
 namespace App\Modules\Users\Model;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Http\Traits\Auth\HasApiTokens;
+use App\Modules\Products\Model\Product;
 use App\Modules\Restaurants\Model\Restaurant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;

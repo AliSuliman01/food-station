@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modules\Categories\Model\Category;
 use App\Modules\Ingredients\Model\Ingredient;
 use App\Modules\Products\Model\Product;
 use App\Modules\Restaurants\Model\Restaurant;
@@ -37,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
             'restaurant' => Restaurant::class,
             'user' => User::class,
             'ingredient' => Ingredient::class,
+            'category' => Category::class,
         ]);
     }
 }

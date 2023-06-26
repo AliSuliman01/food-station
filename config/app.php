@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use Nuwave\Lighthouse\WhereConditions\WhereConditionsServiceProvider;
 
 return [
 
@@ -82,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'ar',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -185,7 +186,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        WhereConditionsServiceProvider::class,
         /*
          * Application Service Providers...
          */

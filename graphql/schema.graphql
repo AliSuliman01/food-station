@@ -1,0 +1,156 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    "Find a single user by an identifying attribute."
+    user(
+      "Search by primary key."
+      id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
+
+      "Search by email address."
+      email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
+    ): User @find
+
+    "List multiple users."
+    users(
+      "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+      name: String @where(operator: "like")
+    ): [User!]! @paginate(defaultCount: 10)
+
+    products(
+        name: String @where(operator: "")
+        hasCategories: _ @whereHasConditions(columns:["slug"])
+    ): [Product]! @all
+
+    categories(
+        hasParentCategory: _ @whereHasConditions(relation:"parent_category" columns:["slug"])
+    ): [Category]! @all
+    restaurants(
+        where: _ @whereConditions(columns: ["name"])
+    ): [Restaurant]! @all
+
+}
+#input CreateRestaurantInput{
+#    id:ID!
+#    name:String
+#    latitude:Float
+#    longitude:Float
+#    full_address:String
+#    cover_image_path:String
+#    image:MorphOneImage
+#    images:MorphManyImages
+#    user:BelongsToUser
+#    products:HasManyProducts
+#}
+
+type LoginResponse{
+    user:User
+    access_token:String
+    refresh_token:String
+}
+
+type RegisterResponse{
+    user:User
+    access_token:String
+    refresh_token:String
+}
+
+type Mutation{
+    login(email:String!, password:String!): LoginResponse
+    register(name:String, email:String!, password:String!, photo_path:String): RegisterResponse
+
+#    createRestaurant(input: CreateRestaurantInput! @spread):Restaurant @create
+#    updateRestaurant(id: ID, email: String, password: String): User
+#    deleteRestaurant(id:ID):Restaurant
+#    createProduct():Product
+#    updateProduct(id: ID, email: String, password: String): User
+#    deleteProduct(id:ID):Product
+#    createIngredient():Ingredient
+#    updateIngredient(id: ID, email: String, password: String): User
+#    deleteIngredient(id:ID):Ingredient
+}
+
+type User {
+    "Unique primary key."
+    id: ID!
+
+    "Non-unique name."
+    name: String!
+
+    "Unique email address."
+    email: String!
+
+    "Unique email address."
+    mobile_phone: String
+
+    "Unique email address."
+    photo_path: String
+
+    "When the email was verified."
+    email_verified_at: DateTime
+
+    "When the account was created."
+    created_at: DateTime!
+
+    "When the account was last updated."
+    updated_at: DateTime!
+}
+
+type Product{
+    id:ID
+    price:Float
+    restaurant:Restaurant
+    ingredients:[Ingredient]
+    image:Image!
+    images:[Image]!
+    translation:Translation
+    translations:[Translation]!
+    categories:[Category]!
+}
+#
+type Restaurant{
+    id:ID!
+    name:String
+    latitude:Float
+    longitude:Float
+    full_address:String
+    cover_image_path:String
+    image:Image
+    images:[Image]
+    user:User
+    products:[Product]
+}
+
+type Category{
+    id:ID!
+    slug:String!
+    image:Image
+    images:[Image]
+    translation:Translation
+    translations:[Translation]
+    ingredients:Ingredient
+    parent_category:Category
+    sub_categories:[Category]
+}
+
+type Ingredient{
+    id:ID!
+    image:Image
+    images:[Image]
+    translation:Translation
+    translations:[Translation]
+    categories:[Category]
+}
+
+type Image{
+    id:ID!
+    path:String!
+}
+
+type Translation{
+    id:ID!
+    name:String!
+    description:String
+    notes:String
+}
