@@ -11,9 +11,18 @@ class CategoriesSeeder extends Seeder
     {
         $data = [
             [
-                'slug' => 'filter',
+                'id' => 1,
+                'slug' => 'home-page-filter',
+            ],
+            [
+                'id' => 2,
+                'slug' => 'available-products',
+            ],
+            [
+                'id' => 3,
+                'slug' => 'most-bought-products',
             ],
         ];
-        Category::query()->insertOrIgnore($data);
+        Category::query()->upsert($data, ['id']);
     }
 }
