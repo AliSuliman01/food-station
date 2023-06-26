@@ -18,17 +18,28 @@ type Query {
       name: String @where(operator: "like")
     ): [User!]! @paginate(defaultCount: 10)
 
+    users(
+        name: String @where(operator: "like")
+        email: String @where(operator: "like")
+    ):[User]! @all
+
     products(
-        name: String @where(operator: "")
         hasCategories: _ @whereHasConditions(columns:["slug"])
+        hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
     ): [Product]! @all
 
     categories(
+        hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
         hasParentCategory: _ @whereHasConditions(relation:"parent_category" columns:["slug"])
     ): [Category]! @all
+
     restaurants(
         where: _ @whereConditions(columns: ["name"])
     ): [Restaurant]! @all
+
+    ingredients(
+        hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
+    ):[Ingredient]! @all
 
 }
 #input CreateRestaurantInput{
