@@ -123,7 +123,7 @@ type Mutation{
     login(email:String!, password:String!): LoginResponse
     register(name:String, email:String!, password:String!, photo_path:String): RegisterResponse
 
-    createRestaurant(input: CreateRestaurantInput! @spread):Restaurant @create @can(ability: "create") @inject(context: "user.id", name: "input.user_id")
+    createRestaurant(input: CreateRestaurantInput! @spread):Restaurant @create @can(ability: "create")
     deleteRestaurant(id:ID):Restaurant @delete
 
     createProduct(input: CreateProductInput! @spread):Product @create
