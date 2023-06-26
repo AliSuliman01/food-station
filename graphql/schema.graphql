@@ -60,7 +60,6 @@ input CreateRestaurantInput{
     longitude:Float
     full_address:String
     cover_image_path:String
-#    images:ImagesMorphMany
 }
 input ImagesMorphMany{
     create:[CreateImageInput]
@@ -124,7 +123,7 @@ type Mutation{
     login(email:String!, password:String!): LoginResponse
     register(name:String, email:String!, password:String!, photo_path:String): RegisterResponse
 
-    createRestaurant(input: CreateRestaurantInput! @spread):Restaurant @create  @inject(context: "user.id", name: "input.user_id")
+    createRestaurant(input: CreateRestaurantInput! @spread):Restaurant @create @auth @inject(context: "user.id", name: "input.user_id")
     deleteRestaurant(id:ID):Restaurant @delete
 
     createProduct(input: CreateProductInput! @spread):Product @create
