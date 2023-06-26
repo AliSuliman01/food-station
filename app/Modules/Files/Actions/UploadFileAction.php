@@ -3,6 +3,7 @@
 namespace App\Modules\Files\Actions;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 class UploadFileAction
 {
@@ -10,6 +11,6 @@ class UploadFileAction
     {
         $filePath = Storage::disk('public')->putFile($path, $file);
 
-        return "/storage/$filePath";
+        return URL::to('/'). "/storage/$filePath";
     }
 }
