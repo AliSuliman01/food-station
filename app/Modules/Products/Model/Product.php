@@ -10,6 +10,8 @@ use App\Modules\Ingredients\Model\Ingredient;
 use App\Modules\Restaurants\Model\Restaurant;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends OptimizedModel
@@ -43,12 +45,12 @@ class Product extends OptimizedModel
         return ProductFactory::new();
     }
 
-        public function ingredients()
+        public function ingredients():BelongsToMany
     {
         return $this->belongsToMany(Ingredient::class);
     }
 
-    public function restaurant()
+    public function restaurant():BelongsTo
     {
         return $this->belongsTo(Restaurant::class);
     }

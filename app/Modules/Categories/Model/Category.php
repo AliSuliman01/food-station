@@ -7,6 +7,9 @@ use App\Http\Traits\HasTranslations;
 use App\Models\OptimizedModel;
 use App\Modules\Ingredients\Model\Ingredient;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends OptimizedModel
@@ -38,17 +41,17 @@ class Category extends OptimizedModel
         return 'slug';
     }
 
-    public function ingredients()
+    public function ingredients():MorphToMany
     {
         return $this->morphedByMany(Ingredient::class, 'categorizable');
     }
 
-    public function parent_category()
+    public function parent_category():BelongsTo
     {
         return $this->belongsTo(Category::class, 'parent_category_id');
     }
 
-    public function sub_categories()
+    public function sub_categories():HasMany
     {
         return $this->hasMany(Category::class, 'parent_category_id');
     }
