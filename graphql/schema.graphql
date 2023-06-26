@@ -64,7 +64,7 @@ input CreateRestaurantInput{
     images:ImagesMorphMany
 }
 input ImagesMorphMany{
-    create:CreateImageInput
+    create:[CreateImageInput]
 }
 input CreateImageInput{
     path: String!
