@@ -55,7 +55,6 @@ type RegisterResponse{
 }
 
 input CreateRestaurantInput{
-    id:ID!
     name:String
     latitude:Float
     longitude:Float
