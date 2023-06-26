@@ -6,6 +6,7 @@ use App\Http\Traits\Auth\HasApiTokens;
 use App\Modules\Products\Model\Product;
 use App\Modules\Restaurants\Model\Restaurant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -53,7 +54,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function restaurants()
+    public function restaurants():HasMany
     {
         return $this->hasMany(Restaurant::class);
     }
