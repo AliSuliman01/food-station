@@ -124,10 +124,10 @@ type Mutation {
     login(email:String!, password:String!): LoginResponse
     register(name:String, email:String!, password:String!, photo_path:String): RegisterResponse
 
-    createRestaurant(input: CreateRestaurantInput!):Restaurant
+    createRestaurant(input: CreateRestaurantInput! @spread):Restaurant
     @create
     @can(ability: "create")
-    @inject(context: "user.id", name: "input.user_id")
+    @inject(context: "user.id", name: "user_id")
 
     deleteRestaurant(id:ID):Restaurant @delete
 
