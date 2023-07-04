@@ -1,0 +1,52 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+
+type LoginResponse{
+    user:User
+    access_token:String
+    refresh_token:String
+}
+type RegisterResponse{
+    user:User
+    access_token:String
+    refresh_token:String
+}
+type User {
+    "Unique primary key."
+    id: ID!
+
+    "Non-unique name."
+    name: String!
+
+    "Unique email address."
+    email: String!
+
+    "Unique email address."
+    mobile_phone: String
+
+    "Unique email address."
+    photo_path: String
+
+    "When the email was verified."
+    email_verified_at: DateTime
+
+    "When the account was created."
+    created_at: DateTime!
+
+    "When the account was last updated."
+    updated_at: DateTime!
+}
+
+
+input CreateUserInput{
+    name:String!
+    email:String!
+    password:String! @hash
+    photo_path:String
+}
+
+input UpdateUserInput{
+    name:String!
+    email:String!
+    password:String @hash
+    photo_path:String
+}

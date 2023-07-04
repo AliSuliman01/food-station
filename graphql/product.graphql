@@ -1,0 +1,37 @@
+
+
+input CreateProductInput{
+    price:Float!
+    restaurant:RestaurantBelongsTo
+    ingredients:IngredientsBelongsToMany
+    images:ImagesMorphMany
+    translations:TranslationsMorphMany
+    categories: CategoriesMorphToMany
+}
+
+input UpdateProductInput{
+    price:Float!
+    restaurant:RestaurantBelongsTo
+    ingredients:IngredientsBelongsToMany
+    images:ImagesMorphMany
+    translations:TranslationsMorphMany
+    categories: CategoriesMorphToMany
+}
+
+type Product{
+    id:ID
+    price:Float
+    restaurant:Restaurant
+    ingredients:[Ingredient]
+    main_image:Image
+    images:[Image]!
+    translation:Translation
+    translations:[Translation]!
+    categories:[Category]!
+
+    "When the account was created."
+    created_at: DateTime!
+
+    "When the account was last updated."
+    updated_at: DateTime!
+}

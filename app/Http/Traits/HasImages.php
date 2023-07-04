@@ -10,10 +10,10 @@ trait HasImages
 {
     public function images():MorphMany
     {
-        return $this->morphMany(Image::class, 'imagable');
+        return $this->morphMany(Image::class, 'imagable')->where('is_main', '=', false);
     }
 
-    public function image():MorphOne
+    public function main_image():MorphOne
     {
         return $this->morphOne(Image::class, 'imagable')->where('is_main', '=', true);
     }

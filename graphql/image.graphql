@@ -1,0 +1,15 @@
+
+input ImagesMorphMany{
+    create:[CreateImageInput]
+    delete:[ID!]
+}
+input CreateImageInput{
+    path: String!
+    is_main: Boolean
+}
+
+type Image{
+    id:ID!
+    path:String!
+    is_main:Boolean
+}

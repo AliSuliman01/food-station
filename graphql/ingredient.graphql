@@ -1,0 +1,31 @@
+
+input IngredientsBelongsToMany{
+    create:[CreateIngredientInput]
+    connect:[ID!]
+    sync:[ID!]
+}
+input CreateIngredientInput{
+    translations:TranslationsMorphMany
+    images:ImagesMorphMany
+    categories:CategoriesMorphToMany
+}
+input UpdateIngredientInput{
+    translations:TranslationsMorphMany
+    images:ImagesMorphMany
+    categories:CategoriesMorphToMany
+}
+
+type Ingredient{
+    id:ID!
+    main_image:Image
+    images:[Image]
+    translation:Translation
+    translations:[Translation]
+    categories:[Category]
+
+    "When the account was created."
+    created_at: DateTime!
+
+    "When the account was last updated."
+    updated_at: DateTime!
+}

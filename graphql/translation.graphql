@@ -1,0 +1,20 @@
+
+input TranslationsMorphMany{
+    upsert:[UpsertTranslationInput!]
+    delete:[ID!]
+}
+input UpsertTranslationInput{
+    id:ID
+    language_code:String!
+    name:String!
+    description:String
+    notes:String
+}
+
+type Translation{
+    id:ID!
+    language_code:String!
+    name:String!
+    description:String
+    notes:String
+}

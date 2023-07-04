@@ -1,0 +1,39 @@
+
+input CategoriesMorphToMany{
+    connect:[ID!]
+    disconnect:[ID!]
+    sync:[ID!]
+}
+
+input CategoryBelongsTo{
+    connect:ID
+}
+input CategoriesHasMany{
+    create:[CreateCategoryInput!]!
+}
+input CreateCategoryInput{
+    parent_category:CategoryBelongsTo
+    name:String
+    translations:TranslationsMorphMany
+    images:ImagesMorphMany
+}
+input UpdateCategoryInput{
+    parent_category:CategoryBelongsTo
+    name:String
+    translations:TranslationsMorphMany
+    images:ImagesMorphMany
+}
+type Category{
+    id:ID!
+    name:String
+    slug:String
+    created_at:DateTime
+    updated_at: DateTime
+    main_image:Image
+    images:[Image]
+    translation:Translation
+    translations:[Translation]
+    ingredients:Ingredient
+    parent_category:Category
+    sub_categories:[Category]
+}

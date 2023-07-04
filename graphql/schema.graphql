@@ -1,8 +1,7 @@
-"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 "Indicates what fields are available at the top level of a query operation."
-type Query {
+type Query{
     "Find a single user by an identifying attribute."
     user(
       "Search by primary key."
@@ -10,216 +9,94 @@ type Query {
 
       "Search by email address."
       email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
-    ): User @find
+    ): User
+    @find
+    @can(ability: "show")
 
     "List multiple users."
     paginationUsers(
       "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
       name: String @where(operator: "like")
-    ): [User!]! @paginate(defaultCount: 10)
+    ): [User!]!
+    @paginate(defaultCount: 10)
+    @can(ability: "index")
 
     users(
-        name: String @where(operator: "like")
-        email: String @where(operator: "like")
-    ):[User]! @all
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
+        where: _ @whereConditions(columns: ["name", "email"])
+    ):[User]!
+    @all
+    @can(ability: "index")
 
     products(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
         hasCategories: _ @whereHasConditions(columns:["slug"])
         hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
+        hasRestaurant: _ @whereHasConditions(relation:"restaurant" columns:["name"])
     ): [Product]! @all
 
     categories(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
         hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
         hasParentCategory: _ @whereHasConditions(relation:"parent_category" columns:["slug"])
     ): [Category]! @all
 
     restaurants(
-        where: _ @whereConditions(columns: ["name"])
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
+        where: _ @whereConditions(columns: ["name", "full_address"])
     ): [Restaurant]! @all
 
     ingredients(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
         hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
     ):[Ingredient]! @all
 
 }
 
-type LoginResponse{
-    user:User
-    access_token:String
-    refresh_token:String
-}
-type RegisterResponse{
-    user:User
-    access_token:String
-    refresh_token:String
-}
-
-input CreateRestaurantInput{
-    name:String
-    latitude:Float
-    longitude:Float
-    full_address:String
-    cover_image_path:String
-    images:ImagesMorphMany
-}
-input ImagesMorphMany{
-    create:[CreateImageInput]
-}
-input CreateImageInput{
-    path: String!
-    is_main: Boolean
-}
-
-
-input RestaurantBelongsTo{
-    connect:ID
-}
-
-input IngredientsBelongsToMany{
-    create:[CreateIngredientInput]
-    connect:[ID!]
-    sync:[ID!]
-}
-input CreateIngredientInput{
-    translations:[CreateTranslationInput!]!
-    images:[CreateImageInput]
-}
-input CategoriesMorphToMany{
-    connect:[ID!]
-    disconnect:[ID!]
-    sync:[ID!]
-}
-input TranslationsMorphMany{
-    create:[CreateTranslationInput!]!
-}
-input CreateTranslationInput{
-    language_code:String!
-    name:String!
-    description:String
-    notes:String
-}
-input CreateProductInput{
-    price:String!
-    restaurant:RestaurantBelongsTo
-    ingredients:IngredientsBelongsToMany
-    images:ImagesMorphMany
-    translations:TranslationsMorphMany
-    categories: CategoriesMorphToMany
-}
-
-input CategoryBelongsTo{
-    connect:ID
-}
-input CategoriesHasMany{
-    create:[CreateCategoryInput!]!
-}
-input CreateCategoryInput{
-    parent_category:CategoryBelongsTo
-    name:String
-    translations:TranslationsMorphMany
-    images:ImagesMorphMany
-    sub_categories:CategoriesHasMany
-}
 type Mutation {
     login(email:String!, password:String!): LoginResponse
     register(name:String, email:String!, password:String!, photo_path:String): RegisterResponse
+    deleteUser(id:ID! @whereKey):User
+    @delete
+    @can(ability: "delete")
 
     createRestaurant(input: CreateRestaurantInput! @spread):Restaurant
     @create
     @can(ability: "create")
-    @inject(context: "user.id", name: "user_id")
+#    @inject(context: "user.id", name: "user_id")
+
+    updateRestaurant(id:ID!, input: UpdateRestaurantInput! @spread):Restaurant
+    @update
+    @can(ability: "update")
 
     deleteRestaurant(id:ID! @whereKey):Restaurant @delete
 
+    createUser(input: CreateUserInput! @spread):User
+    @create
+    @can(ability: "create")
+
+    updateUser(id: ID!, input: UpdateUserInput! @spread):User
+    @update
+    @can(ability: "update")
+
     createProduct(input: CreateProductInput! @spread):Product @create
+    updateProduct(id:ID!, input: UpdateProductInput! @spread):Product @update
     deleteProduct(id:ID! @whereKey):Product @delete
 
     createCategory(input: CreateCategoryInput! @spread):Category @create
+    updateCategory(id:ID!, input: UpdateCategoryInput! @spread):Category @update
     deleteCategory(id:ID! @whereKey):Category @delete
+
+    createIngredient(input: CreateIngredientInput! @spread):Ingredient @create
+    updateIngredient(id: ID!, input: UpdateIngredientInput! @spread):Ingredient @update
+    deleteIngredient(id: ID! @whereKey):Ingredient @delete
 }
 
-type User {
-    "Unique primary key."
-    id: ID!
 
-    "Non-unique name."
-    name: String!
-
-    "Unique email address."
-    email: String!
-
-    "Unique email address."
-    mobile_phone: String
-
-    "Unique email address."
-    photo_path: String
-
-    "When the email was verified."
-    email_verified_at: DateTime
-
-    "When the account was created."
-    created_at: DateTime!
-
-    "When the account was last updated."
-    updated_at: DateTime!
-}
-
-type Product{
-    id:ID
-    price:Float
-    restaurant:Restaurant
-    ingredients:[Ingredient]
-    image:Image!
-    images:[Image]!
-    translation:Translation
-    translations:[Translation]!
-    categories:[Category]!
-}
-#
-type Restaurant{
-    id:ID!
-    name:String
-    latitude:Float
-    longitude:Float
-    full_address:String
-    cover_image_path:String
-    image:Image
-    images:[Image]
-    user:User
-    products:[Product]
-}
-
-type Category{
-    id:ID!
-    name:String!
-    slug:String!
-    image:Image
-    images:[Image]
-    translation:Translation
-    translations:[Translation]
-    ingredients:Ingredient
-    parent_category:Category
-    sub_categories:[Category]
-}
-
-type Ingredient{
-    id:ID!
-    image:Image
-    images:[Image]
-    translation:Translation
-    translations:[Translation]
-    categories:[Category]
-}
-
-type Image{
-    id:ID!
-    path:String!
-    is_main:Boolean
-}
-
-type Translation{
-    id:ID!
-    name:String!
-    description:String
-    notes:String
-}
+#import category.graphql
+#import image.graphql
+#import ingredient.graphql
+#import product.graphql
+#import restaurant.graphql
+#import translation.graphql
+#import user.graphql

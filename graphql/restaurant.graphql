@@ -1,0 +1,45 @@
+
+input CreateRestaurantInput{
+    name:String
+    latitude:String
+    longitude:String
+    full_address:String
+    user_id:ID
+    cover_image_path:String
+    images:ImagesMorphMany
+}
+
+
+input UpdateRestaurantInput{
+    name:String
+    latitude:Float
+    longitude:Float
+    user_id:ID
+    full_address:String
+    cover_image_path:String
+    images:ImagesMorphMany
+}
+
+
+input RestaurantBelongsTo{
+    connect:ID
+}
+#
+type Restaurant{
+    id:ID!
+    name:String
+    latitude:Float
+    longitude:Float
+    full_address:String
+    cover_image_path:String
+    main_image:Image
+    images:[Image]
+    user:User
+    products:[Product]
+
+    "When the account was created."
+    created_at: DateTime!
+
+    "When the account was last updated."
+    updated_at: DateTime!
+}
