@@ -1,8 +1,8 @@
 
 input CreateRestaurantInput{
     name:String
-    latitude:String
-    longitude:String
+    latitude:Float
+    longitude:Float
     full_address:String
     user_id:ID
     cover_image_path:String
