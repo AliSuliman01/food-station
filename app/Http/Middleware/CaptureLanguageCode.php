@@ -17,7 +17,7 @@ class CaptureLanguageCode
      */
     public function handle(Request $request, Closure $next)
     {
-        App::setLocale($request->header('language_code'));
+        App::setLocale($request->header('language'));
         return $next($request);
     }
 }
