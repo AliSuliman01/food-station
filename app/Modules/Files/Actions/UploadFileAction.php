@@ -11,6 +11,6 @@ class UploadFileAction
     {
         $filePath = Storage::disk('public')->putFile($path, $file);
 
-        return URL::to('/'). "/storage/$filePath";
+        return "/storage/$filePath";
     }
 }
