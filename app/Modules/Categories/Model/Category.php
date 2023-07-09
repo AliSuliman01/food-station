@@ -5,7 +5,9 @@ namespace App\Modules\Categories\Model;
 use App\Http\Traits\HasImages;
 use App\Http\Traits\HasTranslations;
 use App\Models\OptimizedModel;
+use App\Modules\Categorizable\Model\Categorizable;
 use App\Modules\Ingredients\Model\Ingredient;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,7 +16,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends OptimizedModel
 {
-    use HasFactory, SoftDeletes, HasTranslations, HasImages;
+    use HasFactory, SoftDeletes, HasTranslations, HasImages, CascadeSoftDeletes;
+
+    protected $cascadeDeletes = [
+        'categorizables'
+    ];
 
     public const AVAILABLE = 'available';
 
@@ -41,18 +47,23 @@ class Category extends OptimizedModel
         return 'slug';
     }
 
-    public function ingredients():MorphToMany
+    public function ingredients(): MorphToMany
     {
         return $this->morphedByMany(Ingredient::class, 'categorizable');
     }
 
-    public function parent_category():BelongsTo
+    public function parent_category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'parent_category_id');
     }
 
-    public function sub_categories():HasMany
+    public function sub_categories(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_category_id');
+    }
+
+    public function categorizables()
+    {
+        return $this->hasMany(Categorizable::class);
     }
 }
