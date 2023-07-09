@@ -45,6 +45,11 @@ type Query{
         hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
     ):[Ingredient]! @all
 
+    orders(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
+        hasOrderStatus: _ @whereHasConditions(columns:["name"])
+    ):[Order]! @all
+
 }
 
 type Mutation {
@@ -94,3 +99,5 @@ type Mutation {
 #import restaurant.graphql
 #import translation.graphql
 #import user.graphql
+#import order_status.graphql
+#import order.graphql

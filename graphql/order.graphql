@@ -1,0 +1,9 @@
+
+
+type Order{
+    id:ID!
+    user:User
+    order_status:[OrderStatus]
+    created_at: DateTime!
+    updated_at: DateTime!
+}
