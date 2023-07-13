@@ -23,7 +23,7 @@ type Query{
 
     products(
         orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
-        hasCategories: _ @whereHasConditions(columns:["slug"])
+        hasCategories: _ @whereHasConditions(columns:["name"])
         hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
         hasRestaurant: _ @whereHasConditions(relation:"restaurant" columns:["name"])
     ): [Product]! @all
@@ -31,7 +31,7 @@ type Query{
     categories(
         orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
         hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
-        hasParentCategory: _ @whereHasConditions(relation:"parent_category" columns:["slug"])
+        hasParentCategory: _ @whereHasConditions(relation:"parent_category" columns:["name"])
     ): [Category]! @all
 
     restaurants(
@@ -41,7 +41,7 @@ type Query{
 
     ingredients(
         orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
-        hasCategories: _ @whereHasConditions(columns:["slug"])
+        hasCategories: _ @whereHasConditions(columns:["name"])
         hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
     ):[Ingredient]! @all
 
@@ -49,6 +49,11 @@ type Query{
         orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
         hasOrderStatus: _ @whereHasConditions(columns:["name"])
     ):[Order]! @all
+
+    carts(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
+        hasOrderStatus: _ @whereHasConditions(columns:["name"])
+    ):[Cart]! @all
 
 }
 
