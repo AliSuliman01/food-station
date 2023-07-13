@@ -50,10 +50,10 @@ type Query{
         hasOrderStatus: _ @whereHasConditions(columns:["name"])
     ):[Order]! @all
 
-    carts(
-        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
-        hasOrderStatus: _ @whereHasConditions(columns:["name"])
-    ):[Cart]! @all
+#    carts(
+#        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
+#        hasOrderStatus: _ @whereHasConditions(columns:["name"])
+#    ):[Cart]! @all
 
 }
 
