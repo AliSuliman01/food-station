@@ -10,5 +10,6 @@
     "app/Modules/Categorizable/Migrations",
     "app/Modules/Settings/Migrations",
     "app/Modules/Orders/Migrations",
-    "app/Modules/OrderStatuses/Migrations"
+    "app/Modules/OrderStatuses/Migrations",
+    "app/Modules/Carts/Migrations"
 ]
