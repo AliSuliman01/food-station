@@ -1,0 +1,24 @@
+
+input CreateCartInput{
+    order_id:ID
+    product_id:ID
+    amount:Int
+    notes:String
+}
+
+input UpdateCartInput{
+    order_id:ID
+    product_id:ID
+    amount:Int
+    notes:String
+}
+
+type Cart{
+    id:ID!
+    order:Order
+    product:Product
+    amount:Int
+    notes:String
+    created_at: DateTime!
+    updated_at: DateTime!
+}
