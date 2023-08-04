@@ -33,7 +33,7 @@ type Category{
     images:[Image]
     translation:Translation
     translations:[Translation]
-    ingredients:Ingredient
+    ingredients:[Ingredient]
     parent_category:Category
     sub_categories:[Category]
 }

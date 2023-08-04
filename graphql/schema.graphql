@@ -31,6 +31,7 @@ type Query{
     categories(
         orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
         hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
+        whereHas: _ @whereConditions(columns:["id"])
         hasParentCategory: _ @whereHasConditions(relation:"parent_category" columns:["name"])
     ): [Category]! @all
 
