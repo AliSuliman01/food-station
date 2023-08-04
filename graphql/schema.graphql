@@ -23,7 +23,7 @@ type Query{
 
     products(
         orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
-        hasCategories: _ @whereHasConditions(columns:["name"])
+        hasCategories: _ @whereHasConditions(columns:["id"])
         hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
         hasRestaurant: _ @whereHasConditions(relation:"restaurant" columns:["name"])
     ): [Product]! @all
