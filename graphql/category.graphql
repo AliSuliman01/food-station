@@ -15,12 +15,14 @@ input CreateCategoryInput{
     parent_category:CategoryBelongsTo
     name:String
     translations:TranslationsMorphMany
+    ingredients:IngredientsBelongsToMany
     images:ImagesMorphMany
 }
 input UpdateCategoryInput{
     parent_category:CategoryBelongsTo
     name:String
     translations:TranslationsMorphMany
+    ingredients:IngredientsBelongsToMany
     images:ImagesMorphMany
 }
 type Category{
