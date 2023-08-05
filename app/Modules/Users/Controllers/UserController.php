@@ -75,7 +75,7 @@ class UserController extends Controller
 
                 $user = RegisterUserAction::execute($userRegisterDto);
 
-                SendVerificationEmailAction::execute($user);
+//                SendVerificationEmailAction::execute($user);
 
                 $tokens = $user->createToken('access_token');
 
