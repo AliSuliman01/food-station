@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RoleEnum;
 use App\Modules\Users\Model\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,8 @@ class RootUserSeeder extends Seeder
      */
     public function run()
     {
-        User::query()->firstOrCreate([
+        /** @var User $user */
+        $user = User::query()->firstOrCreate([
             'email' => 'root@eatchen.com',
         ], [
             'name' => 'root',
@@ -24,6 +26,8 @@ class RootUserSeeder extends Seeder
             'password' => Hash::make('123456'),
 
         ]);
+
+        $user->assignRole(RoleEnum::ROOT());
 
     }
 }
