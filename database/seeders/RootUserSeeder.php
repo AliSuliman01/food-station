@@ -27,7 +27,7 @@ class RootUserSeeder extends Seeder
 
         ]);
 
-        $user->assignRole(RoleEnum::ROOT());
+        $user->assignRole(RoleEnum::ROOT);
 
     }
 }
