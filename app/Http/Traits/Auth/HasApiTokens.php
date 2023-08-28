@@ -39,7 +39,7 @@ trait HasApiTokens
                 'refresh_token' => null,
             ];
         } else {
-            $response = Http::asForm()->post('/oauth/token', [
+            $response = Http::asForm()->post(route('passport.token'), [
                 'grant_type' => 'password',
                 'client_id' => $client->id,
                 'client_secret' => $client->secret,
