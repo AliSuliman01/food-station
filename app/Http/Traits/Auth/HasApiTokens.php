@@ -15,7 +15,7 @@ trait HasApiTokens
         createToken as parentCreateToken;
     }
 
-    public function createToken($name)
+    public function createToken($name, $password)
     {
 
         if (DB::table('oauth_clients')->count() == 0) {
@@ -44,7 +44,7 @@ trait HasApiTokens
                 'client_id' => $client->id,
                 'client_secret' => $client->secret,
                 'username' => $this->username,
-                'password' => $this->password,
+                'password' => $password,
                 'scope' => implode(' ', ['*']),
             ]);
 

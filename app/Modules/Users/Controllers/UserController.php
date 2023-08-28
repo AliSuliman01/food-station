@@ -106,7 +106,7 @@ class UserController extends Controller
 
                 $user = UserLoginAction::execute($userLoginDto);
 
-                $tokens = $user->createToken('access_token');
+                $tokens = $user->createToken('access_token', $userLoginDto->password);
 
                 return [
                     'user' => $user,
