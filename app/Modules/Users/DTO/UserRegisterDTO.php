@@ -13,6 +13,9 @@ class UserRegisterDTO extends OptimizedDataTransferObject
     public $username;
 
     /* @var string|null */
+    public $email;
+
+    /* @var string|null */
     public $photo_path;
 
     /* @var string|null */
@@ -23,6 +26,7 @@ class UserRegisterDTO extends OptimizedDataTransferObject
         return new self([
             'name' => $request['name'] ?? null,
             'username' => $request['username'] ?? null,
+            'email' => $request['email'] ?? null,
             'photo_path' => $request['photo_path'] ?? null,
             'password' => $request['password'] ?? null,
         ]);

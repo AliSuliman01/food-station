@@ -11,6 +11,7 @@ class RegisterUserRequest extends ApiFormRequest
         return [
             'name' => 'required',
             'username' => ['required', 'unique:users,username,NULL,id,deleted_at,NULL'],
+            'email' => ['required', 'unique:users,email,NULL,id,deleted_at,NULL'],
             'photo_path' => 'nullable',
             'password' => 'required',
         ];
