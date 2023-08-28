@@ -55,6 +55,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function findForPassport($username)
+    {
+        return $this->where('username', $username)->first();
+    }
+
     public function restaurants(): HasMany
     {
         return $this->hasMany(Restaurant::class);

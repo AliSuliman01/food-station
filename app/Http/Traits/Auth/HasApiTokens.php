@@ -43,7 +43,7 @@ trait HasApiTokens
                 'grant_type' => 'password',
                 'client_id' => $client->id,
                 'client_secret' => $client->secret,
-                'username' => $this->email,
+                'username' => $this->username,
                 'password' => $this->password,
                 'scope' => implode(' ', ['*']),
             ]);
