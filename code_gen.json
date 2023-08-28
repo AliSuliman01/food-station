@@ -1,38 +1,37 @@
 {
-    "tables": [
+    "attached_products": [
         {
-            "table_name": "settings",
-            "entity_name": "Setting",
-            "instance_name": "setting",
-            "sub_namespace": "Settings",
-            "operation": "crud",
-            "columns": [
-                {
-                    "type": "integer",
-                    "name": "id",
-                    "validation_rules": "integer|required"
-                },
-                {
-                    "type": "string",
-                    "name": "group",
-                    "validation_rules": "string|required"
-                },
-                {
-                    "type": "string",
-                    "name": "name",
-                    "validation_rules": "string|required"
-                },
-                {
-                    "type": "boolean",
-                    "name": "locked",
-                    "validation_rules": "integer|required"
-                },
-                {
-                    "type": "string",
-                    "name": "payload",
-                    "validation_rules": "integer|required"
-                }
-            ]
+            "translation": {
+                "name": "pizza"
+            }
         }
-    ]
+    ],
+    "categories": [
+        {
+            "translation": {
+                "name": "pizza"
+            }
+        }
+    ],
+    "restaurant": {
+        "name": "yami",
+        "full_address": "homs syria (al nzha street)",
+        "is_verified": true
+    },
+    "translation": {
+        "name": "pizza"
+    },
+    "price": 2000,
+    "is_favorite": false,
+    "image": {
+        "id": 18,
+        "original_url": "http://localhost:8000/storage/18/Jh7DsZOItVjQlhDqV7AmTcorZKZ92OzDG9ZQv2SP.jpg",
+        "thumb_url": "http://localhost:8000/storage/18/conversions/Jh7DsZOItVjQlhDqV7AmTcorZKZ92OzDG9ZQv2SP-thumb.jpg"
+    },
+    "discount": 0.3,
+    "rate": 4.7,
+    "user_rate": 4.2,
+    "total_rates": 9000,
+    "product_status": "",
+    "preparing_time": "00:25"
 }

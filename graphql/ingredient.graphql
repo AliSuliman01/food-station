@@ -1,4 +1,21 @@
 
+extend type Query {
+
+    ingredients(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
+        hasCategories: _ @whereHasConditions(columns:["name"])
+        hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
+    ):[Ingredient]! @all
+
+}
+extend type Mutation{
+
+    createIngredient(input: CreateIngredientInput! @spread):Ingredient @create
+    updateIngredient(id: ID!, input: UpdateIngredientInput! @spread):Ingredient @update
+    deleteIngredient(id: ID! @whereKey):Ingredient @delete
+
+}
+
 input IngredientsBelongsToMany{
     create:[CreateIngredientInput]
     connect:[ID!]
@@ -13,19 +30,4 @@ input UpdateIngredientInput{
     translations:TranslationsMorphMany
     images:ImagesMorphMany
     categories:CategoriesMorphToMany
-}
-
-type Ingredient{
-    id:ID!
-    main_image:Image
-    images:[Image]
-    translation:Translation
-    translations:[Translation]
-    categories:[Category]
-
-    "When the account was created."
-    created_at: DateTime!
-
-    "When the account was last updated."
-    updated_at: DateTime!
 }

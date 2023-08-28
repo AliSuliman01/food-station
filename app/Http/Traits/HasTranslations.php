@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\App;
 
 trait HasTranslations
 {
-    public function translation():MorphOne
+    public function translation(): MorphOne
     {
         return $this->morphOne(Translation::class, 'translatable')->where('language_code', App::getLocale());
     }
 
-    public function translations():MorphMany
+    public function translations(): MorphMany
     {
         return $this->morphMany(Translation::class, 'translatable');
     }

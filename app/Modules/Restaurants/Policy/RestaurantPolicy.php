@@ -2,8 +2,8 @@
 
 namespace App\Modules\Restaurants\Policy;
 
-use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Modules\Users\Model\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 final class RestaurantPolicy
 {
@@ -13,6 +13,7 @@ final class RestaurantPolicy
     {
         return true;
     }
+
     public function update(User $user)
     {
         return true;

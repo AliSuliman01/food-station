@@ -65,15 +65,15 @@ class RouteServiceProvider extends ServiceProvider
                     ->namespace($this->namespace)
                     ->group(base_path('routes/api.php'));
 
-                if (file_exists(__DIR__.'/routes.json')) {
-                    $routeFiles = json_decode(file_get_contents(__DIR__.'/routes.json'), true);
+                                if (file_exists(__DIR__.'/routes.json')) {
+                                    $routeFiles = json_decode(file_get_contents(__DIR__.'/routes.json'), true);
 
-                    foreach ($routeFiles as $routeFile) {
-                        Route::middleware('api')
-                            ->namespace($this->namespace)
-                            ->group(base_path($routeFile));
-                    }
-                }
+                                    foreach ($routeFiles as $routeFile) {
+                                        Route::middleware('api')
+                                            ->namespace($this->namespace)
+                                            ->group(base_path($routeFile));
+                                    }
+                                }
             });
         });
     }

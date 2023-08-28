@@ -3,20 +3,21 @@
 namespace App\Modules\Products\Model;
 
 use App\Http\Traits\HasCategories;
-use App\Http\Traits\HasImages;
 use App\Http\Traits\HasTranslations;
 use App\Models\OptimizedModel;
 use App\Modules\Ingredients\Model\Ingredient;
 use App\Modules\Restaurants\Model\Restaurant;
+use App\Modules\Users\Model\User;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Product extends OptimizedModel
 {
-    use HasFactory, SoftDeletes, HasTranslations, HasImages, HasCategories;
+    use HasFactory, SoftDeletes, HasTranslations, InteractsWithMedia, HasCategories;
 
     protected $cascadeDeletes = [
         'translations',
@@ -45,13 +46,17 @@ class Product extends OptimizedModel
         return ProductFactory::new();
     }
 
-        public function ingredients():BelongsToMany
-    {
-        return $this->belongsToMany(Ingredient::class);
-    }
+        public function ingredients(): BelongsToMany
+        {
+            return $this->belongsToMany(Ingredient::class);
+        }
 
-    public function restaurant():BelongsTo
+    public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class);
+    }
+    public function customer_user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'customer_user_id');
     }
 }

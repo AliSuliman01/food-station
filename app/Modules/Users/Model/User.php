@@ -2,8 +2,9 @@
 
 namespace App\Modules\Users\Model;
 
+use App\Enums\OrderStatusEnum;
 use App\Http\Traits\Auth\HasApiTokens;
-use App\Modules\Products\Model\Product;
+use App\Modules\Orders\Model\Order;
 use App\Modules\Restaurants\Model\Restaurant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -54,8 +55,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function restaurants():HasMany
+    public function restaurants(): HasMany
     {
         return $this->hasMany(Restaurant::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function open_order()
+    {
+        return $this->hasOne(Order::class)->where('status', OrderStatusEnum::OPEN);
     }
 }

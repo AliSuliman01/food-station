@@ -1,1 +1,11 @@
-["app/Modules/Products/Routes/products.php","app/Modules/Images/Routes/images.php","app/Modules/Translations/Routes/translations.php","app/Modules/Restaurants/Routes/restaurants.php","app/Modules/Users/Routes/users.php","app/Modules/Ingredients/Routes/ingredients.php","app/Modules/Categories/Routes/categories.php","app/Modules/Files/Routes/files.php","app/Modules/Settings/Routes/settings.php"]
+[
+    "app/Modules/Products/Routes/products.php",
+    "app/Modules/Translations/Routes/translations.php",
+    "app/Modules/Restaurants/Routes/restaurants.php",
+    "app/Modules/Users/Routes/users.php",
+    "app/Modules/Users/Admins/Routes/admins.php",
+    "app/Modules/Ingredients/Routes/ingredients.php",
+    "app/Modules/Media/Routes/media.php",
+    "app/Modules/Orders/Routes/orders.php",
+    "app/Modules/Categories/Routes/categories.php"
+]

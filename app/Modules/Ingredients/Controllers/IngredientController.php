@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ingredients\Controllers;
 
+use App\Enums\MediaCollectionEnum;
 use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Modules\Ingredients\Actions\DestroyIngredientAction;
@@ -13,6 +14,7 @@ use App\Modules\Ingredients\Requests\StoreIngredientRequest;
 use App\Modules\Ingredients\Requests\UpdateIngredientRequest;
 use App\Modules\Ingredients\ViewModels\GetAllIngredientsVM;
 use App\Modules\Ingredients\ViewModels\GetIngredientVM;
+use Illuminate\Support\Facades\Storage;
 
 class IngredientController extends Controller
 {
@@ -43,7 +45,10 @@ class IngredientController extends Controller
         $ingredient = StoreIngredientAction::execute($ingredientDTO);
 
         $ingredient->updateRelation('translations', $data['translations']);
-        $ingredient->updateRelation('images', $data['translations']);
+
+        $ingredient->addMedia(Storage::disk('public')->path($data['image']))
+            ->toMediaCollection(MediaCollectionEnum::IMAGE);
+
         $ingredient->categories()->sync($data['categories']);
 
         return response()->json(Response::success((new GetIngredientVM($ingredient))->toArray()));
@@ -59,7 +64,12 @@ class IngredientController extends Controller
         $ingredient = UpdateIngredientAction::execute($ingredient, $ingredientDTO);
 
         $ingredient->updateRelation('translations', $data['translations']);
-        $ingredient->updateRelation('images', $data['translations']);
+
+        if (isset($data['image'])) {
+            $ingredient->addMedia(Storage::disk('public')->path($data['image']))
+                ->toMediaCollection(MediaCollectionEnum::IMAGE);
+        }
+
         $ingredient->categories()->sync($data['categories']);
 
         return response()->json(Response::success((new GetIngredientVM($ingredient))->toArray()));

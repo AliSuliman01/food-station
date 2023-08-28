@@ -10,7 +10,7 @@ class UserRegisterDTO extends OptimizedDataTransferObject
     public $name;
 
     /* @var string|null */
-    public $email;
+    public $username;
 
     /* @var string|null */
     public $photo_path;
@@ -22,7 +22,7 @@ class UserRegisterDTO extends OptimizedDataTransferObject
     {
         return new self([
             'name' => $request['name'] ?? null,
-            'email' => $request['email'] ?? null,
+            'username' => $request['username'] ?? null,
             'photo_path' => $request['photo_path'] ?? null,
             'password' => $request['password'] ?? null,
         ]);

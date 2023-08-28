@@ -14,7 +14,7 @@ use App\Modules\Products\Model\Product;
 use App\Modules\Products\Requests\StoreProductRequest;
 use App\Modules\Products\Requests\UpdateProductRequest;
 use App\Modules\Products\ViewModels\GetAllProductsVM;
-use App\Modules\Products\ViewModels\GetProductVM;
+use App\Modules\Products\ViewModels\LoadProductVM;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -35,14 +35,14 @@ class AdminProductController extends Controller
     public function show(Product $product)
     {
         return view('products.admin.show', [
-            'product' => (new GetProductVM($product))->toArray(),
+            'product' => (new LoadProductVM($product))->toArray(),
         ]);
     }
 
     public function edit(Product $product)
     {
         return view('products.admin.edit', [
-            'product' => (new GetProductVM($product))->toArray(),
+            'product' => (new LoadProductVM($product))->toArray(),
             'categories' => (new GetLeafCategoriesVM(with: ['ingredients']))->toArray(),
         ]);
     }

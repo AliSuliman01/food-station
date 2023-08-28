@@ -7,7 +7,7 @@ use App\Modules\Users\Model\User;
 
 class StoreUserAction
 {
-    public static function execute(UserDTO $userDTO)
+    public static function execute(UserDTO $userDTO):User
     {
         return User::create($userDTO->toArrayWithoutNulls());
     }

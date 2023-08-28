@@ -2,7 +2,6 @@
 
 namespace App\Modules\Restaurants\Model;
 
-use App\Http\Traits\HasImages;
 use App\Models\OptimizedModel;
 use App\Modules\Products\Model\Product;
 use App\Modules\Users\Model\User;
@@ -10,10 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Restaurant extends OptimizedModel
 {
-    use HasFactory, SoftDeletes, HasImages;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $cascadeDeletes = [
         'products',
@@ -35,12 +35,12 @@ class Restaurant extends OptimizedModel
         'deleted_by_user_id',
     ];
 
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function products():HasMany
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class);
     }

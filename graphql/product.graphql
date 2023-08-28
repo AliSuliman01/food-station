@@ -1,10 +1,40 @@
 
+extend type Query {
+    most_popular_products(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id", "rate"])
+        hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
+        hasRestaurant: _ @whereHasConditions(relation:"restaurant" columns:["name"])
+        hasCategories: _ @whereHasConditions(columns:["id"])
+    ):[Product]!
+
+    available_today_products(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id", "rate"])
+        hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
+        hasRestaurant: _ @whereHasConditions(relation:"restaurant" columns:["name"])
+        hasCategories: _ @whereHasConditions(columns:["id"])
+    ):[Product]!
+
+    products(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
+        hasCategories: _ @whereHasConditions(columns:["id"])
+        hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
+        hasRestaurant: _ @whereHasConditions(relation:"restaurant" columns:["name"])
+    ): [Product]! @all
+
+}
+extend type Mutation {
+
+    createProduct(input: CreateProductInput! @spread):Product @create
+    updateProduct(id:ID!, input: UpdateProductInput! @spread):Product @update
+    deleteProduct(id:ID! @whereKey):Product @delete
+
+}
 
 input CreateProductInput{
     price:Float!
     restaurant:RestaurantBelongsTo
     ingredients:IngredientsBelongsToMany
-    images:ImagesMorphMany
+    media:ImagesMorphMany
     translations:TranslationsMorphMany
     categories: CategoriesMorphToMany
 }
@@ -16,22 +46,4 @@ input UpdateProductInput{
     images:ImagesMorphMany
     translations:TranslationsMorphMany
     categories: CategoriesMorphToMany
-}
-
-type Product{
-    id:ID
-    price:Float
-    restaurant:Restaurant
-    ingredients:[Ingredient]
-    main_image:Image
-    images:[Image]!
-    translation:Translation
-    translations:[Translation]!
-    categories:[Category]!
-
-    "When the account was created."
-    created_at: DateTime!
-
-    "When the account was last updated."
-    updated_at: DateTime!
 }

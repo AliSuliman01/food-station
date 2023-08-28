@@ -1,6 +1,5 @@
 [
     "app/Modules/Products/Migrations",
-    "app/Modules/Images/Migrations",
     "app/Modules/Translations/Migrations",
     "app/Modules/Restaurants/Migrations",
     "app/Modules/Users/Migrations",
@@ -11,5 +10,6 @@
     "app/Modules/Settings/Migrations",
     "app/Modules/Orders/Migrations",
     "app/Modules/OrderStatuses/Migrations",
+    "app/Modules/Media/Migrations",
     "app/Modules/Carts/Migrations"
 ]

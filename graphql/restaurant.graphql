@@ -1,4 +1,26 @@
+extend type Query {
 
+    restaurants(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
+        where: _ @whereConditions(columns: ["name", "full_address"])
+    ): [Restaurant]! @all
+
+}
+
+extend type Mutation {
+
+    createRestaurant(input: CreateRestaurantInput! @spread):Restaurant
+    @create
+    @can(ability: "create")
+    #    @inject(context: "user.id", name: "user_id")
+
+    updateRestaurant(id:ID!, input: UpdateRestaurantInput! @spread):Restaurant
+    @update
+    @can(ability: "update")
+
+    deleteRestaurant(id:ID! @whereKey):Restaurant @delete
+
+}
 input CreateRestaurantInput{
     name:String
     latitude:Float
@@ -25,21 +47,3 @@ input RestaurantBelongsTo{
     connect:ID
 }
 #
-type Restaurant{
-    id:ID!
-    name:String
-    latitude:Float
-    longitude:Float
-    full_address:String
-    cover_image_path:String
-    main_image:Image
-    images:[Image]
-    user:User
-    products:[Product]
-
-    "When the account was created."
-    created_at: DateTime!
-
-    "When the account was last updated."
-    updated_at: DateTime!
-}

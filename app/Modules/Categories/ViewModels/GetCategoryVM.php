@@ -10,7 +10,7 @@ class GetCategoryVM implements Arrayable
 
     public function __construct($category)
     {
-        $this->category = $category->load(['translation', 'image', 'ingredients']);
+        $this->category = $category->load(['translations', 'image', 'ingredients.translation', 'parent_categories.translation']);
     }
 
     public function toArray()

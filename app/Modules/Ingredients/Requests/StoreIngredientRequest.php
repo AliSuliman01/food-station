@@ -14,8 +14,7 @@ class StoreIngredientRequest extends ApiFormRequest
             'translations.*.name' => ['required', 'string'],
             'translations.*.description' => ['nullable', 'string'],
             'translations.*.notes' => ['nullable', 'string'],
-            'images' => ['required'],
-            'images.*.path' => ['required'],
+            'image' => ['required'],
             'categories' => ['required'],
             'categories.*' => ['required', 'exists:categories,id,deleted_at,NULL'],
         ];

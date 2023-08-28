@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained();
             $table->foreignId('product_id')->constrained();
-            $table->integer('amount')->default(1);
-            $table->text('notes')->nullable();
+            $table->integer('quantity')->default(1);
+            $table->decimal('price', 10, 3);
+            $table->json('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

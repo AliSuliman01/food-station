@@ -14,7 +14,7 @@ use App\Modules\Products\Requests\StoreProductRequest;
 use App\Modules\Products\Requests\UpdateProductRequest;
 use App\Modules\Products\ViewModels\GetAllProductsVM;
 use App\Modules\Products\ViewModels\GetProductsByCategoryVM;
-use App\Modules\Products\ViewModels\GetProductVM;
+use App\Modules\Products\ViewModels\LoadProductVM;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -43,7 +43,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
 
-        return response()->json(Response::success((new GetProductVM($product))->toArray()));
+        return response()->json(Response::success((new LoadProductVM($product))->toArray()));
     }
 
     public function create()
@@ -70,7 +70,7 @@ class ProductController extends Controller
             return $product;
         });
 
-        return response()->json(Response::success((new GetProductVM($product))->toArray()));
+        return response()->json(Response::success((new LoadProductVM($product))->toArray()));
     }
 
     public function update(Product $product, UpdateProductRequest $request)
@@ -91,7 +91,7 @@ class ProductController extends Controller
 
         });
 
-        return response()->json(Response::success((new GetProductVM($product))->toArray()));
+        return response()->json(Response::success((new LoadProductVM($product))->toArray()));
 
     }
 

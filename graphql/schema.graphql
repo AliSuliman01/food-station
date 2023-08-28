@@ -1,103 +1,12 @@
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+scalar Email @scalar(class: "MLL\\GraphQLScalars\\Email")
+scalar JSON @scalar(class: "MLL\\GraphQLScalars\\JSON")
 
-type Query{
-#    user(
-#      id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
-#      email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
-#    ): User
-#    @find
-#    @can(ability: "show")
+type Query
 
-    paginationUsers(
-      name: String @where(operator: "like")
-    ): [User!]!
-    @paginate(defaultCount: 10)
-    @can(ability: "index")
+type Mutation
 
-    users(
-        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
-        where: _ @whereConditions(columns: ["name", "email"])
-    ):[User]!
-    @all
-    @can(ability: "index")
-
-    products(
-        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
-        hasCategories: _ @whereHasConditions(columns:["id"])
-        hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
-        hasRestaurant: _ @whereHasConditions(relation:"restaurant" columns:["name"])
-    ): [Product]! @all
-
-    categories(
-        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
-        hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
-        whereHas: _ @whereConditions(columns:["id"])
-        hasParentCategory: _ @whereHasConditions(relation:"parent_category" columns:["name"])
-    ): [Category]! @all
-
-    restaurants(
-        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
-        where: _ @whereConditions(columns: ["name", "full_address"])
-    ): [Restaurant]! @all
-
-    ingredients(
-        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
-        hasCategories: _ @whereHasConditions(columns:["name"])
-        hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
-    ):[Ingredient]! @all
-
-    orders(
-        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
-        hasOrderStatus: _ @whereHasConditions(columns:["name"])
-    ):[Order]! @all
-
-#    carts(
-#        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
-#        hasOrderStatus: _ @whereHasConditions(columns:["name"])
-#    ):[Cart]! @all
-
-}
-
-type Mutation {
-    login(email:String!, password:String!): LoginResponse
-    register(name:String, email:String!, password:String!, photo_path:String): RegisterResponse
-    deleteUser(id:ID! @whereKey):User
-    @delete
-    @can(ability: "delete")
-
-    createRestaurant(input: CreateRestaurantInput! @spread):Restaurant
-    @create
-    @can(ability: "create")
-#    @inject(context: "user.id", name: "user_id")
-
-    updateRestaurant(id:ID!, input: UpdateRestaurantInput! @spread):Restaurant
-    @update
-    @can(ability: "update")
-
-    deleteRestaurant(id:ID! @whereKey):Restaurant @delete
-
-    createUser(input: CreateUserInput! @spread):User
-    @create
-    @can(ability: "create")
-
-    updateUser(id: ID!, input: UpdateUserInput! @spread):User
-    @update
-    @can(ability: "update")
-
-    createProduct(input: CreateProductInput! @spread):Product @create
-    updateProduct(id:ID!, input: UpdateProductInput! @spread):Product @update
-    deleteProduct(id:ID! @whereKey):Product @delete
-
-    createCategory(input: CreateCategoryInput! @spread):Category @create
-    updateCategory(id:ID!, input: UpdateCategoryInput! @spread):Category @update
-    deleteCategory(id:ID! @whereKey):Category @delete
-
-    createIngredient(input: CreateIngredientInput! @spread):Ingredient @create
-    updateIngredient(id: ID!, input: UpdateIngredientInput! @spread):Ingredient @update
-    deleteIngredient(id: ID! @whereKey):Ingredient @delete
-}
-
-
+#import models.graphql
 #import category.graphql
 #import image.graphql
 #import ingredient.graphql
@@ -105,5 +14,6 @@ type Mutation {
 #import restaurant.graphql
 #import translation.graphql
 #import user.graphql
-#import order_status.graphql
 #import order.graphql
+#import cart.graphql
+

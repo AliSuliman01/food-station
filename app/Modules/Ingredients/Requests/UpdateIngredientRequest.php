@@ -10,14 +10,11 @@ class UpdateIngredientRequest extends ApiFormRequest
     {
         return [
             'translations' => 'array',
-            'translations.*.id' => ['required', 'exists:translations,id,deleted_at,NULL'],
             'translations.*.language_code' => ['required'],
             'translations.*.name' => ['required', 'string'],
             'translations.*.description' => ['nullable', 'string'],
             'translations.*.notes' => ['nullable', 'string'],
-            'images' => ['required'],
-            'images.*.id' => ['required', 'exists:images,id,deleted_at,NULL'],
-            'images.*.path' => ['required'],
+            'image' => ['sometimes'],
             'categories' => ['required'],
             'categories.*' => ['required', 'exists:categories,id,deleted_at,NULL'],
         ];

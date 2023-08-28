@@ -9,14 +9,17 @@ class StoreCategoryRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'parent_category_id' => ['integer', 'nullable', 'exists:categories,id,deleted_at,NULL'],
             'name' => 'string|required',
+
             'translations.*.language_code' => ['required'],
             'translations.*.name' => ['required', 'string'],
             'translations.*.description' => ['nullable', 'string'],
             'translations.*.notes' => ['nullable', 'string'],
-            'images' => ['required'],
-            'images.*.path' => ['required'],
+
+            'image' => ['nullable'],
+
+            'parent_categories' => ['required'],
+            'parent_categories.*' => ['required', 'exists:categories,id,deleted_at,NULL'],
         ];
     }
 }

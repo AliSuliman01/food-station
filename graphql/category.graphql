@@ -1,4 +1,24 @@
 
+extend type Query {
+
+    categories(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
+        hasTranslation: _ @whereHasConditions(relation:"translation" columns:["name","description","notes"])
+        whereHas: _ @whereConditions(columns:["id"])
+        hasParentCategory: _ @whereHasConditions(relation:"parent_category" columns:["name"])
+    ): [Category]! @all
+
+
+}
+
+extend type Mutation {
+
+    createCategory(input: CreateCategoryInput! @spread):Category @create
+    updateCategory(id:ID!, input: UpdateCategoryInput! @spread):Category @update
+    deleteCategory(id:ID! @whereKey):Category @delete
+
+}
+
 input CategoriesMorphToMany{
     connect:[ID!]
     disconnect:[ID!]
@@ -24,18 +44,4 @@ input UpdateCategoryInput{
     translations:TranslationsMorphMany
     ingredients:IngredientsBelongsToMany
     images:ImagesMorphMany
-}
-type Category{
-    id:ID!
-    name:String
-    slug:String
-    created_at:DateTime
-    updated_at: DateTime
-    main_image:Image
-    images:[Image]
-    translation:Translation
-    translations:[Translation]
-    ingredients:[Ingredient]
-    parent_category:Category
-    sub_categories:[Category]
 }

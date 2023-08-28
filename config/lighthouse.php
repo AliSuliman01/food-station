@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 return [
     /*
@@ -38,7 +40,7 @@ return [
             // middleware, this delegates auth and permission checks to the field level.
             Nuwave\Lighthouse\Http\Middleware\AttemptAuthentication::class,
 
-            \App\Http\Middleware\CaptureLanguageCode::class
+            \App\Http\Middleware\CaptureLanguageCode::class,
             // Logs every incoming GraphQL query.
             // Nuwave\Lighthouse\Http\Middleware\LogGraphQLQueries::class,
         ],
@@ -148,6 +150,8 @@ return [
 
     'namespaces' => [
         'models' => [
+            'App\\Modules\\Orders\\Model',
+            'App\\Modules\\Carts\\Model',
             'App\\Modules\\Users\\Model',
             'App\\Modules\\Products\\Model',
             'App\\Modules\\Restaurants\\Model',
@@ -181,7 +185,7 @@ return [
     'security' => [
         'max_query_complexity' => GraphQL\Validator\Rules\QueryComplexity::DISABLED,
         'max_query_depth' => GraphQL\Validator\Rules\QueryDepth::DISABLED,
-        'disable_introspection' => (bool)env('LIGHTHOUSE_SECURITY_DISABLE_INTROSPECTION', false)
+        'disable_introspection' => (bool) env('LIGHTHOUSE_SECURITY_DISABLE_INTROSPECTION', false)
             ? GraphQL\Validator\Rules\DisableIntrospection::ENABLED
             : GraphQL\Validator\Rules\DisableIntrospection::DISABLED,
     ],
@@ -409,13 +413,13 @@ return [
             ],
             'pusher' => [
                 'driver' => 'pusher',
-                'routes' => Nuwave\Lighthouse\Subscriptions\SubscriptionRouter::class . '@pusher',
+                'routes' => Nuwave\Lighthouse\Subscriptions\SubscriptionRouter::class.'@pusher',
                 'connection' => 'pusher',
             ],
             'echo' => [
                 'driver' => 'echo',
                 'connection' => env('LIGHTHOUSE_SUBSCRIPTION_REDIS_CONNECTION', 'default'),
-                'routes' => Nuwave\Lighthouse\Subscriptions\SubscriptionRouter::class . '@echoRoutes',
+                'routes' => Nuwave\Lighthouse\Subscriptions\SubscriptionRouter::class.'@echoRoutes',
             ],
         ],
 

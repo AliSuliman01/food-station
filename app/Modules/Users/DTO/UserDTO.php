@@ -14,6 +14,9 @@ class UserDTO extends OptimizedDataTransferObject
     public $name;
 
     /* @var string|null */
+    public $username;
+
+    /* @var string|null */
     public $email;
 
     /* @var string|null */
@@ -36,6 +39,7 @@ class UserDTO extends OptimizedDataTransferObject
         return new self([
             'id' => $request['id'] ?? null,
             'name' => $request['name'] ?? null,
+            'username' => $request['username'] ?? null,
             'email' => $request['email'] ?? null,
             'mobile_phone' => $request['mobile_phone'] ?? null,
             'email_verified_at' => $request['email_verified_at'] ?? null,

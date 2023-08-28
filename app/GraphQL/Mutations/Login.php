@@ -5,12 +5,11 @@ namespace App\GraphQL\Mutations;
 use App\Exceptions\GeneralException;
 use App\Modules\Users\Actions\UserLoginAction;
 use App\Modules\Users\DTO\UserLoginDTO;
-use Illuminate\Support\Facades\DB;
 
 final class Login
 {
     /**
-     * @param null $_
+     * @param  null  $_
      * @param array{}  $args
      */
     public function __invoke($_, $args)

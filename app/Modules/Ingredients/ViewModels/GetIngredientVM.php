@@ -10,9 +10,7 @@ class GetIngredientVM implements Arrayable
 
     public function __construct($ingredient)
     {
-        $this->ingredient = $ingredient->load(['translation',
-            'images',
-            'categories', ]);
+        $this->ingredient = $ingredient->load(['translations', 'image', 'categories']);
     }
 
     public function toArray()

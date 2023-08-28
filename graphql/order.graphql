@@ -1,9 +1,15 @@
 
+extend type Query {
 
-type Order{
-    id:ID!
-    user:User
-    order_status:[OrderStatus]
-    created_at: DateTime!
-    updated_at: DateTime!
+    orders(
+        orderBy: _ @orderBy(columns: ["created_at", "updated_at", "id"])
+        hasOrderStatus: _ @whereHasConditions(columns:["name"])
+    ):[Order]! @all
+
+}
+extend type Mutation {
+
+    addToOrder(product_id:ID!, quantity:Int, notes:JSON):Cart @guard
+    removeFromOrder(cart_id:ID!, quantity:Int!):Cart @guard
+    cancelOrder:Order @guard
 }

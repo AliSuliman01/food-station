@@ -9,16 +9,18 @@ class UpdateCategoryRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'parent_category_id' => ['integer', 'nullable', 'exists:categories,id,deleted_at,NULL'],
-            'name' => 'required',
-            'translations.*.id' => ['required', 'exists:translations,id,deleted_at,NULL'],
+            'name' => 'string|required',
+
             'translations.*.language_code' => ['required'],
             'translations.*.name' => ['required', 'string'],
             'translations.*.description' => ['nullable', 'string'],
             'translations.*.notes' => ['nullable', 'string'],
-            'images' => ['nullable'],
-            'images.*.id' => ['required', 'exists:images,id,deleted_at,NULL'],
-            'images.*.path' => ['required'],
+
+            'image' => ['nullable'],
+
+            'parent_categories' => ['nullable'],
+            'parent_categories.*' => ['required', 'exists:categories,id,deleted_at,NULL'],
+
         ];
     }
 }

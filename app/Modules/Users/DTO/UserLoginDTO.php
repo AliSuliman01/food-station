@@ -7,7 +7,7 @@ use App\Classes\OptimizedDataTransferObject;
 class UserLoginDTO extends OptimizedDataTransferObject
 {
     /* @var string|null */
-    public $email;
+    public $username;
 
     /* @var string|null */
     public $password;
@@ -15,7 +15,7 @@ class UserLoginDTO extends OptimizedDataTransferObject
     public static function fromRequest($request)
     {
         return new self([
-            'email' => $request['email'] ?? null,
+            'username' => $request['username'] ?? null,
             'password' => $request['password'] ?? null,
         ]);
     }

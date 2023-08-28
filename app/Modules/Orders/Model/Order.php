@@ -3,20 +3,26 @@
 namespace App\Modules\Orders\Model;
 
 use App\Models\OptimizedModel;
-use App\Modules\OrderStatuses\Model\OrderStatus;
+use App\Modules\Carts\Model\Cart;
+use App\Modules\Users\Model\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends OptimizedModel
 {
-    use SoftDeletes;
+    use SoftDeletes, SoftDeletes;
 
-    public function order_status()
+    public function user()
     {
-        return $this->belongsTo(OrderStatus::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function getStatus()
+    public function prepared_by_user()
     {
-        return $this->order_status?->name;
+        return $this->belongsTo(User::class, 'prepared_by_user_id');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
     }
 }

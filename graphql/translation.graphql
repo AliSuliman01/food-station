@@ -11,10 +11,3 @@ input UpsertTranslationInput{
     notes:String
 }
 
-type Translation{
-    id:ID!
-    language_code:String!
-    name:String!
-    description:String
-    notes:String
-}

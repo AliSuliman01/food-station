@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Modules\Categorizable\Model;
-
 
 use App\Models\OptimizedModel;
 use Illuminate\Database\Eloquent\SoftDeletes;

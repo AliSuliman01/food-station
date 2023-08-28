@@ -6,12 +6,11 @@ use App\Exceptions\GeneralException;
 use App\Modules\Users\Actions\RegisterUserAction;
 use App\Modules\Users\Actions\SendVerificationEmailAction;
 use App\Modules\Users\DTO\UserRegisterDTO;
-use Illuminate\Support\Facades\DB;
 
 final class Register
 {
     /**
-     * @param null $_
+     * @param  null  $_
      * @param array{}  $args
      */
     public function __invoke($_, array $args)
@@ -31,7 +30,6 @@ final class Register
                 'access_token' => $tokens['access_token'],
                 'refresh_token' => $tokens['refresh_token'],
             ];
-
 
         } catch (\Throwable $e) {
             throw new GeneralException($e->getMessage());

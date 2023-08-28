@@ -27,6 +27,9 @@ class RestaurantDTO extends DataTransferObject
     /* @var integer|null */
     public $user_id;
 
+    /* @var bool|null */
+    public $is_verified;
+
     public static function fromRequest($request)
     {
         return new self([
@@ -37,6 +40,7 @@ class RestaurantDTO extends DataTransferObject
             'full_address' => $request['full_address'] ?? null,
             'cover_image_path' => $request['cover_image_path'] ?? null,
             'user_id' => $request['user_id'] ?? null,
+            'is_verified' => $request['is_verified'] ?? null,
 
         ]);
     }

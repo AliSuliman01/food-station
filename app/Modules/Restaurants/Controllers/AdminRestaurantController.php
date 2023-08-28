@@ -9,7 +9,7 @@ use App\Modules\Restaurants\Actions\UpdateRestaurantAction;
 use App\Modules\Restaurants\DTO\RestaurantDTO;
 use App\Modules\Restaurants\Model\Restaurant;
 use App\Modules\Restaurants\Requests\StoreRestaurantRequest;
-use App\Modules\Restaurants\Requests\UpdateRestaurantRequest;
+use App\Modules\Restaurants\Requests\StoreOrderRequest;
 use App\Modules\Restaurants\ViewModels\GetAllRestaurantsVM;
 use App\Modules\Restaurants\ViewModels\GetRestaurantVM;
 use App\Modules\Users\ViewModels\GetAllUsersVM;
@@ -71,7 +71,7 @@ class AdminRestaurantController extends Controller
         return back();
     }
 
-    public function update(Restaurant $restaurant, UpdateRestaurantRequest $request)
+    public function update(Restaurant $restaurant, StoreOrderRequest $request)
     {
 
         $data = $request->validated();

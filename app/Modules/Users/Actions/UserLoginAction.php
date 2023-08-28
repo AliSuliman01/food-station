@@ -12,7 +12,7 @@ class UserLoginAction
         UserLoginDTO $userLoginDTO
     ) {
         /** @var User $user */
-        $user = User::query()->where('email', '=', $userLoginDTO->email)->first();
+        $user = User::query()->where('username', '=', $userLoginDTO->username)->first();
 
         if (! Hash::check($userLoginDTO->password, $user->password)) {
             throw new \Exception(__('auth.failed'));

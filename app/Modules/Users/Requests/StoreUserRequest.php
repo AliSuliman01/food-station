@@ -10,6 +10,7 @@ class StoreUserRequest extends ApiFormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'username' => ['required', 'unique:users,username,NULL,id,deleted_at,NULL'],
             'email' => ['required', 'email', 'unique:users,email,NULL,id,deleted_at,NULL'],
             'photo_path' => ['nullable', 'string'],
             'password' => ['required', 'min:8'],

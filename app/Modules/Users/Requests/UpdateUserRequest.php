@@ -9,6 +9,8 @@ class UpdateUserRequest extends ApiFormRequest
 {
     public function rules(): array
     {
+        dd($this->route()->parameters);
+
         return [
             'name' => ['required', 'string'],
             'email' => ['required', 'email', Rule::unique('users')->ignore($this->user()->id, 'id')],
