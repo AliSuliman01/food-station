@@ -1,0 +1,91 @@
+    
+  GET|HEAD        / ............................................................................................................................................ 
+  POST            _ignition/execute-solution ..................................... ignition.executeSolution › Spatie\LaravelIgnition › ExecuteSolutionController
+  GET|HEAD        _ignition/health-check ................................................. ignition.healthCheck › Spatie\LaravelIgnition › HealthCheckController
+  POST            _ignition/update-config .............................................. ignition.updateConfig › Spatie\LaravelIgnition › UpdateConfigController
+  GET|HEAD        admin ............................................................................ filament.admin.pages.dashboard › Filament\Pages › Dashboard
+  GET|HEAD        admin/login ............................................................................... filament.admin.auth.login › Filament\Pages › Login
+  POST            admin/logout ................................................................... filament.admin.auth.logout › Filament\Http › LogoutController
+  GET|HEAD        api/v1/admins ...................................................... admins.index › App\Modules\Users\Admins\Controllers\AdminController@index
+  POST            api/v1/admins ...................................................... admins.store › App\Modules\Users\Admins\Controllers\AdminController@store
+  GET|HEAD        api/v1/admins/create ............................................. admins.create › App\Modules\Users\Admins\Controllers\AdminController@create
+  GET|HEAD        api/v1/admins/{admin} ................................................ admins.show › App\Modules\Users\Admins\Controllers\AdminController@show
+  PUT|PATCH       api/v1/admins/{admin} ............................................ admins.update › App\Modules\Users\Admins\Controllers\AdminController@update
+  DELETE          api/v1/admins/{admin} .......................................... admins.destroy › App\Modules\Users\Admins\Controllers\AdminController@destroy
+  GET|HEAD        api/v1/admins/{admin}/edit ........................................... admins.edit › App\Modules\Users\Admins\Controllers\AdminController@edit
+  POST            api/v1/auth/login ......................................................................... App\Modules\Users\Controllers\UserController@login
+  POST            api/v1/auth/logout ....................................................................... App\Modules\Users\Controllers\UserController@logout
+  POST            api/v1/auth/register ................................................................... App\Modules\Users\Controllers\UserController@register
+  GET|HEAD        api/v1/categories ............................................. categories.index › App\Modules\Categories\Controllers\CategoryController@index
+  POST            api/v1/categories ............................................. categories.store › App\Modules\Categories\Controllers\CategoryController@store
+  GET|HEAD        api/v1/categories/create .................................... categories.create › App\Modules\Categories\Controllers\CategoryController@create
+  GET|HEAD        api/v1/categories/ingredients .............................................. App\Modules\Categories\Controllers\CategoryController@ingredients
+  GET|HEAD        api/v1/categories/{category} .................................... categories.show › App\Modules\Categories\Controllers\CategoryController@show
+  PUT|PATCH       api/v1/categories/{category} ................................ categories.update › App\Modules\Categories\Controllers\CategoryController@update
+  DELETE          api/v1/categories/{category} .............................. categories.destroy › App\Modules\Categories\Controllers\CategoryController@destroy
+  GET|HEAD        api/v1/categories/{category}/edit ............................... categories.edit › App\Modules\Categories\Controllers\CategoryController@edit
+  GET|HEAD        api/v1/ingredients ........................................ ingredients.index › App\Modules\Ingredients\Controllers\IngredientController@index
+  POST            api/v1/ingredients ........................................ ingredients.store › App\Modules\Ingredients\Controllers\IngredientController@store
+  GET|HEAD        api/v1/ingredients/create ............................... ingredients.create › App\Modules\Ingredients\Controllers\IngredientController@create
+  GET|HEAD        api/v1/ingredients/{ingredient} ............................. ingredients.show › App\Modules\Ingredients\Controllers\IngredientController@show
+  PUT|PATCH       api/v1/ingredients/{ingredient} ......................... ingredients.update › App\Modules\Ingredients\Controllers\IngredientController@update
+  DELETE          api/v1/ingredients/{ingredient} ....................... ingredients.destroy › App\Modules\Ingredients\Controllers\IngredientController@destroy
+  GET|HEAD        api/v1/ingredients/{ingredient}/edit ........................ ingredients.edit › App\Modules\Ingredients\Controllers\IngredientController@edit
+  POST            api/v1/media/upload_image .......................................................... App\Modules\Media\Controllers\MediaController@uploadImage
+  GET|HEAD        api/v1/orders ............................................................ orders.index › App\Modules\Orders\Controllers\OrderController@index
+  POST            api/v1/orders ............................................................ orders.store › App\Modules\Orders\Controllers\OrderController@store
+  POST            api/v1/orders/store_custom ....................................................... App\Modules\Orders\Controllers\OrderController@store_custom
+  GET|HEAD        api/v1/orders/{order} ...................................................... orders.show › App\Modules\Orders\Controllers\OrderController@show
+  DELETE          api/v1/orders/{order} ................................................ orders.destroy › App\Modules\Orders\Controllers\OrderController@destroy
+  GET|HEAD        api/v1/products .................................................... products.index › App\Modules\Products\Controllers\ProductController@index
+  POST            api/v1/products .................................................... products.store › App\Modules\Products\Controllers\ProductController@store
+  GET|HEAD        api/v1/products/available ....................................................... App\Modules\Products\Controllers\ProductController@available
+  GET|HEAD        api/v1/products/create ........................................... products.create › App\Modules\Products\Controllers\ProductController@create
+  GET|HEAD        api/v1/products/most_bought ................................................... App\Modules\Products\Controllers\ProductController@most_bought
+  GET|HEAD        api/v1/products/{product} ............................................ products.show › App\Modules\Products\Controllers\ProductController@show
+  PUT|PATCH       api/v1/products/{product} ........................................ products.update › App\Modules\Products\Controllers\ProductController@update
+  DELETE          api/v1/products/{product} ...................................... products.destroy › App\Modules\Products\Controllers\ProductController@destroy
+  GET|HEAD        api/v1/products/{product}/edit ....................................... products.edit › App\Modules\Products\Controllers\ProductController@edit
+  GET|HEAD        api/v1/restaurants ........................................ restaurants.index › App\Modules\Restaurants\Controllers\RestaurantController@index
+  POST            api/v1/restaurants ........................................ restaurants.store › App\Modules\Restaurants\Controllers\RestaurantController@store
+  GET|HEAD        api/v1/restaurants/create ............................... restaurants.create › App\Modules\Restaurants\Controllers\RestaurantController@create
+  GET|HEAD        api/v1/restaurants/{restaurant} ............................. restaurants.show › App\Modules\Restaurants\Controllers\RestaurantController@show
+  PUT|PATCH       api/v1/restaurants/{restaurant} ......................... restaurants.update › App\Modules\Restaurants\Controllers\RestaurantController@update
+  DELETE          api/v1/restaurants/{restaurant} ....................... restaurants.destroy › App\Modules\Restaurants\Controllers\RestaurantController@destroy
+  GET|HEAD        api/v1/restaurants/{restaurant}/edit ........................ restaurants.edit › App\Modules\Restaurants\Controllers\RestaurantController@edit
+  GET|HEAD        api/v1/translations .................................... translations.index › App\Modules\Translations\Controllers\TranslationController@index
+  POST            api/v1/translations .................................... translations.store › App\Modules\Translations\Controllers\TranslationController@store
+  GET|HEAD        api/v1/translations/{translation} ........................ translations.show › App\Modules\Translations\Controllers\TranslationController@show
+  PUT|PATCH       api/v1/translations/{translation} .................... translations.update › App\Modules\Translations\Controllers\TranslationController@update
+  DELETE          api/v1/translations/{translation} .................. translations.destroy › App\Modules\Translations\Controllers\TranslationController@destroy
+  GET|HEAD        api/v1/users ................................................................ users.index › App\Modules\Users\Controllers\UserController@index
+  POST            api/v1/users ................................................................ users.store › App\Modules\Users\Controllers\UserController@store
+  GET|HEAD        api/v1/users/create ....................................................... users.create › App\Modules\Users\Controllers\UserController@create
+  GET|HEAD        api/v1/users/{user} ........................................................... users.show › App\Modules\Users\Controllers\UserController@show
+  PUT|PATCH       api/v1/users/{user} ....................................................... users.update › App\Modules\Users\Controllers\UserController@update
+  DELETE          api/v1/users/{user} ..................................................... users.destroy › App\Modules\Users\Controllers\UserController@destroy
+  GET|HEAD        api/v1/users/{user}/edit ...................................................... users.edit › App\Modules\Users\Controllers\UserController@edit
+  GET|HEAD        graphiql ........................................................................................ graphiql › MLL\GraphiQL › GraphiQLController
+  GET|POST|HEAD   graphql ...................................................................................... graphql › Nuwave\Lighthouse › GraphQLController
+  GET|HEAD        livewire/livewire.js ............................................................. Livewire\Mechanisms › FrontendAssets@returnJavaScriptAsFile
+  GET|HEAD        livewire/preview-file/{filename} .................................... livewire.preview-file › Livewire\Features › FilePreviewController@handle
+  POST            livewire/update .......................................................... livewire.update › Livewire\Mechanisms › HandleRequests@handleUpdate
+  POST            livewire/upload-file .................................................. livewire.upload-file › Livewire\Features › FileUploadController@handle
+  GET|HEAD        oauth/authorize ..................................... passport.authorizations.authorize › Laravel\Passport › AuthorizationController@authorize
+  POST            oauth/authorize .................................. passport.authorizations.approve › Laravel\Passport › ApproveAuthorizationController@approve
+  DELETE          oauth/authorize ........................................... passport.authorizations.deny › Laravel\Passport › DenyAuthorizationController@deny
+  GET|HEAD        oauth/clients ........................................................... passport.clients.index › Laravel\Passport › ClientController@forUser
+  POST            oauth/clients ............................................................. passport.clients.store › Laravel\Passport › ClientController@store
+  PUT             oauth/clients/{client_id} ............................................... passport.clients.update › Laravel\Passport › ClientController@update
+  DELETE          oauth/clients/{client_id} ............................................. passport.clients.destroy › Laravel\Passport › ClientController@destroy
+  GET|HEAD        oauth/personal-access-tokens ....................... passport.personal.tokens.index › Laravel\Passport › PersonalAccessTokenController@forUser
+  POST            oauth/personal-access-tokens ......................... passport.personal.tokens.store › Laravel\Passport › PersonalAccessTokenController@store
+  DELETE          oauth/personal-access-tokens/{token_id} .......... passport.personal.tokens.destroy › Laravel\Passport › PersonalAccessTokenController@destroy
+  GET|HEAD        oauth/scopes .................................................................. passport.scopes.index › Laravel\Passport › ScopeController@all
+  POST            oauth/token ............................................................. passport.token › Laravel\Passport › AccessTokenController@issueToken
+  POST            oauth/token/refresh ............................................. passport.token.refresh › Laravel\Passport › TransientTokenController@refresh
+  GET|HEAD        oauth/tokens .............................................. passport.tokens.index › Laravel\Passport › AuthorizedAccessTokenController@forUser
+  DELETE          oauth/tokens/{token_id} ................................. passport.tokens.destroy › Laravel\Passport › AuthorizedAccessTokenController@destroy
+
+                                                                                                                                             Showing [87] routes
+

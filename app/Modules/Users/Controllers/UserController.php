@@ -78,13 +78,12 @@ class UserController extends Controller
 
                 //                SendVerificationEmailAction::execute($user);
 
-                $tokens = $user->createToken('access_token');
+                $tokens = $user->createToken('access_token', $userRegisterDto->password);
 
-                return [
-                    'user' => $user,
-                    'access_token' => $tokens['access_token'],
-                    'refresh_token' => $tokens['refresh_token'],
-                ];
+                $user->setAttribute('access_token', $tokens['access_token']);
+                $user->setAttribute('refresh_token', $tokens['refresh_token']);
+
+                return $user;
 
             });
 

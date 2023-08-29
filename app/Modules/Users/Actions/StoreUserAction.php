@@ -2,13 +2,18 @@
 
 namespace App\Modules\Users\Actions;
 
+use App\Enums\RoleEnum;
 use App\Modules\Users\DTO\UserDTO;
 use App\Modules\Users\Model\User;
 
 class StoreUserAction
 {
-    public static function execute(UserDTO $userDTO):User
+    public static function execute(UserDTO $userDTO, RoleEnum $role = null): User
     {
-        return User::create($userDTO->toArrayWithoutNulls());
+        /** @var User $user */
+        $user = User::create($userDTO->toArrayWithoutNulls());
+        if (isset($role)) {
+            $user->assignRole($role->value);
+        }
     }
 }

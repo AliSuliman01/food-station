@@ -5,40 +5,35 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1.0",
         "bensampo/laravel-enum": "^6.6",
         "doctrine/dbal": "^3.6",
         "dyrynda/laravel-cascade-soft-deletes": "^4.1",
+        "filament/filament": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
         "jenssegers/agent": "3.0.x-dev",
         "kreait/laravel-firebase": "^5.2",
-        "laravel/framework": "^9.19",
+        "laravel/framework": "^10.0",
         "laravel/passport": "^11.0",
         "laravel/tinker": "^2.7",
-        "livewire/livewire": "^2.12",
         "mll-lab/graphql-php-scalars": "^6.2",
         "mll-lab/laravel-graphiql": "^3.0",
-        "mll-lab/laravel-graphql-playground": "^2.6",
         "nuwave/lighthouse": "^6.11",
-        "pestphp/pest": "^1.16",
-        "pestphp/pest-plugin-laravel": "^1.1",
         "spatie/data-transfer-object": "^3.7",
         "spatie/laravel-data": "^3.7",
         "spatie/laravel-medialibrary": "^10.11",
         "spatie/laravel-permission": "^5.9",
-        "spatie/laravel-settings": "^3.1",
-        "yajra/laravel-datatables-oracle": "^9.18"
+        "spatie/laravel-settings": "^3.1"
     },
     "require-dev": {
         "alisuliman/code_generator": "^2.1.0",
         "fakerphp/faker": "^1.9.1",
-        "laravel/breeze": "^1.18",
         "laravel/pint": "^1.10",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
         "files": [
@@ -58,7 +53,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -83,7 +79,7 @@
             "pestphp/pest-plugin": true
         }
     },
-    "repositories":[
+    "repositories": [
         {
             "type": "vcs",
             "url": "git@github.com:AliSuliman01/code_gen.git"
