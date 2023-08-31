@@ -153,7 +153,7 @@ return [
     | on the page. If you want Bootstrap CSS, you can specify: "bootstrap"
     |
     */
-    'asset_url' => env('APP_URL'),
+    'asset_url' => env('ASSET_URL'),
 
     'pagination_theme' => 'tailwind',
 ];
