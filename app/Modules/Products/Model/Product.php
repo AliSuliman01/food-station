@@ -2,6 +2,8 @@
 
 namespace App\Modules\Products\Model;
 
+use App\Classes\OptimizedInteractsWithMedia;
+use App\Enums\MediaCollectionEnum;
 use App\Http\Traits\HasCategories;
 use App\Http\Traits\HasTranslations;
 use App\Models\OptimizedModel;
@@ -17,7 +19,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Product extends OptimizedModel
 {
-    use HasFactory, SoftDeletes, HasTranslations, InteractsWithMedia, HasCategories;
+    use HasFactory, SoftDeletes, HasTranslations, OptimizedInteractsWithMedia, HasCategories;
 
     protected $cascadeDeletes = [
         'translations',
@@ -58,5 +60,15 @@ class Product extends OptimizedModel
     public function customer_user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'customer_user_id');
+    }
+
+    public function main_image()
+    {
+        return $this->oneMedia()->where('collection_name', MediaCollectionEnum::MAIN_IMAGE());
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection(MediaCollectionEnum::MAIN_IMAGE())->singleFile();
     }
 }

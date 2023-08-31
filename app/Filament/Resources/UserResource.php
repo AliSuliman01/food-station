@@ -17,7 +17,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public static function form(Form $form): Form
     {
@@ -53,17 +53,22 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('photo_path'),
+                Tables\Columns\ImageColumn::make('photo_path')->label('avatar')->circular(),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('username'),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('mobile_phone'),
+                Tables\Columns\TextColumn::make('roles.name')
+                ->badge(),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                ->visible(function(User $user){
+                    return !$user->hasRole(RoleEnum::ROOT);
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -89,5 +94,17 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+    public static function getNavigationSort(): ?int
+    {
+        return 1;
     }
 }

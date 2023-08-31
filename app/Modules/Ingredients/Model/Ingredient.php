@@ -33,13 +33,13 @@ class Ingredient extends OptimizedModel implements HasMedia
         'deleted_by_user_id',
     ];
 
-    public function image()
+    public function main_image()
     {
-        return $this->oneMedia()->where('collection_name', MediaCollectionEnum::IMAGE());
+        return $this->oneMedia()->where('collection_name', MediaCollectionEnum::MAIN_IMAGE());
     }
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection(MediaCollectionEnum::IMAGE())->singleFile();
+        $this->addMediaCollection(MediaCollectionEnum::MAIN_IMAGE())->singleFile();
     }
 }

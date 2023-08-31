@@ -16,17 +16,15 @@ class DefaultCategoriesSeeder extends Seeder
      */
     public function run()
     {
-        $categories = [];
-
         foreach (CategoryEnum::asArray() as $value) {
-            $categories[] = [
+            Category::query()->firstOrCreate([
                 'name' => $value,
-                'slug' => Str::slug($value.' '.time()),
+            ], [
+                'slug' => Str::slug($value . ' ' . time()),
                 'created_at' => now()->toDateTimeString(),
                 'updated_at' => now()->toDateTimeString(),
-            ];
+            ]);
         }
 
-        Category::query()->insertOrIgnore($categories);
     }
 }

@@ -7,9 +7,9 @@ namespace App\Enums;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static IMAGE()
+ * @method static static MAIN_IMAGE()
  */
 final class MediaCollectionEnum extends Enum
 {
-    const IMAGE = 'IMAGE';
+    const MAIN_IMAGE = 'MAIN_IMAGE';
 }

@@ -67,14 +67,14 @@ class Category extends OptimizedModel implements HasMedia
         return $this->hasMany(Categorizable::class);
     }
 
-    public function image()
+    public function main_image()
     {
-        return $this->oneMedia()->where('collection_name', MediaCollectionEnum::IMAGE());
+        return $this->oneMedia()->where('collection_name', MediaCollectionEnum::MAIN_IMAGE());
     }
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection(MediaCollectionEnum::IMAGE())->singleFile();
+        $this->addMediaCollection(MediaCollectionEnum::MAIN_IMAGE())->singleFile();
     }
 
     public function parent_categories()

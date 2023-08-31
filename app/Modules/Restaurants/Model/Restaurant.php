@@ -2,6 +2,8 @@
 
 namespace App\Modules\Restaurants\Model;
 
+use App\Classes\OptimizedInteractsWithMedia;
+use App\Enums\MediaCollectionEnum;
 use App\Models\OptimizedModel;
 use App\Modules\Products\Model\Product;
 use App\Modules\Users\Model\User;
@@ -13,7 +15,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Restaurant extends OptimizedModel
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia;
+    use HasFactory, SoftDeletes, OptimizedInteractsWithMedia;
 
     protected $cascadeDeletes = [
         'products',
@@ -43,5 +45,15 @@ class Restaurant extends OptimizedModel
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function main_image()
+    {
+        return $this->oneMedia()->where('collection_name', MediaCollectionEnum::MAIN_IMAGE());
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection(MediaCollectionEnum::MAIN_IMAGE())->singleFile();
     }
 }
