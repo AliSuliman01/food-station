@@ -17,7 +17,7 @@ class RootUserSeeder extends Seeder
     public function run()
     {
         /** @var User $user */
-        $user = User::query()->firstOrCreate([
+        $user = User::query()->updateOrCreate([
             'email' => 'root@eatchen.com',
         ], [
             'name' => 'root',
