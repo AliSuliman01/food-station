@@ -25,18 +25,16 @@ class IngredientResource extends Resource
         return $form
             ->schema([
                 Forms\Components\SpatieMediaLibraryFileUpload::make('main_image')
-                    ->collection(MediaCollectionEnum::MAIN_IMAGE)
-//                Forms\Components\FileUpload::make('image.original_url')
-//                    ->maxWidth("xs")
-//                    ->image()
-//                    ->columnSpanFull()
-//                    ->imageEditor()
-//                    ->imageEditorAspectRatios([
-//                        '16:9',
-//                        '4:3',
-//                        '1:1',
-//                    ])
-//                    ->nullable(),
+                    ->collection(MediaCollectionEnum::MAIN_IMAGE),
+                Forms\Components\Select::make('categories')
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
+                    ->native(false)
+                    ->relationship('categories', 'name')
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')->maxLength(255),
+                    ])
             ]);
     }
 
@@ -48,7 +46,6 @@ class IngredientResource extends Resource
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('main_image')
                     ->circular()
                     ->collection(MediaCollectionEnum::MAIN_IMAGE),
-//                Tables\Columns\ImageColumn::make('image.original_url'),
                 Tables\Columns\TextColumn::make('translation.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('categories.name')
