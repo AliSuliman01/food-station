@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class CategoryResource extends Resource
 {
@@ -39,7 +40,13 @@ class CategoryResource extends Resource
                     ->relationship('parent_categories', 'name')
                     ->createOptionForm([
                         Forms\Components\TextInput::make('name')->maxLength(255),
-                    ])
+                    ]),
+                Forms\Components\Checkbox::make('is_selectable')
+                    ->reactive(),
+                Forms\Components\Checkbox::make('can_select_many')
+                    ->visible(function (callable $get) {
+                    return $get('is_selectable');
+                }),
             ]);
     }
 
@@ -54,6 +61,7 @@ class CategoryResource extends Resource
                             ->searchable(),
                         Tables\Columns\TextColumn::make('translation.name')
                             ->searchable(),
+                        Tables\Columns\CheckboxColumn::make('is_selectable'),
                         Tables\Columns\TextColumn::make('parent_categories.name')
                             ->badge(),
                         Tables\Columns\TextColumn::make('created_at')
