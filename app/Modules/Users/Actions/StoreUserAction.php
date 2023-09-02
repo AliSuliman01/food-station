@@ -15,5 +15,6 @@ class StoreUserAction
         if (isset($role)) {
             $user->assignRole($role->value);
         }
+        return $user;
     }
 }

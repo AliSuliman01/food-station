@@ -2,6 +2,7 @@
 
 namespace App\Modules\Users\Actions;
 
+use App\Enums\RoleEnum;
 use App\Modules\Firebase\ViewModels\GetMobilePhoneFromIdTokenVM;
 use App\Modules\Users\DTO\UserDTO;
 use App\Modules\Users\DTO\UserRegisterDTO;
@@ -17,6 +18,6 @@ class RegisterUserAction
 
         $userDto = UserDTO::fromRequest($userRegisterDTO->toArray());
 
-        return StoreUserAction::execute($userDto);
+        return StoreUserAction::execute($userDto, RoleEnum::CUSTOMER());
     }
 }
