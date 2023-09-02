@@ -33,6 +33,15 @@ class ProductResource extends Resource
                     ->seconds(false),
                 Forms\Components\Select::make('status')->options(ProductStatusEnum::asSelectArray()),
                 Forms\Components\Select::make('type')->options(ProductStatusEnum::asSelectArray()),
+                Forms\Components\Select::make('categories')
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
+                    ->native(false)
+                    ->relationship('categories', 'name')
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')->maxLength(255),
+                    ])
             ]);
     }
 
@@ -48,6 +57,9 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('preparing_time'),
                 Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\TextColumn::make('type'),
+                Tables\Columns\TextColumn::make('categories.name')
+                    ->searchable()
+                    ->badge(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
