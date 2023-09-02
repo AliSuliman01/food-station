@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\CategoryEnum;
 use App\Enums\MediaCollectionEnum;
 use App\Filament\Resources\CategoryResource\Pages;
+use App\Filament\Resources\CategoryResource\RelationManagers\TranslationsRelationManager;
 use App\Modules\Categories\Model\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -87,7 +88,7 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TranslationsRelationManager::class
         ];
     }
 

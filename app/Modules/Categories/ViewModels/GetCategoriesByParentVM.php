@@ -25,9 +25,9 @@ class GetCategoriesByParentVM implements Arrayable
 
         return $category->sub_categories()->with([
             'translation',
-            'image',
+            'main_image',
             'ingredients.translation',
-            'ingredients.image',
+            'ingredients.main_image',
         ])->get();
     }
 }
