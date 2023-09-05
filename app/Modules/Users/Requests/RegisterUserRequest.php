@@ -9,7 +9,7 @@ class RegisterUserRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'name' => 'nullable',
             'username' => ['required', 'unique:users,username,NULL,id,deleted_at,NULL'],
             'email' => ['required', 'unique:users,email,NULL,id,deleted_at,NULL'],
             'photo_path' => 'nullable',
