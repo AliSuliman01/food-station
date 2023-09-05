@@ -3,9 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\GeneralException;
-use App\Exceptions\RequestException;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
-use Illuminate\Http\Request;
 
 class Authenticate extends Middleware
 {
@@ -18,6 +16,6 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        throw new GeneralException('unauthorized', null, 401);
+        throw new GeneralException('unauthenticated', null, 401);
     }
 }

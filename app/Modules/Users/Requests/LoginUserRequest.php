@@ -9,7 +9,7 @@ class LoginUserRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'username' => ['required', 'exists:users,username,deleted_at,NULL'],
+            'email' => ['required', 'exists:users,email,deleted_at,NULL'],
             'password' => 'required',
         ];
     }

@@ -4,6 +4,8 @@ namespace App\Modules\Users\Actions;
 
 use App\Modules\Users\DTO\UserLoginDTO;
 use App\Modules\Users\Model\User;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Hash;
 
 class UserLoginAction
@@ -12,10 +14,10 @@ class UserLoginAction
         UserLoginDTO $userLoginDTO
     ) {
         /** @var User $user */
-        $user = User::query()->where('username', '=', $userLoginDTO->username)->first();
+        $user = User::query()->where('email', '=', $userLoginDTO->email)->first();
 
         if (! Hash::check($userLoginDTO->password, $user->password)) {
-            throw new \Exception(__('auth.failed'));
+            throw new AuthenticationException(__('auth.failed'));
         }
 
         return $user;
