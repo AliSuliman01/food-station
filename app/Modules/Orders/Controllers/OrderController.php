@@ -19,7 +19,6 @@ use App\Modules\Orders\ViewModels\GetAllOrdersVM;
 use App\Modules\Orders\ViewModels\LoadOneOrderVM;
 use App\Modules\Products\Actions\StoreProductAction;
 use App\Modules\Products\Data\ProductData;
-use App\Modules\Products\DTO\ProductDTO;
 use App\Modules\Translations\Data\TranslationData;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
