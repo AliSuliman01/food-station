@@ -6,12 +6,13 @@ use App\Modules\Products\Data\ProductData;
 use App\Modules\Products\DTO\ProductDTO;
 use App\Modules\Products\Model\Product;
 use App\Modules\Translations\Data\TranslationData;
+use Illuminate\Support\Collection;
 
 class StoreProductAction
 {
     /**
      * @param ProductData $productData
-     * @param ?TranslationData[] $translations
+     * @param ?Collection<TranslationData> $translations
      * @param ?int[] $ingredients
      *
      * @return Product
