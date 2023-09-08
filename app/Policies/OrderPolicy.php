@@ -46,7 +46,7 @@ class OrderPolicy
     }
     public function store_custom(User $user)
     {
-        return $user->hasRole(RoleEnum::CUSTOMER())
+        return $user->hasRole(RoleEnum::CUSTOMER());
     }
 
     /**
