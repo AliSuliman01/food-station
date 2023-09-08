@@ -84,7 +84,7 @@ class OrderController extends Controller
                 notes: $data['notes'],
             );
 
-            $product = StoreProductAction::execute($productData, collect([$translationData]), $data['ingredients']);
+            $product = StoreProductAction::execute($productData, ingredients: $data['ingredients']);
 
             $orderData = new OrderData(
                 user_id: Auth::id(),
