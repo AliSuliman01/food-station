@@ -79,10 +79,7 @@ class OrderController extends Controller
         $order = DB::transaction(function ()use ($data){
 
             $productData = new ProductData(
-                customer_user_id: Auth::id()
-            );
-
-            $translationData = new TranslationData(
+                customer_user_id: Auth::id(),
                 name: $data['name'],
                 notes: $data['notes'],
             );

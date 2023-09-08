@@ -11,6 +11,8 @@ class ProductData extends Data
     public function __construct(
         public ?int $id = null,
         public ?float $price = null,
+        public ?string $name = null,
+        public ?string $notes = null,
         public ?int $rate = null,
         public ?int $restaurant_id = null,
         public ?int $customer_user_id = null,
