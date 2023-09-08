@@ -27,7 +27,7 @@ class StoreProductAction
         $product = Product::create(array_null_filter($productData->toArray()));
 
         if ($translations){
-            $product->updateRelation('translations', $translations);
+            $product->updateRelation('translations', $translations->toArray());
         }
 
         $product->ingredients()->sync($ingredients);

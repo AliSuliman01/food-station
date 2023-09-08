@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 abstract class OptimizedModel extends Model
 {
-    public function updateRelation($relation, $data, $primaryKeyName = 'id')
+    public function updateRelation($relation, array $data, $primaryKeyName = 'id')
     {
         DB::transaction(function () use ($relation, $data, $primaryKeyName) {
             if (is_object($data)) {
@@ -16,7 +16,11 @@ abstract class OptimizedModel extends Model
             $ids = [];
             foreach ($data as $item) {
                 if (isset($item[$primaryKeyName])) {
-                    $this->{$relation}()->where($primaryKeyName, $item[$primaryKeyName])->update(array_null_filter($item));
+                    $this->{$relation}()
+                        ->where($primaryKeyName, $item[$primaryKeyName])
+                        ->update(array_filter($item, function ($field) {
+                        return $field !== null;
+                    }));
                     array_push($ids, $item[$primaryKeyName]);
                 } else {
                     $model = $this->{$relation}()->create(array_null_filter($item));
