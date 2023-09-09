@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\CategoryEnum;
+use App\Enums\MediaCollectionEnum;
 use App\Enums\ProductStatusEnum;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers\TranslationsRelationManager;
@@ -24,8 +26,15 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('price'),
-                Forms\Components\TextInput::make('rate')->numeric()->minValue(0)->maxValue(5),
+                Forms\Components\SpatieMediaLibraryFileUpload::make('main_image')
+                    ->collection(MediaCollectionEnum::MAIN_IMAGE),
+                Forms\Components\TextInput::make('name')->required(),
+                Forms\Components\TextInput::make('price')->required(),
+                Forms\Components\Textarea::make('notes'),
+                Forms\Components\TextInput::make('rate')
+                    ->numeric()
+                    ->minValue(0)
+                    ->maxValue(5),
                 Forms\Components\Select::make('restaurant_id')->relationship('restaurant', 'name'),
                 Forms\Components\Select::make('customer_user_id')->relationship('customer_user', 'name'),
                 Forms\Components\TimePicker::make('preparing_time')
@@ -49,6 +58,13 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('main_image')
+                    ->circular()
+                    ->collection(MediaCollectionEnum::MAIN_IMAGE),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('notes'),
+                Tables\Columns\TextColumn::make('translation.name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('rate'),
                 Tables\Columns\TextColumn::make('restaurant.name'),
@@ -63,6 +79,10 @@ class ProductResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\SelectFilter::make('category')
+                    ->multiple()
+                    ->preload()
+                    ->relationship('categories', 'name')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

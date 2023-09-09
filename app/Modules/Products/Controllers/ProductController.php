@@ -2,6 +2,7 @@
 
 namespace App\Modules\Products\Controllers;
 
+use App\Enums\CategoryEnum;
 use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Modules\Categories\Model\Category;
@@ -32,12 +33,16 @@ class ProductController extends Controller
 
     public function available()
     {
-        return \response()->json(Response::success((new GetProductsByCategoryVM(Category::AVAILABLE))->toArray()));
+        return \response()->json(Response::success(
+            (new GetProductsByCategoryVM(CategoryEnum::AVAILABLE_TODAY))->toArray()
+        ));
     }
 
-    public function most_bought()
+    public function popular()
     {
-        return \response()->json(Response::success((new GetProductsByCategoryVM(Category::MOST_BOUGHT))->toArray()));
+        return \response()->json(Response::success(
+            (new GetProductsByCategoryVM(CategoryEnum::POPULAR_PRODUCTS))->toArray()
+        ));
     }
 
     public function show(Product $product)

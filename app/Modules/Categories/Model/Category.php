@@ -26,10 +26,6 @@ class Category extends OptimizedModel implements HasMedia
         'categorizables',
     ];
 
-    public const AVAILABLE = 'available';
-
-    public const MOST_BOUGHT = 'most_bought';
-
     protected $guarded = [
         'id',
         'created_at',
