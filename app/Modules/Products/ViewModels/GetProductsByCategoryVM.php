@@ -26,8 +26,8 @@ class GetProductsByCategoryVM implements Arrayable
                         ->orWhereRelation('translation', 'name', 'like', "%{$value}%");
                 }),])
             ->with([
-                'translation:name',
-                'main_image:file_name'
+                'translation',
+                'main_image'
             ])
             ->whereRelation('categories', 'name', '=', $this->categoryName)
             ->latest()
