@@ -27,7 +27,7 @@ class GetProductsByCategoryVM implements Arrayable
                 }),])
             ->with([
                 'translation:name',
-                'main_image:original_url'
+                'main_image:file_name'
             ])
             ->whereRelation('categories', 'name', '=', $this->categoryName)
             ->latest()
