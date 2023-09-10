@@ -31,6 +31,7 @@ class ProductResource extends Resource
                 Forms\Components\SpatieMediaLibraryFileUpload::make('main_image')
                     ->collection(MediaCollectionEnum::MAIN_IMAGE),
                 Forms\Components\TextInput::make('name')->required(),
+                Forms\Components\TextInput::make('old_price')->required(),
                 Forms\Components\TextInput::make('price')->required(),
                 Forms\Components\Textarea::make('notes'),
                 Forms\Components\TextInput::make('rate')
@@ -82,6 +83,7 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('notes'),
                 Tables\Columns\TextColumn::make('translation.name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('old_price'),
                 Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('rate'),
                 Tables\Columns\TextColumn::make('restaurant.name'),
