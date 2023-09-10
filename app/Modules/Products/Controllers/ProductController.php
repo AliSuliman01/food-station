@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\Products\Actions\DestroyProductAction;
 use App\Modules\Products\Actions\StoreProductAction;
 use App\Modules\Products\Actions\UpdateProductAction;
-use App\Modules\Products\DTO\ProductDTO;
+use App\Modules\Products\Data\ProductData;
 use App\Modules\Products\Model\Product;
 use App\Modules\Products\Requests\StoreProductRequest;
 use App\Modules\Products\Requests\UpdateProductRequest;
@@ -74,7 +74,7 @@ class ProductController extends Controller
 
             $data = $request->validated();
 
-            $productDTO = ProductDTO::fromRequest($data);
+            $productDTO = ProductData::from($data);
 
             $productDTO->user_id = Auth::id();
 
@@ -100,7 +100,7 @@ class ProductController extends Controller
 
             $data = $request->validated();
 
-            $productDTO = ProductDTO::fromRequest($data);
+            $productDTO = ProductData::from($data);
 
             $product = UpdateProductAction::execute($product, $productDTO);
 

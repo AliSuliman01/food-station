@@ -6,6 +6,7 @@ use App\Enums\MediaCollectionEnum;
 use App\Enums\ProductStatusEnum;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers\TranslationsRelationManager;
+use App\Modules\Categories\Model\Category;
 use App\Modules\Products\Model\Product;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,7 +14,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\App;
 
 class ProductResource extends Resource
 {
@@ -50,6 +53,21 @@ class ProductResource extends Resource
                     ->createOptionForm([
                         Forms\Components\TextInput::make('name')->maxLength(255),
                     ]),
+                Forms\Components\Select::make('ingredients')
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
+                    ->native(false)
+                    ->relationship(
+                        name: 'ingredients',
+                        titleAttribute: null,
+                        modifyQueryUsing: fn(Builder $query) => $query->with(['translation'])->whereHas('translation'),
+                    )
+                    ->getOptionLabelFromRecordUsing(fn(Model $record) => $record->translation->name),
+                Forms\Components\Repeater::make('extra_items')
+                    ->schema([
+                        Forms\Components\TextInput::make('item')
+                    ])
             ]);
     }
 
@@ -75,6 +93,13 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('categories.name')
                     ->searchable()
                     ->badge(),
+                Tables\Columns\TextColumn::make('ingredients.translation.name')
+                    ->searchable()
+                    ->badge(),
+                Tables\Columns\TextColumn::make('num_of_extra_items')
+                    ->alignCenter()
+                    ->tooltip(fn(Model $record): string => collect($record->extra_items)->flatten()->implode(', '))
+
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

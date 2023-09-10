@@ -3,6 +3,7 @@
 namespace App\Modules\Categories\Model;
 
 use App\Classes\OptimizedInteractsWithMedia;
+use App\Enums\CategoryEnum;
 use App\Enums\MediaCollectionEnum;
 use App\Exceptions\CategoryExistenceException;
 use App\Http\Traits\HasCategories;
@@ -11,6 +12,7 @@ use App\Models\OptimizedModel;
 use App\Modules\Categorizable\Model\Categorizable;
 use App\Modules\Ingredients\Model\Ingredient;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,11 +46,27 @@ class Category extends OptimizedModel implements HasMedia
     public static function getByName($name): Category
     {
         $category = Category::where('name', $name)->first();
-        if (! $category) {
-            throw new CategoryExistenceException('undefined category: '.$name);
+        if (!$category) {
+            throw new CategoryExistenceException('undefined category: ' . $name);
         }
 
         return $category;
+    }
+
+    public function scopeIngredientsCategories(Builder $query): void
+    {
+        $query->whereRelation('parent_categories', 'name', '=', CategoryEnum::INGREDIENTS);
+    }
+
+    public static function ingredientsForSelect()
+    {
+        return static::ingredientsCategories()->get()->mapWithKeys(function ($category) {
+            return [
+                $category->name => $category->ingredients->mapWithKeys(function ($ingredient) {
+                    return [$ingredient->id => $ingredient->translation->name];
+                })
+            ];
+        });
     }
 
     public function ingredients(): MorphToMany
