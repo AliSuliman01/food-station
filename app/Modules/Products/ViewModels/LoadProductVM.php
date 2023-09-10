@@ -11,8 +11,8 @@ class LoadProductVM implements Arrayable
     public function __construct($product)
     {
         $this->product = $product->load([
-            'images',
-            'translations',
+            'main_image',
+            'translation',
             'categories',
         ]);
     }

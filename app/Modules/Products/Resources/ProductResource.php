@@ -2,6 +2,7 @@
 
 namespace App\Modules\Products\Resources;
 
+use App\Modules\Ingredients\Resources\IngredientResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -28,6 +29,12 @@ class ProductResource extends JsonResource
             'notes' => $this->translation?->notes ?? $this->notes,
             'main_image' => $this->main_image->original_url,
             'restaurant' => $this->restaurant?->only(['name', 'is_verified']),
+            'ingredients' => $this->when($request->routeIs('products.show'), function () {
+                return IngredientResource::collection($this->ingredients);
+            }, function () {
+                return $this->ingredients->map(fn($ingredient) => $ingredient->translation->name);
+            })
+
         ];
     }
 }
