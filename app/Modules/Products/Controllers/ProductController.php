@@ -12,6 +12,7 @@ use App\Modules\Products\DTO\ProductDTO;
 use App\Modules\Products\Model\Product;
 use App\Modules\Products\Requests\StoreProductRequest;
 use App\Modules\Products\Requests\UpdateProductRequest;
+use App\Modules\Products\Resources\ProductResource;
 use App\Modules\Products\ViewModels\GetAllProductsVM;
 use App\Modules\Products\ViewModels\GetProductsByCategoryVM;
 use App\Modules\Products\ViewModels\LoadProductVM;
@@ -27,27 +28,39 @@ class ProductController extends Controller
 
     public function index()
     {
-        return \response()->json(Response::success((new GetAllProductsVM())->toArray()));
+        return \response()->json(Response::success(
+            ProductResource::collection(
+                (new GetAllProductsVM())->toArray()
+            )
+        ));
     }
 
     public function available()
     {
         return \response()->json(Response::success(
-            (new GetProductsByCategoryVM(CategoryEnum::AVAILABLE_TODAY))->toArray()
+            ProductResource::collection(
+                (new GetProductsByCategoryVM(CategoryEnum::AVAILABLE_TODAY))->toArray()
+            )
         ));
     }
 
     public function popular()
     {
         return \response()->json(Response::success(
-            (new GetProductsByCategoryVM(CategoryEnum::POPULAR_PRODUCTS))->toArray()
+            ProductResource::collection(
+                (new GetProductsByCategoryVM(CategoryEnum::POPULAR_PRODUCTS))->toArray()
+            )
         ));
     }
 
     public function show(Product $product)
     {
 
-        return response()->json(Response::success((new LoadProductVM($product))->toArray()));
+        return response()->json(Response::success(
+            ProductResource::make(
+                (new LoadProductVM($product))->toArray()
+            )
+        ));
     }
 
     public function create()
@@ -74,12 +87,16 @@ class ProductController extends Controller
             return $product;
         });
 
-        return response()->json(Response::success((new LoadProductVM($product))->toArray()));
+        return response()->json(Response::success(
+            ProductResource::make(
+                (new LoadProductVM($product))->toArray()
+            )
+        ));
     }
 
     public function update(Product $product, UpdateProductRequest $request)
     {
-        $product = DB::transaction(function () use ($request) {
+        $product = DB::transaction(function () use ($product, $request) {
 
             $data = $request->validated();
 
@@ -95,16 +112,21 @@ class ProductController extends Controller
 
         });
 
-        return response()->json(Response::success((new LoadProductVM($product))->toArray()));
+        return response()->json(Response::success(
+            ProductResource::make(
+                (new LoadProductVM($product))->toArray()
+            )
+        ));
 
     }
 
     public function destroy(Product $product)
     {
 
-        DestroyProductAction::execute($product);
-
-        return redirect()->route('admin.products.index');
-
+        return response()->json(Response::success(
+            ProductResource::make(
+                DestroyProductAction::execute($product)
+            )
+        ));
     }
 }
