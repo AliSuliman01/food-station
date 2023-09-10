@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Modules\Orders\ViewModels;
-
 
 use App\Modules\Orders\Model\Order;
 use Illuminate\Contracts\Support\Arrayable;
@@ -15,6 +13,6 @@ class LoadOneOrderVM implements Arrayable
 
     public function toArray()
     {
-        return $this->order->load(['carts', 'user'])->get();
+        return $this->order->load(['carts', 'user']);
     }
 }

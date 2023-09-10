@@ -2,7 +2,6 @@
 
 namespace App\Modules\Categories\ViewModels;
 
-use App\Enums\CategoryEnum;
 use App\Exceptions\CategoryExistenceException;
 use App\Modules\Categories\Model\Category;
 use Illuminate\Contracts\Support\Arrayable;

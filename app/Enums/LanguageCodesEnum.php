@@ -18,5 +18,4 @@ final class LanguageCodesEnum extends Enum
     const AR = 'ar';
 
     const TR = 'tr';
-
 }

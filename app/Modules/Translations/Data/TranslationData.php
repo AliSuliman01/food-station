@@ -11,7 +11,6 @@ class TranslationData extends Data
         public ?string $language_code = null,
         public ?string $description = null,
         public ?string $notes = null,
-    )
-    {
+    ) {
     }
 }

@@ -4,7 +4,6 @@ namespace App\Modules\Users\Actions;
 
 use App\Modules\Users\DTO\UserLoginDTO;
 use App\Modules\Users\Model\User;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Hash;
 

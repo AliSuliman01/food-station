@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Modules\Orders\ViewModels;
-
 
 use App\Modules\Orders\Model\Order;
 use Illuminate\Contracts\Support\Arrayable;

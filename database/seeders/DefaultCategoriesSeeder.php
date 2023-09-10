@@ -20,7 +20,7 @@ class DefaultCategoriesSeeder extends Seeder
             Category::query()->firstOrCreate([
                 'name' => $value,
             ], [
-                'slug' => Str::slug($value . ' ' . time()),
+                'slug' => Str::slug($value.' '.time()),
                 'created_at' => now()->toDateTimeString(),
                 'updated_at' => now()->toDateTimeString(),
             ]);

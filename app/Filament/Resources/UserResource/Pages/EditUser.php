@@ -4,7 +4,6 @@ namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Enums\RoleEnum;
 use App\Filament\Resources\UserResource;
-use App\Modules\Users\Actions\StoreUserAction;
 use App\Modules\Users\Actions\UpdateUserAction;
 use App\Modules\Users\DTO\UserDTO;
 use Filament\Actions;
@@ -23,6 +22,7 @@ class EditUser extends EditRecord
             Actions\RestoreAction::make(),
         ];
     }
+
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
         $userDTO = UserDTO::fromRequest($data);
@@ -36,5 +36,4 @@ class EditUser extends EditRecord
     {
         return self::getResource()::getUrl('index');
     }
-
 }

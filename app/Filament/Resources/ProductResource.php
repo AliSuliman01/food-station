@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\CategoryEnum;
 use App\Enums\MediaCollectionEnum;
 use App\Enums\ProductStatusEnum;
 use App\Filament\Resources\ProductResource\Pages;
@@ -50,7 +49,7 @@ class ProductResource extends Resource
                     ->relationship('categories', 'name')
                     ->createOptionForm([
                         Forms\Components\TextInput::make('name')->maxLength(255),
-                    ])
+                    ]),
             ]);
     }
 
@@ -82,7 +81,7 @@ class ProductResource extends Resource
                 Tables\Filters\SelectFilter::make('category')
                     ->multiple()
                     ->preload()
-                    ->relationship('categories', 'name')
+                    ->relationship('categories', 'name'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -102,7 +101,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TranslationsRelationManager::class
+            TranslationsRelationManager::class,
         ];
     }
 
@@ -122,6 +121,7 @@ class ProductResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
     public static function getNavigationSort(): ?int
     {
         return 4;

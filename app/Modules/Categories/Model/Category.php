@@ -12,15 +12,13 @@ use App\Modules\Categorizable\Model\Categorizable;
 use App\Modules\Ingredients\Model\Ingredient;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 
 class Category extends OptimizedModel implements HasMedia
 {
-    use HasFactory, SoftDeletes, HasTranslations, OptimizedInteractsWithMedia, CascadeSoftDeletes, HasCategories;
+    use CascadeSoftDeletes, HasCategories, HasFactory, HasTranslations, OptimizedInteractsWithMedia, SoftDeletes;
 
     protected $cascadeDeletes = [
         'categorizables',
@@ -43,7 +41,7 @@ class Category extends OptimizedModel implements HasMedia
         'deleted_by_user_id',
     ];
 
-    public static function getByName($name):Category
+    public static function getByName($name): Category
     {
         $category = Category::where('name', $name)->first();
         if (! $category) {
@@ -80,7 +78,6 @@ class Category extends OptimizedModel implements HasMedia
 
     public function sub_categories()
     {
-        return $this->morphToMany(Category::class,'categorizable', 'categorizables', 'category_id', 'categorizable_id');
+        return $this->morphToMany(Category::class, 'categorizable', 'categorizables', 'category_id', 'categorizable_id');
     }
-
 }

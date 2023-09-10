@@ -8,7 +8,6 @@ use App\Modules\Products\Model\Product;
 final class AvailableTodayProducts
 {
     /**
-     * @param  null  $_
      * @param  array{}  $args
      */
     public function __invoke($_, array $args)

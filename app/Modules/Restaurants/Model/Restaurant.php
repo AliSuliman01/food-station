@@ -11,11 +11,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Restaurant extends OptimizedModel
 {
-    use HasFactory, SoftDeletes, OptimizedInteractsWithMedia;
+    use HasFactory, OptimizedInteractsWithMedia, SoftDeletes;
 
     protected $cascadeDeletes = [
         'products',

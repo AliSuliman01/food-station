@@ -10,8 +10,7 @@ use App\Modules\Users\DTO\UserRegisterDTO;
 final class Register
 {
     /**
-     * @param  null  $_
-     * @param array{}  $args
+     * @param  array{}  $args
      */
     public function __invoke($_, array $args)
     {

@@ -25,7 +25,7 @@ class UserResource extends Resource
             ->schema([
 
                 Forms\Components\FileUpload::make('photo_path')
-                    ->maxWidth("xs")
+                    ->maxWidth('xs')
                     ->image()
                     ->columnSpanFull()
                     ->imageEditor()
@@ -35,16 +35,16 @@ class UserResource extends Resource
                         '1:1',
                     ])
                     ->nullable(),
-                        Forms\Components\Select::make('role')->options(RoleEnum::asArray())->required(),
-                        Forms\Components\TextInput::make('name')->required()->maxLength(15),
+                Forms\Components\Select::make('role')->options(RoleEnum::asArray())->required(),
+                Forms\Components\TextInput::make('name')->required()->maxLength(15),
 
-                        Forms\Components\TextInput::make('username')->required()->unique(ignorable: $form->getRecord()),
-                        Forms\Components\TextInput::make('email')->required()
-                            ->unique(ignorable: $form->getRecord())
-                            ->email()
-                            ->maxLength(30),
-                        Forms\Components\TextInput::make('mobile_phone')->nullable()->maxLength(14),
-                        Forms\Components\TextInput::make('password')->password(),
+                Forms\Components\TextInput::make('username')->required()->unique(ignorable: $form->getRecord()),
+                Forms\Components\TextInput::make('email')->required()
+                    ->unique(ignorable: $form->getRecord())
+                    ->email()
+                    ->maxLength(30),
+                Forms\Components\TextInput::make('mobile_phone')->nullable()->maxLength(14),
+                Forms\Components\TextInput::make('password')->password(),
 
             ]);
     }
@@ -59,16 +59,16 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('mobile_phone'),
                 Tables\Columns\TextColumn::make('roles.name')
-                ->badge(),
+                    ->badge(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                ->visible(function(User $user){
-                    return !$user->hasRole(RoleEnum::ROOT);
-                }),
+                    ->visible(function (User $user) {
+                        return ! $user->hasRole(RoleEnum::ROOT);
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -103,6 +103,7 @@ class UserResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
     public static function getNavigationSort(): ?int
     {
         return 1;

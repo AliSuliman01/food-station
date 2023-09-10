@@ -10,11 +10,10 @@ use App\Models\OptimizedModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Ingredient extends OptimizedModel implements HasMedia
 {
-    use HasFactory, SoftDeletes, HasTranslations, OptimizedInteractsWithMedia, HasCategories;
+    use HasCategories, HasFactory, HasTranslations, OptimizedInteractsWithMedia, SoftDeletes;
 
     protected $guarded = [
         'id',

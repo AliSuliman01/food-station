@@ -2,7 +2,6 @@
 
 namespace App\Modules\Users\Admins\Actions;
 
-use App\Modules\Users\Admins\DTO\UserDTO;
 use App\Modules\Users\Model\User;
 
 class DestroyUserAction
@@ -11,6 +10,7 @@ class DestroyUserAction
         User $user
     ) {
         $user->delete();
+
         return $user;
     }
 }

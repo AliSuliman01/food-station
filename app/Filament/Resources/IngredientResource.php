@@ -34,7 +34,7 @@ class IngredientResource extends Resource
                     ->relationship('categories', 'name')
                     ->createOptionForm([
                         Forms\Components\TextInput::make('name')->maxLength(255),
-                    ])
+                    ]),
             ]);
     }
 
@@ -50,7 +50,7 @@ class IngredientResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('categories.name')
                     ->searchable()
-                ->badge(),
+                    ->badge(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -80,7 +80,7 @@ class IngredientResource extends Resource
             'index' => Pages\ListIngredients::route('/'),
             'create' => Pages\CreateIngredient::route('/create'),
             'edit' => Pages\EditIngredient::route('/{record}/edit'),
-            'view' => Pages\ViewIngredient::route('/{record}')
+            'view' => Pages\ViewIngredient::route('/{record}'),
         ];
     }
 

@@ -16,7 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles, HasPermissions;
+    use HasApiTokens, HasFactory, HasPermissions, HasRoles, Notifiable, SoftDeletes;
 
     protected $cascadeDeletes = [
         'restaurants',

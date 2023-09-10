@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\App;
 
 class Response
 {
-    public static function success($data = null, $message= null)
+    public static function success($data = null, $message = null)
     {
         return [
             'success' => true,

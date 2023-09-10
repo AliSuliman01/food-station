@@ -31,7 +31,7 @@
     "require-dev": {
         "alisuliman/code_generator": "^2.1.0",
         "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.10",
+        "laravel/pint": "^1.13",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",

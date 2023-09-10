@@ -10,7 +10,6 @@ class ViewIngredient extends ViewRecord
 {
     protected static string $resource = IngredientResource::class;
 
-
     protected function getHeaderActions(): array
     {
         return [

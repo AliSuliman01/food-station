@@ -8,7 +8,6 @@ use App\Modules\Orders\Actions\ChangeOrderStatus;
 final class CancelOrder
 {
     /**
-     * @param  null  $_
      * @param  array{}  $args
      */
     public function __invoke($_, array $args)

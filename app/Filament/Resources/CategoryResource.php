@@ -14,7 +14,6 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Str;
 
 class CategoryResource extends Resource
 {
@@ -45,8 +44,8 @@ class CategoryResource extends Resource
                     ->reactive(),
                 Forms\Components\Checkbox::make('can_select_many')
                     ->visible(function (callable $get) {
-                    return $get('is_selectable');
-                }),
+                        return $get('is_selectable');
+                    }),
             ]);
     }
 
@@ -54,49 +53,49 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                        Tables\Columns\SpatieMediaLibraryImageColumn::make('main_image')
-                            ->circular()
-                            ->collection(MediaCollectionEnum::MAIN_IMAGE),
-                        Tables\Columns\TextColumn::make('name')
-                            ->searchable(),
-                        Tables\Columns\TextColumn::make('translation.name')
-                            ->searchable(),
-                        Tables\Columns\CheckboxColumn::make('is_selectable'),
-                        Tables\Columns\TextColumn::make('parent_categories.name')
-                            ->badge(),
-                        Tables\Columns\TextColumn::make('created_at')
-                            ->dateTime()
-                            ->sortable()
-                            ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('main_image')
+                    ->circular()
+                    ->collection(MediaCollectionEnum::MAIN_IMAGE),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('translation.name')
+                    ->searchable(),
+                Tables\Columns\CheckboxColumn::make('is_selectable'),
+                Tables\Columns\TextColumn::make('parent_categories.name')
+                    ->badge(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
             ])
             ->filters([
-        Tables\Filters\TrashedFilter::make(),
-    ])
-        ->actions([
-            Tables\Actions\EditAction::make()
-            ->visible(function (Category $category){
-                return !CategoryEnum::hasKey($category->name);
-            }),
-            Tables\Actions\DeleteAction::make()
-                ->visible(function (Category $category){
-                    return !CategoryEnum::hasKey($category->name);
-            }),
-        ])
-        ->bulkActions([
-            Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]),
-        ])
-        ->emptyStateActions([
-            Tables\Actions\CreateAction::make(),
-        ]);
+                Tables\Filters\TrashedFilter::make(),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make()
+                    ->visible(function (Category $category) {
+                        return ! CategoryEnum::hasKey($category->name);
+                    }),
+                Tables\Actions\DeleteAction::make()
+                    ->visible(function (Category $category) {
+                        return ! CategoryEnum::hasKey($category->name);
+                    }),
+            ])
+            ->bulkActions([
+                    Tables\Actions\BulkActionGroup::make([
+                        Tables\Actions\DeleteBulkAction::make(),
+                    ]),
+            ])
+            ->emptyStateActions([
+                    Tables\Actions\CreateAction::make(),
+            ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            TranslationsRelationManager::class
+            TranslationsRelationManager::class,
         ];
     }
 

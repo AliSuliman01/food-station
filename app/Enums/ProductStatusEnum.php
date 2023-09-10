@@ -13,5 +13,6 @@ use BenSampo\Enum\Enum;
 final class ProductStatusEnum extends Enum
 {
     const ACTIVE = 'active';
+
     const BLOCKED = 'blocked';
 }

@@ -9,8 +9,7 @@ use App\Modules\Users\DTO\UserLoginDTO;
 final class Login
 {
     /**
-     * @param  null  $_
-     * @param array{}  $args
+     * @param  array{}  $args
      */
     public function __invoke($_, $args)
     {

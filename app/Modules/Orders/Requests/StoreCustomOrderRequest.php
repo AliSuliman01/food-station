@@ -12,7 +12,7 @@ class StoreCustomOrderRequest extends ApiFormRequest
             'name' => ['nullable', 'string'],
             'ingredients' => ['array', 'required'],
             'ingredients.*' => ['required', 'exists:ingredients,id,deleted_at,NULL'],
-            'notes' => ['nullable', 'string']
+            'notes' => ['nullable', 'string'],
         ];
     }
 }

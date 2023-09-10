@@ -23,5 +23,4 @@ class EditIngredient extends EditRecord
     {
         return self::getResource()::getUrl('index');
     }
-
 }

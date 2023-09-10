@@ -9,4 +9,9 @@ Route::prefix('auth')->group(function () {
     Route::post('logout', [UserController::class, 'logout'])->middleware('auth:api');
 });
 
+Route::prefix('users')->group(function () {
+
+    Route::get('{user}/orders', [UserController::class, 'userOrders']);
+});
+
 Route::resource('users', UserController::class)->middleware('auth:api');

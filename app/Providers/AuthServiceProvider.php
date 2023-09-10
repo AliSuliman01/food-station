@@ -18,8 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-//        Restaurant::class => RestaurantPolicy::class,
-//        User::class => UserPolicy::class,
+        //        Restaurant::class => RestaurantPolicy::class,
+        //        User::class => UserPolicy::class,
     ];
 
     /**

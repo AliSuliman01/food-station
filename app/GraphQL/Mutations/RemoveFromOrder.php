@@ -9,8 +9,7 @@ use App\Modules\Carts\ViewModels\GetCartVM;
 final class RemoveFromOrder
 {
     /**
-     * @param  null  $_
-     * @param array{}  $args
+     * @param  array{}  $args
      */
     public function __invoke($_, array $args)
     {

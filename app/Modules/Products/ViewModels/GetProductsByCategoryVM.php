@@ -24,10 +24,10 @@ class GetProductsByCategoryVM implements Arrayable
                 AllowedFilter::callback('name', function (Builder $query, $value) {
                     $query->where('name', 'like', "%{$value}%")
                         ->orWhereRelation('translation', 'name', 'like', "%{$value}%");
-                }),])
+                }), ])
             ->with([
                 'translation',
-                'main_image'
+                'main_image',
             ])
             ->whereRelation('categories', 'name', '=', $this->categoryName)
             ->latest()

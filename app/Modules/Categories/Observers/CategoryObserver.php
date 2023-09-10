@@ -9,11 +9,11 @@ class CategoryObserver
 {
     public function creating(Category $category)
     {
-        $category->slug = Str::slug($category->name . '-' . time());
+        $category->slug = Str::slug($category->name.'-'.time());
     }
 
     public function updating(Category $category)
     {
-        $category->slug = Str::slug($category->name . '-' . time());
+        $category->slug = Str::slug($category->name.'-'.time());
     }
 }

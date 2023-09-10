@@ -13,5 +13,6 @@ use BenSampo\Enum\Enum;
 final class ProductTypeEnum extends Enum
 {
     const PERSONAL = 'personal';
+
     const PUBLIC = 'public';
 }

@@ -9,8 +9,8 @@ use App\Modules\Restaurants\Actions\StoreRestaurantAction;
 use App\Modules\Restaurants\Actions\UpdateRestaurantAction;
 use App\Modules\Restaurants\DTO\RestaurantDTO;
 use App\Modules\Restaurants\Model\Restaurant;
-use App\Modules\Restaurants\Requests\StoreRestaurantRequest;
 use App\Modules\Restaurants\Requests\StoreOrderRequest;
+use App\Modules\Restaurants\Requests\StoreRestaurantRequest;
 use App\Modules\Restaurants\ViewModels\GetAllRestaurantsVM;
 use App\Modules\Restaurants\ViewModels\GetRestaurantVM;
 

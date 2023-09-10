@@ -28,7 +28,7 @@ class RestaurantResource extends Resource
                     ->preload()
                     ->searchable()
                     ->native(false)
-                    ->relationship('user', 'name')
+                    ->relationship('user', 'name'),
             ]);
     }
 
@@ -38,7 +38,7 @@ class RestaurantResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('full_address'),
-                Tables\Columns\TextColumn::make('user.name')
+                Tables\Columns\TextColumn::make('user.name'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -81,6 +81,7 @@ class RestaurantResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
     public static function getNavigationSort(): ?int
     {
         return 3;

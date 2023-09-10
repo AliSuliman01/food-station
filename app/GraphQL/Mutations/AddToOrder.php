@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\DB;
 final class AddToOrder
 {
     /**
-     * @param  null  $_
-     * @param array{}  $args
+     * @param  array{}  $args
      */
     public function __invoke($_, array $args)
     {

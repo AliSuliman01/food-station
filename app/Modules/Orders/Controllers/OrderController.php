@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Modules\Orders\Controllers;
-
 
 use App\Enums\OrderStatusEnum;
 use App\Helpers\Response;
@@ -16,16 +14,17 @@ use App\Modules\Orders\Model\Order;
 use App\Modules\Orders\Requests\StoreCustomOrderRequest;
 use App\Modules\Orders\Requests\StoreOrderRequest;
 use App\Modules\Orders\ViewModels\GetAllOrdersVM;
+use App\Modules\Orders\ViewModels\GetUserOrdersVM;
 use App\Modules\Orders\ViewModels\LoadOneOrderVM;
 use App\Modules\Products\Actions\StoreProductAction;
 use App\Modules\Products\Data\ProductData;
-use App\Modules\Translations\Data\TranslationData;
+use App\Modules\Users\Model\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
-
     public function index()
     {
         return response()->json(Response::success((new GetAllOrdersVM())->toArray()));
@@ -40,7 +39,7 @@ class OrderController extends Controller
     {
         $data = $request->validated();
 
-        $order = DB::transaction(function () use($data){
+        $order = DB::transaction(function () use ($data) {
 
             $orderData = new OrderData(
                 $data['user_id'],
@@ -50,20 +49,8 @@ class OrderController extends Controller
 
             $order = StoreOrderAction::execute($orderData);
 
-            $carts = [];
-            foreach ($data['carts'] as $cart) {
-                $cartData = new CartData(
-                    $order->id,
-                    $data['product_id'],
-                    $data['quantity'],
-                    $data['notes'],
-                );
-                $carts[] = array_merge($cartData->toArray(), [
-                    'created_at' => now()->toDateTimeString(),
-                    'updated_at' => now()->toDateTimeString(),
-                ]);
-            }
-            $order->carts()->insert($carts);
+            $order->carts()->insert($data['carts']);
+
             return $order;
         });
 
@@ -76,12 +63,12 @@ class OrderController extends Controller
 
         $data = $request->validated();
 
-        $order = DB::transaction(function ()use ($data){
+        $order = DB::transaction(function () use ($data) {
 
             $productData = new ProductData(
-                customer_user_id: Auth::id(),
                 name: $data['name'],
                 notes: $data['notes'],
+                customer_user_id: Auth::id(),
             );
 
             $product = StoreProductAction::execute($productData, ingredients: $data['ingredients']);
@@ -102,8 +89,10 @@ class OrderController extends Controller
 
             return $order;
         });
+
         return response()->json(Response::success((new LoadOneOrderVM($order))->toArray()));
     }
+
     public function destroy(Order $order)
     {
         return response()->json(Response::success(DestroyOrderAction::execute($order)));

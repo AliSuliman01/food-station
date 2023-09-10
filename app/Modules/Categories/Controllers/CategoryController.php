@@ -13,9 +13,9 @@ use App\Modules\Categories\DTO\CategoryDTO;
 use App\Modules\Categories\Model\Category;
 use App\Modules\Categories\Requests\StoreCategoryRequest;
 use App\Modules\Categories\Requests\UpdateCategoryRequest;
+use App\Modules\Categories\ViewModels\GetAllCategoriesVM;
 use App\Modules\Categories\ViewModels\GetCategoriesByParentVM;
 use App\Modules\Categories\ViewModels\GetCategoryVM;
-use App\Modules\Categories\ViewModels\GetAllCategoriesVM;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
@@ -48,9 +48,10 @@ class CategoryController extends Controller
 
         $category->updateRelation('translations', $data['translations']);
 
-        if (isset($data['image']))
+        if (isset($data['image'])) {
             $category->addMedia(Storage::path($data['image']))
                 ->toMediaCollection(MediaCollectionEnum::IMAGE);
+        }
 
         $category->parent_categories()->sync($data['parent_categories'] ?? []);
 
@@ -67,9 +68,10 @@ class CategoryController extends Controller
 
         $category->updateRelation('translations', $data['translations']);
 
-        if (isset($data['image']))
+        if (isset($data['image'])) {
             $category->addMedia(Storage::path($data['image']))
                 ->toMediaCollection(MediaCollectionEnum::IMAGE);
+        }
 
         $category->parent_categories()->sync($data['parent_categories'] ?? []);
 

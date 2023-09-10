@@ -19,8 +19,8 @@ abstract class OptimizedModel extends Model
                     $this->{$relation}()
                         ->where($primaryKeyName, $item[$primaryKeyName])
                         ->update(array_filter($item, function ($field) {
-                        return $field !== null;
-                    }));
+                            return $field !== null;
+                        }));
                     array_push($ids, $item[$primaryKeyName]);
                 } else {
                     $model = $this->{$relation}()->create(array_null_filter($item));

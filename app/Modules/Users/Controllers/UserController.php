@@ -6,6 +6,7 @@ use App\Enums\RoleEnum;
 use App\Exceptions\GeneralException;
 use App\Helpers\Response;
 use App\Http\Controllers\Controller;
+use App\Modules\Users\ViewModels\GetUserOrdersVM;
 use App\Modules\Users\Actions\DestroyUserAction;
 use App\Modules\Users\Actions\RegisterUserAction;
 use App\Modules\Users\Actions\SendVerificationEmailAction;
@@ -24,12 +25,20 @@ use App\Modules\Users\ViewModels\GetAllUsersVM;
 use App\Modules\Users\ViewModels\GetUserVM;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
     public function index()
     {
         return response()->json(Response::success((new GetAllUsersVM())->toArray()));
+    }
+
+    public function userOrders(User $user)
+    {
+        Gate::authorize('userOrders', $user);
+
+        return response()->json(Response::success((new GetUserOrdersVM($user))->toArray()));
     }
 
     public function store(StoreUserRequest $request)

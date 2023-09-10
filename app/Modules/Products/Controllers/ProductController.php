@@ -5,7 +5,6 @@ namespace App\Modules\Products\Controllers;
 use App\Enums\CategoryEnum;
 use App\Helpers\Response;
 use App\Http\Controllers\Controller;
-use App\Modules\Categories\Model\Category;
 use App\Modules\Products\Actions\DestroyProductAction;
 use App\Modules\Products\Actions\StoreProductAction;
 use App\Modules\Products\Actions\UpdateProductAction;

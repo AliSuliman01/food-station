@@ -15,6 +15,7 @@ class UpdateUserAction
         if (isset($role)) {
             $user->assignRole($role->value);
         }
+
         return $user;
     }
 }

@@ -16,11 +16,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Product extends OptimizedModel implements HasMedia
 {
-    use HasFactory, SoftDeletes, HasTranslations, OptimizedInteractsWithMedia, HasCategories;
+    use HasCategories, HasFactory, HasTranslations, OptimizedInteractsWithMedia, SoftDeletes;
 
     protected $cascadeDeletes = [
         'translations',
@@ -49,15 +48,16 @@ class Product extends OptimizedModel implements HasMedia
         return ProductFactory::new();
     }
 
-        public function ingredients(): BelongsToMany
-        {
-            return $this->belongsToMany(Ingredient::class);
-        }
+    public function ingredients(): BelongsToMany
+    {
+        return $this->belongsToMany(Ingredient::class);
+    }
 
     public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class);
     }
+
     public function customer_user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'customer_user_id');

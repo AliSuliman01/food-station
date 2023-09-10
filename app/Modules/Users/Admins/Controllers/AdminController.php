@@ -8,11 +8,11 @@ use App\Modules\Users\Admins\Actions\DestroyUserAction;
 use App\Modules\Users\Admins\Actions\StoreAdminAction;
 use App\Modules\Users\Admins\Actions\UpdateAdminAction;
 use App\Modules\Users\Admins\DTO\UserDTO;
-use App\Modules\Users\Model\User;
 use App\Modules\Users\Admins\Requests\StoreAdminRequest;
 use App\Modules\Users\Admins\Requests\UpdateUserRequest;
 use App\Modules\Users\Admins\ViewModels\GetAllUsersVM;
 use App\Modules\Users\Admins\ViewModels\GetUserVM;
+use App\Modules\Users\Model\User;
 
 class AdminController extends Controller
 {
