@@ -22,13 +22,17 @@ use App\Modules\Products\Data\ProductData;
 use App\Modules\Users\Model\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
     public function index()
     {
         return response()->json(Response::success((new GetAllOrdersVM())->toArray()));
+    }
+
+    public function userOrders(User $user)
+    {
+        return response()->json(Response::success((new GetUserOrdersVM($user))->toArray()));
     }
 
     public function show(Order $order)
