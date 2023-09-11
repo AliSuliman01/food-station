@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Enums\RoleEnum;
-use App\Models\Order;
+use App\Modules\Orders\Model\Order;
 use App\Modules\Users\Model\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 

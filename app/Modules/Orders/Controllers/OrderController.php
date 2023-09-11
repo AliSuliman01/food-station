@@ -32,7 +32,11 @@ class OrderController extends Controller
 
     public function userOrders(User $user)
     {
-        return response()->json(Response::success((new GetUserOrdersVM($user))->toArray()));
+        return response()->json(Response::success(
+            OrderResource::collection(
+                (new GetUserOrdersVM($user))->toArray()
+            )
+        ));
     }
 
     public function show(Order $order)
@@ -64,7 +68,7 @@ class OrderController extends Controller
 
     public function store_custom(StoreCustomOrderRequest $request)
     {
-//        $this->authorize('store_custom', Order::class);
+        $this->authorize('store_custom', Order::class);
 
         $data = $request->validated();
 
