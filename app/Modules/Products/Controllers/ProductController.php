@@ -12,7 +12,7 @@ use App\Modules\Products\Data\ProductData;
 use App\Modules\Products\Model\Product;
 use App\Modules\Products\Requests\StoreProductRequest;
 use App\Modules\Products\Requests\UpdateProductRequest;
-use App\Modules\Products\Resources\ProductResource;
+use App\Modules\Products\Resources\ProductListResource;
 use App\Modules\Products\ViewModels\GetAllProductsVM;
 use App\Modules\Products\ViewModels\GetProductsByCategoryVM;
 use App\Modules\Products\ViewModels\LoadProductVM;
@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function index()
     {
         return \response()->json(Response::success(
-            ProductResource::collection(
+            ProductListResource::collection(
                 (new GetAllProductsVM())->toArray()
             )
         ));
@@ -33,7 +33,7 @@ class ProductController extends Controller
     public function available()
     {
         return \response()->json(Response::success(
-            ProductResource::collection(
+            ProductListResource::collection(
                 (new GetProductsByCategoryVM(CategoryEnum::AVAILABLE_TODAY))->toArray()
             )
         ));
@@ -42,7 +42,7 @@ class ProductController extends Controller
     public function popular()
     {
         return \response()->json(Response::success(
-            ProductResource::collection(
+            ProductListResource::collection(
                 (new GetProductsByCategoryVM(CategoryEnum::POPULAR_PRODUCTS))->toArray()
             )
         ));
@@ -52,7 +52,7 @@ class ProductController extends Controller
     {
 
         return response()->json(Response::success(
-            ProductResource::make(
+            ProductListResource::make(
                 (new LoadProductVM($product))->toArray()
             )
         ));
@@ -83,7 +83,7 @@ class ProductController extends Controller
         });
 
         return response()->json(Response::success(
-            ProductResource::make(
+            ProductListResource::make(
                 (new LoadProductVM($product))->toArray()
             )
         ));
@@ -108,7 +108,7 @@ class ProductController extends Controller
         });
 
         return response()->json(Response::success(
-            ProductResource::make(
+            ProductListResource::make(
                 (new LoadProductVM($product))->toArray()
             )
         ));
@@ -119,7 +119,7 @@ class ProductController extends Controller
     {
 
         return response()->json(Response::success(
-            ProductResource::make(
+            ProductListResource::make(
                 DestroyProductAction::execute($product)
             )
         ));

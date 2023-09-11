@@ -6,7 +6,7 @@ use App\Modules\Ingredients\Resources\IngredientResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductResource extends JsonResource
+class ProductBaseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,7 +15,6 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // TODO: calculate rate_count
         return [
             'id' => $this->id,
             'old_price' => $this->old_price,
@@ -27,14 +26,7 @@ class ProductResource extends JsonResource
             'extra_items' => $this->extra_items,
             'name' => $this->translation?->name ?? $this->name,
             'notes' => $this->translation?->notes ?? $this->notes,
-            'main_image' => $this->main_image->original_url,
-            'restaurant' => $this->restaurant?->only(['name', 'is_verified']),
-            'ingredients' => $this->when($request->routeIs('products.show'), function () {
-                return IngredientResource::collection($this->ingredients);
-            }, function () {
-                return $this->ingredients->map(fn($ingredient) => $ingredient->translation->name);
-            })
-
+            'main_image' => $this->main_image?->original_url
         ];
     }
 }

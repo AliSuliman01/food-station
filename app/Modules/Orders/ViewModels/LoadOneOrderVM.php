@@ -13,6 +13,6 @@ class LoadOneOrderVM implements Arrayable
 
     public function toArray()
     {
-        return $this->order->load(['carts', 'user']);
+        return $this->order->load(['carts.product', 'user', 'prepared_by_user']);
     }
 }

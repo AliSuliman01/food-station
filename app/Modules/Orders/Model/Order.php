@@ -2,6 +2,7 @@
 
 namespace App\Modules\Orders\Model;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\OptimizedModel;
 use App\Modules\Carts\Model\Cart;
 use App\Modules\Users\Model\User;
@@ -10,6 +11,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends OptimizedModel
 {
     use SoftDeletes, SoftDeletes;
+
+    protected $guarded = [
+        'id'
+    ];
+
+    protected $casts = [
+        'status' => OrderStatusEnum::class
+    ];
 
     public function user()
     {

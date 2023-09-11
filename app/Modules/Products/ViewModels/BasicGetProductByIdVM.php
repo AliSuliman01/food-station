@@ -5,17 +5,13 @@ namespace App\Modules\Products\ViewModels;
 use App\Modules\Products\Model\Product;
 use Illuminate\Contracts\Support\Arrayable;
 
-class GetProductVM implements Arrayable
+class BasicGetProductByIdVM implements Arrayable
 {
     private $product;
 
     public function __construct($productId)
     {
-        $this->product = Product::with([
-            'images',
-            'translations',
-            'categories',
-        ])->find($productId);
+        $this->product = Product::find($productId);
     }
 
     public function toArray()

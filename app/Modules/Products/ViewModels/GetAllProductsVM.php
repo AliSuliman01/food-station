@@ -10,7 +10,7 @@ class GetAllProductsVM implements Arrayable
     public function toArray()
     {
         return Product::with([
-            'images',
+            'main_image',
             'translations',
             'categories',
         ])

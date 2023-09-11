@@ -11,7 +11,7 @@ class GetAllIngredientsVM implements Arrayable
     {
         return Ingredient::with([
             'translation',
-            'image',
+            'main_image',
         ])->get();
     }
 }

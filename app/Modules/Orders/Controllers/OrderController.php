@@ -13,6 +13,7 @@ use App\Modules\Orders\Data\OrderData;
 use App\Modules\Orders\Model\Order;
 use App\Modules\Orders\Requests\StoreCustomOrderRequest;
 use App\Modules\Orders\Requests\StoreOrderRequest;
+use App\Modules\Orders\Resources\OrderResource;
 use App\Modules\Orders\ViewModels\GetAllOrdersVM;
 use App\Modules\Orders\ViewModels\GetUserOrdersVM;
 use App\Modules\Orders\ViewModels\LoadOneOrderVM;
@@ -59,7 +60,7 @@ class OrderController extends Controller
 
     public function store_custom(StoreCustomOrderRequest $request)
     {
-        $this->authorize('store_custom', Order::class);
+//        $this->authorize('store_custom', Order::class);
 
         $data = $request->validated();
 
@@ -90,7 +91,11 @@ class OrderController extends Controller
             return $order;
         });
 
-        return response()->json(Response::success((new LoadOneOrderVM($order))->toArray()));
+        return response()->json(Response::success(
+            OrderResource::make(
+                (new LoadOneOrderVM($order))->toArray()
+            )
+        ));
     }
 
     public function destroy(Order $order)

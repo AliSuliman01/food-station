@@ -24,7 +24,7 @@ class Product extends OptimizedModel implements HasMedia
 
     protected $cascadeDeletes = [
         'translations',
-        'images',
+        'main_image',
         'ingredients',
     ];
 

@@ -12,6 +12,7 @@ use App\Modules\Ingredients\DTO\IngredientDTO;
 use App\Modules\Ingredients\Model\Ingredient;
 use App\Modules\Ingredients\Requests\StoreIngredientRequest;
 use App\Modules\Ingredients\Requests\UpdateIngredientRequest;
+use App\Modules\Ingredients\Resources\IngredientResource;
 use App\Modules\Ingredients\ViewModels\GetAllIngredientsVM;
 use App\Modules\Ingredients\ViewModels\GetIngredientVM;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,11 @@ class IngredientController extends Controller
     public function index()
     {
 
-        return response()->json(Response::success((new GetAllIngredientsVM())->toArray()));
+        return response()->json(Response::success(
+            IngredientResource::collection(
+                (new GetAllIngredientsVM())->toArray()
+            )
+        ));
     }
 
     public function show(Ingredient $ingredient)
