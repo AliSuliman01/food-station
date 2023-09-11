@@ -13,6 +13,7 @@ use App\Modules\Products\Model\Product;
 use App\Modules\Products\Requests\StoreProductRequest;
 use App\Modules\Products\Requests\UpdateProductRequest;
 use App\Modules\Products\Resources\ProductListResource;
+use App\Modules\Products\Resources\ProductShowResource;
 use App\Modules\Products\ViewModels\GetAllProductsVM;
 use App\Modules\Products\ViewModels\GetProductsByCategoryVM;
 use App\Modules\Products\ViewModels\LoadProductVM;
@@ -52,7 +53,7 @@ class ProductController extends Controller
     {
 
         return response()->json(Response::success(
-            ProductListResource::make(
+            ProductShowResource::make(
                 (new LoadProductVM($product))->toArray()
             )
         ));
