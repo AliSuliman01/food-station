@@ -29,7 +29,9 @@ class AdminController extends Controller
 
         $user = StoreAdminAction::execute($userDTO);
 
-        return response()->json(Response::success((new GetUserVM($user))->toArray()));
+        return response()->json(Response::success([
+            'user' =>  (new GetUserVM($user))->toArray()
+        ]));
     }
 
     public function update(User $user, UpdateUserRequest $request)
@@ -41,7 +43,9 @@ class AdminController extends Controller
 
         $user = UpdateAdminAction::execute($user, $userDTO);
 
-        return response()->json(Response::success((new GetUserVM($user))->toArray()));
+        return response()->json(Response::success([
+            'user' =>  (new GetUserVM($user))->toArray()
+        ]));
 
     }
 
@@ -49,6 +53,8 @@ class AdminController extends Controller
     {
         DestroyUserAction::execute($user);
 
-        return response()->json(Response::success((new GetUserVM($user))->toArray()));
+        return response()->json(Response::success([
+            'user' =>  (new GetUserVM($user))->toArray()
+        ]));
     }
 }

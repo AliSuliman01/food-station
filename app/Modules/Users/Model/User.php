@@ -38,6 +38,10 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'verification_code',
+        'reset_password_code',
+        'reset_password_code_expired_at',
+        'reset_password_token',
+        'reset_password_token_expired_at',
         'password',
         'remember_token',
         'created_by_user_id',

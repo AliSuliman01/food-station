@@ -16,7 +16,7 @@ class Response
         ];
     }
 
-    public static function error($message, $code, $detailedError = null)
+    public static function error($message, $detailedError = null)
     {
         if (! App::isLocal()) {
             $detailedError = null;
@@ -24,7 +24,6 @@ class Response
 
         return [
             'success' => false,
-            'code' => $code,
             'message' => $message,
             'detailed_error' => $detailedError,
         ];

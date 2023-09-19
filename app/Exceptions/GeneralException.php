@@ -26,7 +26,7 @@ class GeneralException extends Exception implements ClientAware
 
     public function render(Request $request)
     {
-        return response()->json(Response::error($this->message, $this->code, $this->detailedError));
+        return response()->json(Response::error($this->message, $this->detailedError));
     }
 
     public function isClientSafe(): bool

@@ -6,12 +6,12 @@ use App\Enums\RoleEnum;
 use App\Modules\Users\DTO\UserDTO;
 use App\Modules\Users\Model\User;
 
-class UpdateUserAction
+class ResetPasswordAction
 {
-    public static function execute(
-        User $user, UserDTO $userDTO, RoleEnum $role = null
-    ) {
-        $user->update($userDTO->toArrayWithoutNulls());
+    public static function execute(UserDTO $userDTO, RoleEnum $role = null): User
+    {
+        /** @var User $user */
+        $user = User::create($userDTO->toArrayWithoutNulls());
         if (isset($role)) {
             $user->assignRole($role->value);
         }
